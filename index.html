@@ -1,0 +1,1590 @@
+<html lang="ja" prefix="og: http://ogp.me/ns#"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <link href="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/css/reset.css" rel="stylesheet" type="text/css" media="all">
+  <link href="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/js/swiper/swiper.min.css" rel="stylesheet">
+  <link href="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/css/style.css" rel="stylesheet" type="text/css" media="all">
+  <link href="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/css/responsive.css" rel="stylesheet" type="text/css" media="all">
+  <style>
+    /* 採用ブロック: 元サイト同様3枚の人物写真を横並び（ぱくたそ フリー素材・日本人） */
+    .top_recruit_img .top_recruit_photos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+      gap: 0;
+    }
+    .top_recruit_img .top_recruit_photo {
+      min-width: 0;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      position: relative;
+    }
+    .top_recruit_img .top_recruit_photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 22%;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .top_recruit_img .top_recruit_photos {
+        gap: 2px;
+      }
+      .top_recruit_img .top_recruit_photo {
+        aspect-ratio: 2 / 3;
+      }
+    }
+    /*
+      MVスライド：ローカル画像(横長)とテーマ同梱(縦長)で素の高さが食い違うため、
+      枠の縦横比をテーマ付属1枚目(jpg)に合わせ、画像は cover で揃える。
+    */
+    .top_mv_slider ._slide ._inner {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 844 / 1252;
+    }
+    .top_mv_slider ._slide ._inner > img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 130% !important;
+      height: 100% !important;
+      max-width: none;
+      object-fit: cover;
+      object-position: center;
+    }
+    /* 1枚目: 明るいローカル画像を、テーマ付属スライドと同系の落ち着いたトーンに */
+    a._inner:has(> img[src$="welfare_kaigo.jpg"])::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: 12px;
+      pointer-events: none;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    .top_mv_slider ._text_sec,
+    .top_mv_slider ._hover_text {
+      z-index: 2;
+    }
+    /* スマホ: テーマ responsive.css の背景日本地図（.top_about_content::before）をオフ */
+    @media (max-width: 768px) {
+      .top_about_content::before {
+        content: none;
+        display: none;
+      }
+    }
+    /* スマホ: デスクトップ用 ScrollTrigger のインライン幅・固定表示を上書き */
+    @media (max-width: 768px) {
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+      #wrapper {
+        padding-left: env(safe-area-inset-left, 0);
+        padding-right: env(safe-area-inset-right, 0);
+        padding-bottom: env(safe-area-inset-bottom, 0);
+      }
+      .top_mv {
+        overflow-x: hidden;
+      }
+      .top_mv .pin-spacer .top_column_copy ._inner {
+        transform: none !important;
+        -webkit-transform: none !important;
+      }
+      .top_mv .pin-spacer {
+        position: relative !important;
+        inset: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+        margin: 0 !important;
+        box-sizing: border-box;
+      }
+      .top_mv .pin-spacer .top_column_copy {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        right: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: none !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        padding-bottom: 0 !important;
+        /* テーマの 110px より下寄せ（以前 padding:0 全面指定をやめ、上余白を確保） */
+        padding-top: 168px !important;
+        box-sizing: border-box;
+        transform: none !important;
+        -webkit-transform: none !important;
+      }
+      .top_stalker {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+    }
+    @media (max-width: 600px) {
+      /* MV: 横長化して縦の占有を抑え、画像は枠内に収める */
+      .top_mv_slider ._slide ._inner {
+        aspect-ratio: 4 / 5;
+        max-height: min(78vh, 520px);
+      }
+      .top_mv_slider ._slide ._inner > img {
+        width: 100% !important;
+        max-width: 100% !important;
+        left: 0 !important;
+        right: auto !important;
+      }
+      .top_information .info_sp_slider {
+        margin-left: max(12px, env(safe-area-inset-left, 0px)) !important;
+        margin-right: max(12px, env(safe-area-inset-right, 0px)) !important;
+      }
+    }
+  </style>
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link href="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180">
+  <script src="//cdn.jsdelivr.net/npm/gsap@3.7.0/dist/gsap.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/gsap@3.7.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+  <script src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/js/jquery-1.11.3.min.js"></script>
+  <script src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/js/jquery.matchHeight.js"></script>
+  <script src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/js/common.js" defer=""></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500&amp;family=Work+Sans&amp;display=swap" rel="stylesheet">
+  <meta name="robots" content="max-image-preview:large">
+  <link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://swc-aiwakai.jp/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fswc-aiwakai.jp%2F">
+  <link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://swc-aiwakai.jp/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fswc-aiwakai.jp%2F&amp;format=xml">
+  
+  <!-- SEO SIMPLE PACK 2.5.0 -->
+  <title>医療法人仁愛会 | 鹿児島の地域医療</title>
+  <meta name="description" content="医療法人仁愛会は、鹿児島市内の病院・介護・障がい福祉の現場で、患者さん・ご利用者さん一人ひとりに寄り添う医療・介護・福祉のサービスを提供しています。仁愛の心で地域の明日を支えます。">
+  <link rel="canonical" href="https://jinaikai.com/">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:image" content="https://jinaikai.com/wp-content/uploads/ogp.png">
+  <meta property="og:title" content="医療法人仁愛会">
+  <meta property="og:description" content="医療法人仁愛会は、鹿児島市を中心に、病院・介護・障がい福祉の連携で地域医療を支えています。仁愛の心をもって、一人ひとりの暮らしに寄り添います。">
+  <meta property="og:url" content="https://jinaikai.com/">
+  <meta property="og:site_name" content="医療法人仁愛会">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- / SEO SIMPLE PACK -->
+  
+  <style id="wp-img-auto-sizes-contain-inline-css" type="text/css">
+  img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+  /*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+  </style>
+  <link rel="stylesheet" id="eo-leaflet.js-css" href="https://swc-aiwakai.jp/cms/wp-content/plugins/event-organiser/lib/leaflet/leaflet.min.css?ver=1.4.0" type="text/css" media="all">
+  <style id="eo-leaflet.js-inline-css" type="text/css">
+  .leaflet-popup-close-button{box-shadow:none!important;}
+  /*# sourceURL=eo-leaflet.js-inline-css */
+  </style>
+  <style id="wp-emoji-styles-inline-css" type="text/css">
+  
+    img.wp-smiley, img.emoji {
+      display: inline !important;
+      border: none !important;
+      box-shadow: none !important;
+      height: 1em !important;
+      width: 1em !important;
+      margin: 0 0.07em !important;
+      vertical-align: -0.1em !important;
+      background: none !important;
+      padding: 0 !important;
+    }
+  /*# sourceURL=wp-emoji-styles-inline-css */
+  </style>
+  <style id="wp-block-library-inline-css" type="text/css">
+  :root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}.has-text-align-center{text-align:center}.has-text-align-left{text-align:left}.has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-wrap:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style*=border-top-color]){border-top-style:solid}html :where([style*=border-right-color]){border-right-style:solid}html :where([style*=border-bottom-color]){border-bottom-style:solid}html :where([style*=border-left-color]){border-left-style:solid}html :where([style*=border-width]){border-style:solid}html :where([style*=border-top-width]){border-top-style:solid}html :where([style*=border-right-width]){border-right-style:solid}html :where([style*=border-bottom-width]){border-bottom-style:solid}html :where([style*=border-left-width]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+  
+  /*# sourceURL=wp-block-library-inline-css */
+  </style>
+  <style id="classic-theme-styles-inline-css" type="text/css">
+  /*! This file is auto-generated */
+  .wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+  /*# sourceURL=/wp-includes/css/classic-themes.min.css */
+  </style>
+  <style id="global-styles-inline-css" type="text/css">
+  :root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+  /*# sourceURL=global-styles-inline-css */
+  </style>
+  
+  <link rel="https://api.w.org/" href="https://swc-aiwakai.jp/wp-json/"><link rel="alternate" title="JSON" type="application/json" href="https://swc-aiwakai.jp/wp-json/wp/v2/pages/12"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://swc-aiwakai.jp/cms/xmlrpc.php?rsd">
+  <meta name="generator" content="WordPress 6.9.4">
+  <link rel="shortlink" href="index.html">
+  <style type="text/css">@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');</style><script src="https://swc-aiwakai.jp/cms/wp-includes/js/wp-emoji-release.min.js?ver=6.9.4" defer=""></script></head>
+  
+  <body style="">
+  <div id="wrapper" class="top _pc">
+    <header id="header" class="">
+          <div class="header_mega_bg"></div>
+          <div class="header_head">
+                          <h1 class="header_logo">
+                  <a href="index.html" class="">
+                      <img src="images/SiteID.svg" alt="医療法人仁愛会">
+                  </a>
+              </h1>
+                          <div class="header_nav_btn">
+                  <div></div>
+                  <div></div>
+              </div>
+          </div>
+          <div class="header_content">
+              <ul class="header_list">
+                  <li class="sp">
+                      <p class="header_list_title">
+                          <a href="index.html">
+                              <span class="_text">トップページ</span>
+                          </a>
+                      </p>
+                  </li>
+                  <li>
+                      <p class="header_list_title">
+                          <a href="about.html">
+                              <span class="_text">仁愛会について</span>
+                          </a>
+                      </p>
+                  </li>
+                  <li class="header_list_has_mega all_item_has_sub_list">
+                      <p class="header_list_title">
+                          <a class="" href="https://jinaikai.com/sakimoto/"><span class="_text">病院・医療</span></a>
+                          <span class="_button"></span>
+                      </p>
+                      <div class="header_mega_wrap _body" style="display: none; opacity: 1;">
+                          <div class="_inner">
+                              <div class="_img_sec">
+                                  <div class="_img">
+                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/header_mega_advanced_01.jpg" alt="" class="active">
+                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/header_mega_advanced_02.jpg" alt="">
+                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/header_mega_advanced_03.jpg" alt="">
+                                  </div>
+                              </div>
+                              <div class="header_mega_content">
+                                  <div class="_right_inner">
+                                      <p class="_title">
+                                          <span class="_jp">病院・医療</span>
+                                      </p>
+                                      <ul class="header_mega_list">
+                                          <li>
+                                              <a href="https://jinaikai.com/sakimoto/" class="">
+                                                  <span class="_mega_text">
+                                                      﨑元病院
+                                                  </span>
+                                                  <span class="_arrow">
+                                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_right.svg" alt="">
+                                                  </span>
+                                              </a>
+                                          </li>
+                                          <li>
+                                                                                      <a href="https://jinaikai.com/jinaikai/" class="">
+                                                                                          <span class="_mega_text">
+                                                      仁愛会病院
+                                                  </span>
+                                                  <span class="_arrow">
+                                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_right.svg" alt="">
+                                                  </span>
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a href="https://jinaikai.com/kekura/" class="">
+                                                  <span class="_mega_text">
+                                                      花倉病院
+                                                  </span>
+                                                  <span class="_arrow">
+                                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_right.svg" alt="">
+                                                  </span>
+                                              </a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="header_list_has_mega all_item_has_sub_list">
+                      <p class="header_list_title">
+                          <a class="" href="care.html"><span class="_text">介護・障がい福祉</span></a>
+                          <span class="_button"></span>
+                      </p>
+                      <div class="header_mega_wrap _body" style="display: none; opacity: 1;">
+                          <div class="_inner">
+                              <div class="_img_sec">
+                                  <div class="_img">
+                                      <img src="images/welfare_care.jpg" alt="" class="active">
+                                  </div>
+                              </div>
+                              <div class="header_mega_content header-asunaro">
+                                  <div class="_right_inner">
+                                      <p class="_title">
+                                          <span class="_jp">介護・障がい福祉</span>
+                                      </p>
+                                      <ul class="header_mega_list">
+                                          <li>
+                                              <a href="https://jinaikai.com/shoukei/" class="">
+                                                  <span class="_mega_text">
+                                                      特別養護老人ホーム 笑憩の里
+                                                  </span>
+                                                  <span class="_arrow">
+                                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_right.svg" alt="">
+                                                  </span>
+                                              </a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="header_list_has_mega all_item_has_sub_list">
+                      <p class="header_list_title">
+                          <a class="" href="care.html"><span class="_text">施設・地域福祉</span></a>
+                          <span class="_button"></span>
+                      </p>
+                      <div class="header_mega_wrap _body">
+                          <div class="_inner">
+                              <div class="_img_sec">
+                                  <div class="_img">
+                                      <img src="images/welfare_child.jpg" alt="" class="active">
+                                      <img src="images/welfare_child.jpg" alt="">
+                                      <img src="images/welfare_child.jpg" alt="">
+                                      <img src="images/welfare_child.jpg" alt="">
+                                      <img src="images/welfare_child.jpg" alt="">
+                                  </div>
+                              </div>
+                              <div class="header_mega_content">
+                                  <div class="_right_inner">
+                                      <p class="_title">
+                                          <span class="_jp">施設・地域福祉</span>
+                                      </p>
+                                      <ul class="header_mega_list _sp_block">
+                                          <li>
+                                              <a href="https://jinaikai.com/shoukei/" class="header-mega-list__child">
+                                                  <span class="_mega_text">
+                                                      特別養護老人ホーム 笑憩の里
+                                                  </span>
+                                                  <span class="_arrow">
+                                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_right.svg" alt="">
+                                                  </span>
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a href="https://jinaikai.com/yuyu/" class="header-mega-list__child">
+                                                  <span class="_mega_text">
+                                                      悠友（地域福祉会館）
+                                                  </span>
+                                                  <span class="_arrow">
+                                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_right.svg" alt="">
+                                                  </span>
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a href="https://jinaikai.com/support/" class="header-mega-list__child">
+                                                  <span class="_mega_text">
+                                                      花倉工房
+                                                  </span>
+                                                  <span class="_arrow">
+                                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_right.svg" alt="">
+                                                  </span>
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a href="https://jinaikai.com/support/" class="header-mega-list__child">
+                                                  <span class="_mega_text">
+                                                      ジャンプ（障害福祉サービス）
+                                                  </span>
+                                                  <span class="_arrow">
+                                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_right.svg" alt="">
+                                                  </span>
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a href="https://jinaikai.com/support/#enjo" class="header-mega-list__child">
+                                                  <span class="_mega_text">
+                                                      相談支援（花倉工房 悠友）
+                                                  </span>
+                                                  <span class="_arrow">
+                                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_right.svg" alt="">
+                                                  </span>
+                                              </a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <li>
+                      <p class="header_list_title">
+                          <a href="about.html">
+                              <span class="_text">情報公開</span>
+                          </a>
+                      </p>
+                  </li>
+                  <li class="header_list_has_mega all_item_has_sub_list">
+                      <p class="header_list_title">
+                          <span class=""><span class="_text">採用情報</span></span>
+                          <span class="_button"></span>
+                      </p>
+                      <div class="header_mega_wrap _body _wide">
+                          <div class="_inner">
+                              <div class="_img_sec">
+                                  <div class="_img">
+                                      <img src="images/stock_mega_recruit_01.jpg" alt="" class="active">
+                                      <img src="images/stock_mega_recruit_02.jpg" alt="">
+                                      <img src="images/stock_mega_recruit_03.jpg" alt="">
+                                      <img src="images/stock_mega_recruit_03.jpg" alt="">
+                                      <img src="images/stock_mega_recruit_03.jpg" alt="">
+                                  </div>
+                              </div>
+                              <div class="header_mega_content">
+                                  <div class="_right_inner">
+                                      <p class="_title">
+                                          <span class="_jp">採用情報</span>
+                                      </p>
+                                      <div class="_wide_wrap">
+                                          <div class="_wide_item">
+                                              <p class="_wide_title">職種から探す</p>
+                                              <ul class="header_mega_list _sp_block">
+                                                  <li>
+                                                      <a href="https://jinaikai.com/recruit/" class="">
+                                                          <span class="_mega_text">
+                                                              医療・看護職
+                                                          </span>
+                                                          <span class="_arrow">
+                                                              <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_right.svg" alt="">
+                                                          </span>
+                                                      </a>
+                                                  </li>
+                                                  <li>
+                                                      <a href="https://jinaikai.com/recruit/" class="">
+                                                          <span class="_mega_text">
+                                                              介護・リハ職
+                                                          </span>
+                                                          <span class="_arrow">
+                                                              <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_right.svg" alt="">
+                                                          </span>
+                                                      </a>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                          <div class="_wide_item">
+                                              <p class="_wide_title">中途・パート採用</p>
+                                              <ul class="header_mega_list _sp_block">
+                                                  <li>
+                                                      <a href="https://jinaikai.com/recruit/" class="">
+                                                          <span class="_mega_text">
+                                                              﨑元病院
+                                                          </span>
+                                                          <span class="_arrow">
+                                                              <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_right.svg" alt="">
+                                                          </span>
+                                                      </a>
+                                                  </li>
+                                                  <li>
+                                                      <a href="https://jinaikai.com/recruit/" class="">
+                                                          <span class="_mega_text">
+                                                              仁愛会病院
+                                                          </span>
+                                                          <span class="_arrow">
+                                                              <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_right.svg" alt="">
+                                                          </span>
+                                                      </a>
+                                                  </li>
+                                                  <li>
+                                                      <a href="https://jinaikai.com/recruit/" class="">
+                                                          <span class="_mega_text">
+                                                              花倉病院
+                                                          </span>
+                                                          <span class="_arrow">
+                                                              <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_right.svg" alt="">
+                                                          </span>
+                                                      </a>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+              </ul>
+              <ul class="header_small_list">
+                  <li>
+                      <a href="news.html">
+                          <span class="_text">お知らせ</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="https://jinaikai.com/">
+                          <span class="_text">お問い合わせ</span>
+                      </a>
+                  </li>
+              </ul>
+              <div class="header_sns">
+                  <!-- <button class="header_sns_button">
+                      SNS
+                  </button> -->
+                  <div class="header_sns_content _pc" style="display: none; opacity: 1;">
+                      <button class="_close_button sp">
+                          <span class="_img">
+                              <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_sns_close.svg" alt="">
+                          </span>
+                          <span class="_text">閉じる</span>
+                      </button>
+                      <div class="_inner">
+                          <p class="_title">公式リンク</p>
+                          <ul class="_list">
+                  <li>
+                      <p class="_list_title">医療法人仁愛会</p>
+                      <ul class="_link_list">
+                          <li class="_insta">
+                              <a href="https://jinaikai.com/" target="_blank" rel="noopener noreferrer" title="公式Webサイト">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_instagram.svg" alt="公式Web">
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>                    </div>
+                  </div>
+              </div>
+          </div>
+      </header>
+  
+      <div class="header_sns_content_sp_wrap">
+          <div class="header_sns_content _sp" style="display: none; opacity: 1;">
+              <button class="_close_button sp">
+                  <span class="_img">
+                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_sns_close.svg" alt="">
+                  </span>
+                  <span class="_text">閉じる</span>
+              </button>
+              <div class="_inner">
+                  
+                          <p class="_title">公式リンク</p>
+                          <ul class="_list">
+                  <li>
+                      <p class="_list_title">医療法人仁愛会</p>
+                      <ul class="_link_list">
+                          <li class="_insta">
+                              <a href="https://jinaikai.com/" target="_blank" rel="noopener noreferrer" title="公式Webサイト">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_instagram.svg" alt="公式Web">
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>            </div>
+          </div>
+      </div>
+    <div class="top_stalker" style="transform: translate(1136px, 223px);">
+          <div class="_arrow">
+              <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_stalker_arrow.svg" alt="">
+          </div>
+      </div>
+    <main id="container">
+          <div class="top_mv_bg"></div>
+      <section class="top_mv">
+              <div class="pin-spacer" style="place-self: auto; grid-area: auto; z-index: 3; float: none; flex-shrink: 1; display: block; margin: 0px; inset: 0px; position: absolute; overflow: visible; box-sizing: border-box; width: 1221px; height: 1578px; padding: 0px 0px 789.001px;"><div class="top_column_copy" style="transform: translate(0px, 0px); left: 0px; top: 0.001px; margin: 0px; max-width: 1221px; width: 1221px; max-height: 789px; height: 789px; padding: 0px; box-sizing: border-box; position: fixed;">
+                  <div class="_inner all_fade_item" style="opacity: 1; transform: translate(-50%, 0%) translate(-0.1211px, 0px);">
+                      <span class="_line">
+                          <span class="_black">仁愛の心を</span><span class="_black">もって</span></span>
+                      </span><br>
+                      <span class="_line">
+                          <span class="_black">地域医療の明日を支える</span>
+                      </span>
+                      <!-- 日本地図（一時非表示）
+                      <div class="_japan" style="left: 185.047px; top: 93.6094px; transform: translate(0%, -50%) translate(-499.469px, 0.031px); opacity: 1;">
+                          <img src="images/top_japan.png" alt="">
+                      </div>
+                      -->
+                  </div>
+              </div></div>
+              <div class="top_mv_slider_wrapper">
+                  <div class="top_mv_slider_control">
+                      <div class="_next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-1543e844e2117e98"></div>
+                  </div>
+                  <div class="top_mv_slider swiper all_fade_item swiper-initialized swiper-horizontal swiper-pointer-events" style="opacity: 1; transform: translate(0px, 0px);">
+                      <div class="swiper-wrapper" id="swiper-wrapper-1543e844e2117e98" aria-live="off" style="transition-duration: 2000ms; transform: translate3d(-3090px, 0px, 0px);"><div class="_slide swiper-slide swiper-slide-duplicate" data-swiper-slide-index="0" style="width: 269px; margin-right: 40px;" role="group" aria-label="1 / 6">
+                              <a href="https://jinaikai.com/sakimoto/" class="_inner">
+                                  <img src="images/welfare_kaigo.jpg" alt="">
+                                  <div class="_text_sec">
+                                      <div class="_title_sec">
+                                          <p class="_jp">病院<span class="_rotate">・</span>医療</p>
+                                          <p class="_en">
+                                              Service <span class="_num">01</span>
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="_hover_text">
+                                      <p class="_text">
+                                          﨑元病院・仁愛会病院・花倉病院の3病院で地域医療に取り組んでいます。
+                                      </p>
+                                      <p class="_button">
+                                          詳しく見る
+                                      </p>
+                                  </div>
+                              </a>
+                          </div><div class="_slide swiper-slide swiper-slide-duplicate" data-swiper-slide-index="1" style="width: 269px; margin-right: 40px;" role="group" aria-label="2 / 6">
+                              <div class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_not_hover_01.jpg" alt="">
+                              </div>
+                          </div><div class="_slide swiper-slide swiper-slide-duplicate" data-swiper-slide-index="2" style="width: 269px; margin-right: 40px;" role="group" aria-label="3 / 6">
+                              <a href="care.html" class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_hover_02.jpg" alt="">
+                                  <div class="_text_sec">
+                                      <div class="_title_sec">
+                                          <p class="_jp">介護<span class="_rotate">・</span>福祉</p>
+                                          <p class="_en">
+                                              Service <span class="_num">02</span>
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="_hover_text">
+                                      <p class="_text">
+                                          介護・障がい福祉・地域づくりの支援事業に取り組んでいます。
+                                      </p>
+                                      <p class="_button">
+                                          詳しく見る
+                                      </p>
+                                  </div>
+                              </a>
+                          </div><div class="_slide swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev" data-swiper-slide-index="3" style="width: 269px; margin-right: 40px;" role="group" aria-label="4 / 6">
+                              <div class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_not_hover_02.jpg" alt="">
+                              </div>
+                          </div><div class="_slide swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="4" style="width: 269px; margin-right: 40px;" role="group" aria-label="5 / 6">
+                              <a href="care.html" class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_hover_03.jpg" alt="">
+                                  <div class="_text_sec">
+                                      <div class="_title_sec">
+                                          <p class="_jp">施設<span class="_rotate">・</span>地域</p>
+                                          <p class="_en">
+                                              Service <span class="_num">03</span>
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="_hover_text">
+                                      <p class="_text">
+                                          在宅と施設をつなぐ特別養護老人ホーム等の介護・福祉を提供しています。
+                                      </p>
+                                      <p class="_button">
+                                          詳しく見る
+                                      </p>
+                                  </div>
+                              </a>
+                          </div><div class="_slide swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="5" style="width: 269px; margin-right: 40px;" role="group" aria-label="6 / 6">
+                              <div class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_not_hover_03.jpg" alt="">
+                              </div>
+                          </div>
+                          <div class="_slide swiper-slide" data-swiper-slide-index="0" style="width: 269px; margin-right: 40px;" role="group" aria-label="1 / 6">
+                              <a href="https://jinaikai.com/sakimoto/" class="_inner">
+                                  <img src="images/welfare_kaigo.jpg" alt="">
+                                  <div class="_text_sec">
+                                      <div class="_title_sec">
+                                          <p class="_jp">病院<span class="_rotate">・</span>医療</p>
+                                          <p class="_en">
+                                              Service <span class="_num">01</span>
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="_hover_text">
+                                      <p class="_text">
+                                          﨑元病院・仁愛会病院・花倉病院の3病院で地域医療に取り組んでいます。
+                                      </p>
+                                      <p class="_button">
+                                          詳しく見る
+                                      </p>
+                                  </div>
+                              </a>
+                          </div>
+                          <div class="_slide swiper-slide" data-swiper-slide-index="1" style="width: 269px; margin-right: 40px;" role="group" aria-label="2 / 6">
+                              <div class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_not_hover_01.jpg" alt="">
+                              </div>
+                          </div>
+                          <div class="_slide swiper-slide" data-swiper-slide-index="2" style="width: 269px; margin-right: 40px;" role="group" aria-label="3 / 6">
+                              <a href="care.html" class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_hover_02.jpg" alt="">
+                                  <div class="_text_sec">
+                                      <div class="_title_sec">
+                                          <p class="_jp">介護<span class="_rotate">・</span>福祉</p>
+                                          <p class="_en">
+                                              Service <span class="_num">02</span>
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="_hover_text">
+                                      <p class="_text">
+                                          介護・障がい福祉・地域づくりの支援事業に取り組んでいます。
+                                      </p>
+                                      <p class="_button">
+                                          詳しく見る
+                                      </p>
+                                  </div>
+                              </a>
+                          </div>
+                          <div class="_slide swiper-slide swiper-slide-prev" data-swiper-slide-index="3" style="width: 269px; margin-right: 40px;" role="group" aria-label="4 / 6">
+                              <div class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_not_hover_02.jpg" alt="">
+                              </div>
+                          </div>
+                          <div class="_slide swiper-slide swiper-slide-active" data-swiper-slide-index="4" style="width: 269px; margin-right: 40px;" role="group" aria-label="5 / 6">
+                              <a href="care.html" class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_hover_03.jpg" alt="">
+                                  <div class="_text_sec">
+                                      <div class="_title_sec">
+                                          <p class="_jp">施設<span class="_rotate">・</span>地域</p>
+                                          <p class="_en">
+                                              Service <span class="_num">03</span>
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="_hover_text">
+                                      <p class="_text">
+                                          在宅と施設をつなぐ特別養護老人ホーム等の介護・福祉を提供しています。
+                                      </p>
+                                      <p class="_button">
+                                          詳しく見る
+                                      </p>
+                                  </div>
+                              </a>
+                          </div>
+                          <div class="_slide swiper-slide swiper-slide-next" data-swiper-slide-index="5" style="width: 269px; margin-right: 40px;" role="group" aria-label="6 / 6">
+                              <div class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_not_hover_03.jpg" alt="">
+                              </div>
+                          </div>
+                      <div class="_slide swiper-slide swiper-slide-duplicate" data-swiper-slide-index="0" style="width: 269px; margin-right: 40px;" role="group" aria-label="1 / 6">
+                              <a href="https://jinaikai.com/sakimoto/" class="_inner">
+                                  <img src="images/welfare_kaigo.jpg" alt="">
+                                  <div class="_text_sec">
+                                      <div class="_title_sec">
+                                          <p class="_jp">病院<span class="_rotate">・</span>医療</p>
+                                          <p class="_en">
+                                              Service <span class="_num">01</span>
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="_hover_text">
+                                      <p class="_text">
+                                          﨑元病院・仁愛会病院・花倉病院の3病院で地域医療に取り組んでいます。
+                                      </p>
+                                      <p class="_button">
+                                          詳しく見る
+                                      </p>
+                                  </div>
+                              </a>
+                          </div><div class="_slide swiper-slide swiper-slide-duplicate" data-swiper-slide-index="1" style="width: 269px; margin-right: 40px;" role="group" aria-label="2 / 6">
+                              <div class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_not_hover_01.jpg" alt="">
+                              </div>
+                          </div><div class="_slide swiper-slide swiper-slide-duplicate" data-swiper-slide-index="2" style="width: 269px; margin-right: 40px;" role="group" aria-label="3 / 6">
+                              <a href="care.html" class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_hover_02.jpg" alt="">
+                                  <div class="_text_sec">
+                                      <div class="_title_sec">
+                                          <p class="_jp">介護<span class="_rotate">・</span>福祉</p>
+                                          <p class="_en">
+                                              Service <span class="_num">02</span>
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="_hover_text">
+                                      <p class="_text">
+                                          介護・障がい福祉・地域づくりの支援事業に取り組んでいます。
+                                      </p>
+                                      <p class="_button">
+                                          詳しく見る
+                                      </p>
+                                  </div>
+                              </a>
+                          </div><div class="_slide swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev" data-swiper-slide-index="3" style="width: 269px; margin-right: 40px;" role="group" aria-label="4 / 6">
+                              <div class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_not_hover_02.jpg" alt="">
+                              </div>
+                          </div><div class="_slide swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="4" style="width: 269px; margin-right: 40px;" role="group" aria-label="5 / 6">
+                              <a href="care.html" class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_hover_03.jpg" alt="">
+                                  <div class="_text_sec">
+                                      <div class="_title_sec">
+                                          <p class="_jp">施設<span class="_rotate">・</span>地域</p>
+                                          <p class="_en">
+                                              Service <span class="_num">03</span>
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="_hover_text">
+                                      <p class="_text">
+                                          在宅と施設をつなぐ特別養護老人ホーム等の介護・福祉を提供しています。
+                                      </p>
+                                      <p class="_button">
+                                          詳しく見る
+                                      </p>
+                                  </div>
+                              </a>
+                          </div><div class="_slide swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="5" role="group" aria-label="6 / 6" style="width: 269px; margin-right: 40px;">
+                              <div class="_inner">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_not_hover_03.jpg" alt="">
+                              </div>
+                          </div></div>
+                  <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+              </div>
+          </section>
+          <section class="top_about">
+              <div class="content">
+                  <div class="top_about_content">
+                      <h2 class="top_title_sec all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                          <span class="_jp">
+                              鹿児島市を中心に、<span class="all_new_line">病院をはじめ、</span><br>介護・障がい福祉・<span class="all_new_line">地域福祉の事業を</span><br>展開しています。
+                          </span>
+                      </h2>
+                      <p id="pin-hide-marker" class="all_text all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                          医療法人仁愛会は、仁愛の精神に基づき、患者さん・ご利用者さんとそのご家族、地域社会との信頼を大切にしてきました。人を思いやる心を大切に、医療・福祉が一体となったサービスを、一人ひとりの暮らしに寄り添って提供してまいります。
+                      </p>
+                      <p class="all_button all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                          <a href="about.html" class="">
+                              <span class="all_button_text">
+                                  仁愛会について
+                              </span>
+                          </a>
+                      </p>
+                  </div>
+              </div>
+          </section>
+          <section class="top_information">
+              <div class="content">
+                  <div class="top_information_content all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                      <div class="_left">
+                          <h2 class="top_title_sec">
+                              <span class="_en all_font_en">Information</span>
+                              <span class="_jp">
+                                  お知らせ
+                              </span>
+                          </h2>
+                          <div class="swiper-container info_sp_slider">
+                              <!-- メイン -->
+                               <ul class="top_information_cat_list swiper-wrapper">
+  
+                                                                  <li class="swiper-slide">
+                                      <a href="#all" class="on">
+                                          すべて
+                                      </a>
+                                  </li>
+                                  <li class="swiper-slide">
+                                      <a href="#cat_news">
+                                          お知らせ
+                                      </a>
+                                  </li>
+                                  <li class="swiper-slide">
+                                      <a href="#cat_recruit">
+                                          採用情報
+                                      </a>
+                                  </li>
+                                  <li class="swiper-slide">
+                                      <a href="#cat_event">
+                                          イベント
+                                      </a>
+                                  </li>
+                                  <li class="swiper-slide">
+                                      <a href="#cat_magazine">
+                                          広報誌
+                                      </a>
+                                  </li>
+                                  
+                              </ul>
+                          </div>
+                          <div class="button_wrapper">
+                              <div class="swiper-button-prev">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/prev_button.svg" alt="">
+                              </div>
+                              <div class="swiper-button-next">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/next_button.svg" alt="">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="_right">
+                          <div class="top_information_list_wrap">
+  
+                          <!-- すべて -->
+                                                          <ul id="all" class="top_information_list on">
+  <li>
+      <a href="https://jinaikai.com/wp/2025/12/28/%e5%b9%b4%e6%9c%ab%e5%b9%b4%e5%a7%8b%e8%a8%ba%e7%99%82%e3%81%ae%e3%81%94%e6%a1%88%e5%86%85-7/" class="" target="_blank" rel="noopener noreferrer">
+          <div class="_text_sec">
+              <div class="all_information_info">
+                  <p class="_cat _area">仁愛会病院</p>
+                  <p class="_cat">お知らせ</p>
+                  <p class="_date">
+                      <time class="all_font_en" datetime="2025-12-28">2025 12/28</time>
+                  </p>
+              </div>
+              <p class="_list_text">
+                  年末年始診療のご案内            </p>
+              <div class="all_hover_arrow pc"></div>
+          </div>
+      </a>
+  </li>
+  <li>
+      <a href="https://jinaikai.com/wp/2025/12/23/%e5%b9%b4%e6%9c%ab%e5%b9%b4%e5%a7%8b%e8%a8%ba%e7%99%82%e3%81%ae%e3%81%94%e6%a1%88%e5%86%85-6/" class="" target="_blank" rel="noopener noreferrer">
+          <div class="_text_sec">
+              <div class="all_information_info">
+                  <p class="_cat _area">花倉病院</p>
+                  <p class="_cat">お知らせ</p>
+                  <p class="_date">
+                      <time class="all_font_en" datetime="2025-12-23">2025 12/23</time>
+                  </p>
+              </div>
+              <p class="_list_text">
+                  年末年始診療のご案内            </p>
+              <div class="all_hover_arrow pc"></div>
+          </div>
+      </a>
+  </li>
+  <li>
+      <a href="https://jinaikai.com/wp/2025/09/19/%e5%a4%96%e6%9d%a5%e8%a8%ba%e7%99%82%e6%97%a5%e5%a4%89%e6%9b%b4%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/" class="" target="_blank" rel="noopener noreferrer">
+          <div class="_text_sec">
+              <div class="all_information_info">
+                  <p class="_cat _area">﨑元病院</p>
+                  <p class="_cat">お知らせ</p>
+                  <p class="_date">
+                      <time class="all_font_en" datetime="2025-09-19">2025 09/19</time>
+                  </p>
+              </div>
+              <p class="_list_text">
+                  外来診療日変更のお知らせ            </p>
+              <div class="all_hover_arrow pc"></div>
+          </div>
+      </a>
+  </li>
+  <li>
+      <a href="https://jinaikai.com/wp/2025/07/28/%e9%9d%a2%e4%bc%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6-4/" class="" target="_blank" rel="noopener noreferrer">
+          <div class="_text_sec">
+              <div class="all_information_info">
+                  <p class="_cat _area">﨑元病院</p>
+                  <p class="_cat">お知らせ</p>
+                  <p class="_date">
+                      <time class="all_font_en" datetime="2025-07-28">2025 07/28</time>
+                  </p>
+              </div>
+              <p class="_list_text">
+                  面会についてのご案内            </p>
+              <div class="all_hover_arrow pc"></div>
+          </div>
+      </a>
+  </li>
+  </ul>
+                              <ul id="cat_news" class="top_information_list">
+                                  <li>
+      <a href="https://jinaikai.com/wp/2025/12/28/%e5%b9%b4%e6%9c%ab%e5%b9%b4%e5%a7%8b%e8%a8%ba%e7%99%82%e3%81%ae%e3%81%94%e6%a1%88%e5%86%85-7/" class="" target="_blank" rel="noopener noreferrer">
+          <div class="_text_sec">
+              <div class="all_information_info">
+                  <p class="_cat _area">仁愛会病院</p>
+                  <p class="_cat">お知らせ</p>
+                  <p class="_date">
+                      <time class="all_font_en" datetime="2025-12-28">2025 12/28</time>
+                  </p>
+              </div>
+              <p class="_list_text">年末年始診療のご案内            </p>
+              <div class="all_hover_arrow pc"></div>
+          </div>
+      </a>
+  </li>
+  <li>
+      <a href="https://jinaikai.com/wp/2025/09/19/%e5%a4%96%e6%9d%a5%e8%a8%ba%e7%99%82%e6%97%a5%e5%a4%89%e6%9b%b4%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/" class="" target="_blank" rel="noopener noreferrer">
+          <div class="_text_sec">
+              <div class="all_information_info">
+                  <p class="_cat _area">﨑元病院</p>
+                  <p class="_cat">お知らせ</p>
+                  <p class="_date">
+                      <time class="all_font_en" datetime="2025-09-19">2025 09/19</time>
+                  </p>
+              </div>
+              <p class="_list_text">外来診療日変更のお知らせ            </p>
+              <div class="all_hover_arrow pc"></div>
+          </div>
+      </a>
+  </li>
+  </ul>
+                              <ul id="cat_recruit" class="top_information_list">
+  <li class="no_post">
+      <div class="_text_sec">
+          <p class="_list_text">求人情報は <a href="recruit.html" style="text-decoration:underline;">求人情報ページ</a> または <a href="https://jinaikai.com/recruit/" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;">公式サイト</a> をご覧ください。</p>
+      </div>
+  </li>
+  </ul>
+                              <ul id="cat_event" class="top_information_list">
+  <li class="no_post">
+      <div class="_text_sec">
+          <p class="_list_text">掲載中のイベント情報は公式サイト（トップ）をご確認ください。</p>
+      </div>
+  </li>
+  </ul>
+                              <ul id="cat_magazine" class="top_information_list">
+  <li class="no_post">
+      <div class="_text_sec">
+          <p class="_list_text">掲載中の記事はありません</p>
+      </div>
+  </li>
+  </ul>
+                              <ul id="cat_column" class="top_information_list">
+                                  <li class="no_post">
+      <div class="_text_sec">
+          <p class="_list_text">
+              記事がありません
+          </p>
+      </div>
+  </li>
+                              </ul>
+                          </div><!-- /.top_information_list_wrap -->
+                          <div class="_button_sec">
+                              <a href="news.html">
+                                  <p class="_text">お知らせ一覧</p>
+                                  <div class="_button all_hover_arrow">
+                                      <div class=""></div>
+                                  </div>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+          <section class="top_service">
+              <div class="content">
+                  <div class="top_service_content">
+                      <h2 class="top_title_sec all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                          <span class="_en all_font_en">Service</span>
+                          <span class="_jp">
+                              サービス内容
+                          </span>
+                      </h2>
+                      <p class="all_text all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                          病院での療養から、在宅・施設にわたる介護・障がい福祉、地域づくりの支援まで、医療・介護・福祉の連携で地域の皆さまに寄り添います。
+                      </p>
+                      <ul class="top_service_list all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                          <li class="all_accordion_item top_service_list_item">
+                              <div class="_head">
+                                  <h3 class="_title">
+                                      病院・医療
+                                  </h3>
+                                  <div class="_arrow">
+                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_top.png" alt="">
+                                  </div>
+                              </div>
+                              <div class="_body">
+                                  <div class="_button_sec">
+                                      <p class="all_button">
+                                          <a href="https://jinaikai.com/sakimoto/" class="">
+                                              <span class="all_button_text">
+                                                  﨑元病院
+                                              </span>
+                                          </a>
+                                      </p>
+                                      <p class="all_button">
+                                          <a href="https://jinaikai.com/jinaikai/" class="">
+                                              <span class="all_button_text">
+                                                  仁愛会病院
+                                              </span>
+                                          </a>
+                                      </p>
+                                      <p class="all_button">
+                                          <a href="https://jinaikai.com/kekura/" class="">
+                                              <span class="all_button_text">
+                                                  花倉病院
+                                              </span>
+                                          </a>
+                                      </p>
+                                  </div>
+                              </div>
+                          </li>
+                          <li class="all_accordion_item top_service_list_item">
+                              <div class="_head">
+                                  <h3 class="_title">
+                                      介護・障がい福祉
+                                  </h3>
+                                  <div class="_arrow">
+                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_top.png" alt="">
+                                  </div>
+                              </div>
+                              <div class="_body">
+                                  <div class="_button_sec">
+                                      <p class="all_button">
+                                          <a href="care.html" class="">
+                                              <span class="all_button_text">
+                                                  特別養護老人ホーム 笑憩の里
+                                              </span>
+                                          </a>
+                                      </p>
+                                  </div>
+                              </div>
+                          </li>
+                          <li class="all_accordion_item top_service_list_item _child">
+                              <div class="_head">
+                                  <h3 class="_title">
+                                      施設・地域福祉
+                                  </h3>
+                                  <div class="_arrow">
+                                      <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/all_arrow_top.png" alt="">
+                                  </div>
+                              </div>
+                              <div class="_body">
+                                  <div class="_button_sec">
+                                      <p class="all_button">
+                                          <a href="https://jinaikai.com/shoukei/" class="">
+                                              <span class="all_button_text">
+                                                  特別養護老人ホーム 笑憩の里
+                                              </span>
+                                          </a>
+                                      </p>
+                                      <p class="all_button">
+                                          <a href="https://jinaikai.com/yuyu/" class="">
+                                              <span class="all_button_text">
+                                                  悠友（地域福祉会館）
+                                              </span>
+                                          </a>
+                                      </p>
+                                      <p class="all_button">
+                                          <a href="https://jinaikai.com/support/" class="">
+                                              <span class="all_button_text">
+                                                  花倉工房
+                                              </span>
+                                          </a>
+                                      </p>
+                                  </div>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="top_service_img_sec">
+                      <div class="_item on">
+                          <picture class="_left all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                              <source srcset="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_service_img_left_sp.jpg" media="(max-width: 600px)">
+                              <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_service_img_left.jpg" alt="">
+                          </picture>
+                          <div class="_right all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                              <div class="_img"><img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_service_img_right.jpg" alt=""></div>
+                          </div>
+                      </div>
+                      <div class="_item">
+                          <picture class="_left all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                              <source srcset="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_service_img_left_02_sp.jpg" media="(max-width: 600px)">
+                              <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_service_img_left_02.jpg" alt="">
+                          </picture>
+                          <div class="_right all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                              <div class="_img"><img src="images/welfare_kaigo2.jpg" alt=""></div>
+                          </div>
+                      </div>
+                      <div class="_item">
+                          <picture class="_left all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                              <source srcset="images/welfare_child2.jpg" media="(max-width: 600px)">
+                              <img src="images/welfare_child2.jpg" alt="">
+                          </picture>
+                          <div class="_right all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                              <div class="_mg"><img src="images/welfare_child3.jpg" alt=""></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+          <!-- 採用エリアの人物写真はフリー素材ぱくたそ（https://www.pakutaso.com/）。商用可・各素材ページの利用規約に従うこと。 -->
+          <section class="top_recruit all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+              <div class="content">
+                  <div class="top_recruit_img">
+                      <div class="_img on">
+                          <div class="top_recruit_photos" role="img" aria-label="医療・採用のイメージ（ぱくたそ・日本人モデル）">
+                              <div class="top_recruit_photo">
+                                  <img src="images/stock_recruit_portrait_01.jpg" alt="">
+                              </div>
+                              <div class="top_recruit_photo">
+                                  <img src="images/stock_recruit_portrait_02.jpg" alt="">
+                              </div>
+                              <div class="top_recruit_photo">
+                                  <img src="images/stock_recruit_portrait_03.jpg" alt="">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="top_recruit_content">
+                      <div class="_title_sec all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                          <h2 class="top_title_sec">
+                              <span class="_en all_font_en">Recruit</span>
+                              <span class="_jp" style="width: 160px;">
+                                  採用情報
+                              </span>
+                          </h2>
+                          <p class="all_text">
+                              医療法人仁愛会では、医療・介護・事務など幅広い職種で一緒に働く仲間を募集中です。<br class="pc">
+                              仁愛の心を共有し、鹿児島の地域医療を共に支えてくださる方のご応募をお待ちしています。
+                          </p>
+                      </div>
+                      <div class="_button_sec_wrap">
+                          <h3 class="top_recruit_title">主な募集職種</h3>
+                          <div class="_button_sec all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                              <p class="all_button _wide">
+                                  <a href="https://jinaikai.com/recruit/" class="">
+                                      <span class="all_button_text">
+                                          医療・看護職
+                                      </span>
+                                  </a>
+                              </p>
+                              <p class="all_button _wide">
+                                  <a href="https://jinaikai.com/recruit/" class="">
+                                      <span class="all_button_text">
+                                          介護・リハ職
+                                      </span>
+                                  </a>
+                              </p>
+                          </div>
+                          <h3 class="top_recruit_title">中途・パート採用</h3>
+                          <div class="_button_sec all_fade_item" style="opacity: 1; transform: translate(0px, 0px);">
+                              <p class="all_button">
+                                  <a href="https://jinaikai.com/recruit/" class="">
+                                      <span class="all_button_text">
+                                          求人情報一覧
+                                      </span>
+                                  </a>
+                              </p>
+                              <p class="all_button">
+                                  <a href="https://jinaikai.com/recruit/" class="">
+                                      <span class="all_button_text">
+                                          採用のご案内
+                                      </span>
+                                  </a>
+                              </p>
+                              <p class="all_button">
+                                  <a href="https://jinaikai.com/recruit/" class="">
+                                      <span class="all_button_text">
+                                          各施設の募集
+                                      </span>
+                                  </a>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+    </main>
+  
+  <footer id="footer">
+      <div class="content">
+              <div class="footer_right">
+                  <div class="footer_contact_button">
+                      <a href="https://jinaikai.com/" class="">
+                          <p class="_text">お問い合わせはこちら</p>
+                          <div class="_button all_hover_arrow _orange"></div>
+                      </a>
+                  </div>
+                  <div class="footer_list_sec">
+                      <div class="_left">
+                          <ul class="footer_list">
+                              <li>
+                                  <p class="footer_list_title">
+                                      <a class="all_hover_underline" href="index.html">トップページ</a>
+                                  </p>
+                              </li>
+                              <li>
+                                  <p class="footer_list_title">
+                                      <a class="all_hover_underline" href="about.html">仁愛会について</a>
+                                  </p>
+                              </li>
+                              <li>
+                                  <p class="footer_list_title all_item_has_sub_list">
+                                      <a class="all_hover_underline" href="https://jinaikai.com/sakimoto/">病院・医療</a>
+                                      <span class="_button"></span>
+                                  </p>
+                                  <div class="_body">
+                                      <ul class="footer_sub_list _short">
+                                          <li>
+                                              <a class="all_hover_underline" href="https://jinaikai.com/sakimoto/">
+                                                  - 﨑元病院
+                                              </a>
+                                          </li>
+                                                                              <li>
+                                              <a class="all_hover_underline" href="https://jinaikai.com/jinaikai/">
+                                                  - 仁愛会病院
+                                              </a>
+                                          </li>
+                                                                              <li>
+                                              <a class="all_hover_underline" href="https://jinaikai.com/kekura/">
+                                                  - 花倉病院
+                                              </a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </li>
+                              <li>
+                                  <p class="footer_list_title">
+                                      <a class="all_hover_underline" href="care.html">介護・障がい福祉</a>
+                                  </p>
+                                  <div class="_body">
+                                      <ul class="footer_sub_list">
+                                          <li>
+                                              <a class="all_hover_underline" href="https://jinaikai.com/shoukei/">
+                                                  - 特別養護老人ホーム 笑憩の里
+                                              </a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </li>
+                              <li>
+                                  <p class="footer_list_title all_item_has_sub_list">
+                                      <a class="all_hover_underline" href="care.html">施設・地域福祉</a>
+                                      <span class="_button"></span>
+                                  </p>
+                                  <div class="_body">
+                                      <ul class="footer_sub_list">
+                                          <li>
+                                              <a class="all_hover_underline" href="https://jinaikai.com/shoukei/">
+                                                  - 特別養護老人ホーム 笑憩の里
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a class="all_hover_underline" href="https://jinaikai.com/yuyu/">
+                                                  - 悠友（地域福祉会館）
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a class="all_hover_underline" href="https://jinaikai.com/support/">
+                                                  - 花倉工房
+                                              </a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </li>
+                          </ul>
+                      </div>
+                      <div class="_right">
+                          <ul class="footer_list">
+                              <li>
+                                  <p class="footer_list_title">
+                                      <a class="all_hover_underline" href="about.html">情報公開</a>
+                                  </p>
+                              </li>
+                              <li>
+                                  <p class="footer_list_title all_item_has_sub_list">
+                                      <a href="" style="pointer-events: none;">採用情報</a>
+                                      <span class="_button"></span>
+                                  </p>
+                                  <div class="_body">
+                                      <p class="_sub_title">職種から探す</p>
+                                      <ul class="footer_sub_list">
+                                          <li>
+                                              <a class="all_hover_underline" href="https://jinaikai.com/recruit/">
+                                                  - 医療・看護職
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a class="all_hover_underline" href="https://jinaikai.com/recruit/">
+                                                  - 介護・リハ職
+                                              </a>
+                                          </li>
+                                      </ul>
+                                      <p class="_sub_title">中途・パート採用</p>
+                                      <ul class="footer_sub_list _short">
+                                          <li>
+                                              <a class="all_hover_underline" href="https://jinaikai.com/recruit/">
+                                                  - 﨑元病院
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a class="all_hover_underline" href="https://jinaikai.com/recruit/">
+                                                  - 仁愛会病院
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a class="all_hover_underline" href="https://jinaikai.com/recruit/">
+                                                  - 花倉病院
+                                              </a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </li>
+                              <li>
+                                  <p class="footer_list_title">
+                                      <a class="all_hover_underline" href="news.html">お知らせ</a>
+                                  </p>
+                              </li>
+                              <li>
+                                  <p class="footer_list_title">
+                                      <a class="all_hover_underline" href="https://jinaikai.com/">お問い合わせ</a>
+                                  </p>
+                              </li>
+                          </ul>
+                          <!-- <p class="footer_banner">
+                              <a href="https://jinaikai.com/" target="_blank">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/footer_banner.png" alt="医療法人仁愛会 公式Webサイト">
+                              </a>
+                              <a href="https://jinaikai.com/shoukei/" target="_blank">
+                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/footer_noodle.png" alt="特別養護老人ホーム 笑憩の里">
+                              </a>
+                          </p> -->
+                      </div>
+                  </div>
+              </div>
+              <div class="footer_left">
+                  <p class="footer_logo">
+                      <img src="images/SiteID_footer.svg" alt="医療法人仁愛会">
+                  </p>
+                  <ul class="footer_address_list">
+                      <li>
+                          <p class="_text">
+                              〒891-0122<br>
+                              鹿児島市南栄5丁目10-19（仁愛会病院）
+                          </p>
+                          <p class="_text">
+                              <span class="_tel">TEL <a href="tel:099-210-0201">099-210-0201</a></span>（代表）<br>
+                              各病院・施設の窓口は<a href="https://jinaikai.com/" target="_blank" rel="noopener noreferrer" class="all_hover_underline" style="text-decoration:underline;">公式サイト</a>をご覧ください。
+                          </p>
+                      </li>
+                  </ul>
+                  <!-- <button class="footer_sns_button sp">
+                      SNS
+                  </button> -->
+                  <p class="_copyright all_font_en">
+                      Copyright 医療法人仁愛会 / JINAIKAI All Rights Reserved.
+                  </p>
+              </div>
+          </div>
+    </footer>
+  </div>
+  <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+          <symbol id="arrow_right" viewBox="0 0 7.049 12.098">
+              <path id="arrow_right" width="7.049" height="12.098" data-name="パス 401211" d="M-18081.576-24732.266l4.635,4.635,4.635-4.635" transform="translate(24733.68 -18070.893) rotate(-90)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </symbol>
+      </defs>
+      <defs>
+          <symbol id="slide_button" width="78" height="78" viewBox="0 0 78 78">
+              <g id="slide_button" data-name="グループ 6249" transform="translate(0 78) rotate(-90)">
+                  <g id="楕円形_784" data-name="楕円形 784" stroke-width="4">
+                      <circle cx="39" cy="39" r="39" stroke="none"></circle>
+                      <circle cx="39" cy="39" r="37" fill="none"></circle>
+                  </g>
+                  <path id="パス_388622" data-name="パス 388622" d="M0,12.938,12.941,0,25.887,12.938" transform="translate(26.156 30.352)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+              </g>
+          </symbol>
+      </defs>
+      <defs>
+          <symbol id="side_nav_circle" viewBox="0 0 28 28">
+              <circle cx="14" cy="14" r="13" fill="none"></circle>
+          </symbol>
+      </defs>
+      <defs>
+          <symbol id="side_nav_arrow" viewBox="0 0 28 28">
+              <g id="グループ_7925" data-name="グループ 7925" transform="translate(16826 17243)">
+                  <g id="グループ_7924" data-name="グループ 7924" transform="translate(-16826 -17243)">
+                      <path id="パス_388622" data-name="パス 388622" d="M-18081.576-24732.266l4.635,4.635,4.635-4.635" transform="translate(18090.941 24744.766)" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </g>
+              </g>
+          </symbol>
+      </defs>
+      <defs>
+          <symbol id="all_svg_tel" viewBox="0 0 26 26">
+              <path id="パス_892809" data-name="パス 892809" d="M15.146,5a12.478,12.478,0,0,0,5.029-1.023A13.313,13.313,0,0,0,24.32,1.163a13.24,13.24,0,0,0,2.809-4.139A12.5,12.5,0,0,0,28.146-8a12.5,12.5,0,0,0-1.016-5.022,13.265,13.265,0,0,0-2.815-4.146,13.243,13.243,0,0,0-4.153-2.815A12.548,12.548,0,0,0,15.132-21a12.482,12.482,0,0,0-5,1.016,13.243,13.243,0,0,0-4.153,2.815A13.265,13.265,0,0,0,3.162-13.02,12.5,12.5,0,0,0,2.146-8,12.43,12.43,0,0,0,3.169-2.976,13.336,13.336,0,0,0,5.984,1.163,13.313,13.313,0,0,0,10.13,3.979,12.445,12.445,0,0,0,15.146,5ZM11.989-4.935a18.024,18.024,0,0,1-2.026-2.4A10.719,10.719,0,0,1,8.639-9.824a5.228,5.228,0,0,1-.328-2.354,3.222,3.222,0,0,1,.976-1.973l.08-.08a.314.314,0,0,1,.107-.067,2.788,2.788,0,0,1,.836-.468,1.264,1.264,0,0,1,.756-.033,1.163,1.163,0,0,1,.615.475l1.6,2.274a1.386,1.386,0,0,1,.348.983,1.731,1.731,0,0,1-.522.876l-.508.535a.359.359,0,0,0-.1.294.689.689,0,0,0,.074.254,7.694,7.694,0,0,0,.642.869q.441.535.976,1.083a13.948,13.948,0,0,0,1.077.976,8.82,8.82,0,0,0,.876.642.586.586,0,0,0,.308.08.38.38,0,0,0,.281-.107l.508-.508a1.7,1.7,0,0,1,.863-.5,1.39,1.39,0,0,1,1,.328q.522.361.916.642l.736.522q.341.241.649.468a1.083,1.083,0,0,1,.508,1.023,1.98,1.98,0,0,1-.495,1.09q-.053.067-.1.134a1.008,1.008,0,0,1-.114.134,3.273,3.273,0,0,1-1.979.976,5.244,5.244,0,0,1-2.354-.328,10.54,10.54,0,0,1-2.494-1.331A18.312,18.312,0,0,1,11.989-4.935Z" transform="translate(-2.146 20.998)" fill="#483c34"></path>
+          </symbol>
+      </defs>
+      <defs>
+          <symbol id="all_svg_fax" viewBox="0 0 26 26">
+              <g id="グループ_8046" data-name="グループ 8046" transform="translate(-640.004 -5794.283)">
+                  <circle id="楕円形_1565" data-name="楕円形 1565" cx="13" cy="13" r="13" transform="translate(640.004 5794.283)" fill="#483c34"></circle>
+                  <path id="パス_892810" data-name="パス 892810" d="M4.245-8.825H5.353V-9.851a.768.768,0,0,1,.191-.571.8.8,0,0,1,.581-.188h5.763a.791.791,0,0,1,.571.188.76.76,0,0,1,.195.571v1.012h1.107v-.923a1.894,1.894,0,0,0-.475-1.425,1.958,1.958,0,0,0-1.4-.455H6.132a1.985,1.985,0,0,0-1.388.455,1.839,1.839,0,0,0-.5,1.425ZM3.637.492H4.949V-.581H3.63A.841.841,0,0,1,3-.793.862.862,0,0,1,2.8-1.422V-7.506A.85.85,0,0,1,3-8.131.85.85,0,0,1,3.63-8.34H14.383A.854.854,0,0,1,15-8.131a.833.833,0,0,1,.215.625v6.084A.845.845,0,0,1,15-.793a.845.845,0,0,1-.619.212H13.146V.492h1.23a2.016,2.016,0,0,0,1.47-.5,1.955,1.955,0,0,0,.506-1.459v-6a1.964,1.964,0,0,0-.506-1.466,2.016,2.016,0,0,0-1.47-.5H3.637a2.052,2.052,0,0,0-1.459.5,1.912,1.912,0,0,0-.53,1.466v6A1.947,1.947,0,0,0,2.157,0,2.038,2.038,0,0,0,3.637.492ZM5.626,2.447H12.38a1.386,1.386,0,0,0,.988-.314,1.321,1.321,0,0,0,.332-1v-2.68a1.321,1.321,0,0,0-.332-1,1.386,1.386,0,0,0-.988-.314H5.626a1.393,1.393,0,0,0-.978.314,1.3,1.3,0,0,0-.342,1v2.68a1.329,1.329,0,0,0,.328,1A1.384,1.384,0,0,0,5.626,2.447Zm.287-1.06a.5.5,0,0,1-.362-.12A.489.489,0,0,1,5.428.9V-1.319a.479.479,0,0,1,.123-.359.5.5,0,0,1,.362-.12h6.18a.5.5,0,0,1,.366.12.487.487,0,0,1,.12.359V.9a.5.5,0,0,1-.12.366.5.5,0,0,1-.366.12Zm.444-1.6A.5.5,0,0,0,6.5.15.491.491,0,0,0,6.87.3h4.272A.483.483,0,0,0,11.5.15a.5.5,0,0,0,.147-.362A.5.5,0,0,0,11.5-.574a.483.483,0,0,0-.359-.15H6.87a.491.491,0,0,0-.366.15A.5.5,0,0,0,6.357-.212ZM5.564-6.084h.588a.266.266,0,0,0,.3-.3v-.588a.266.266,0,0,0-.3-.3H5.564a.266.266,0,0,0-.3.3v.588A.266.266,0,0,0,5.564-6.084Zm2.092,0h.595a.263.263,0,0,0,.294-.3v-.588a.263.263,0,0,0-.294-.3H7.656a.263.263,0,0,0-.294.3v.588A.263.263,0,0,0,7.656-6.084Zm2.1,0h.595a.266.266,0,0,0,.3-.3v-.588a.266.266,0,0,0-.3-.3H9.755a.266.266,0,0,0-.3.3v.588A.266.266,0,0,0,9.755-6.084Zm2.1,0h.595a.263.263,0,0,0,.294-.3v-.588a.263.263,0,0,0-.294-.3h-.595a.263.263,0,0,0-.294.3v.588A.263.263,0,0,0,11.854-6.084ZM5.564-3.931h.588a.263.263,0,0,0,.3-.294v-.595a.263.263,0,0,0-.3-.294H5.564a.263.263,0,0,0-.3.294v.595A.263.263,0,0,0,5.564-3.931Zm2.092,0h.595a.26.26,0,0,0,.294-.294v-.595a.26.26,0,0,0-.294-.294H7.656a.26.26,0,0,0-.294.294v.595A.26.26,0,0,0,7.656-3.931Zm2.1,0h.595a.263.263,0,0,0,.3-.294v-.595a.263.263,0,0,0-.3-.294H9.755a.263.263,0,0,0-.3.294v.595A.263.263,0,0,0,9.755-3.931Zm2.1,0h.595a.26.26,0,0,0,.294-.294v-.595a.26.26,0,0,0-.294-.294h-.595a.26.26,0,0,0-.294.294v.595A.26.26,0,0,0,11.854-3.931Z" transform="translate(644.004 5812.283)" fill="#fdfcfa"></path>
+              </g>
+          </symbol>
+      </defs>
+      <defs>
+          <symbol id="all_svg_mail" viewBox="0 0 26 26">
+              <g id="グループ_42505" data-name="グループ 42505" transform="translate(-7669 -16131.623)">
+                  <g id="グループ_42504" data-name="グループ 42504">
+                  <g id="グループ_42503" data-name="グループ 42503" transform="translate(7669 16131.623)">
+                      <g id="グループ_42500" data-name="グループ 42500" transform="translate(0 0)">
+                      <circle id="楕円形_1680" data-name="楕円形 1680" cx="13" cy="13" r="13" fill="#483d34"></circle>
+                      <g id="グループ_42499" data-name="グループ 42499" transform="translate(6.45 8.282)">
+                          <g id="グループ_42499-2" data-name="グループ 42499" transform="translate(0 0)" clip-path="url(#clip-path)">
+                          <path id="パス_909015" data-name="パス 909015" d="M6.55,16.96,0,12.214v6.438a1.3,1.3,0,0,0,1.294,1.294H11.807A1.3,1.3,0,0,0,13.1,18.652V12.22Z" transform="translate(0 -10.511)" fill="#fff"></path>
+                          <path id="パス_909016" data-name="パス 909016" d="M7.352,5.386,13.774.739A1.3,1.3,0,0,0,12.608,0H2.1A1.3,1.3,0,0,0,.931.734Z" transform="translate(-0.801 0)" fill="#fff"></path>
+                          </g>
+                      </g>
+                      </g>
+                  </g>
+                  </g>
+              </g>
+          </symbol>
+      </defs>
+      <defs>
+          <symbol id="all_svg_insta" viewBox="0 0 26 26">
+              <g id="グループ_42507" data-name="グループ 42507" transform="translate(-7871 -16557.885)">
+                  <g id="グループ_42506" data-name="グループ 42506">
+                  <ellipse id="楕円形_1679" data-name="楕円形 1679" cx="13" cy="13" rx="13" ry="13" transform="translate(7871 16557.885)" fill="#483c34"></ellipse>
+                  <g id="グループ_42402" data-name="グループ 42402" transform="translate(7876.337 16563.422)">
+                      <g id="グループ_42403" data-name="グループ 42403" transform="translate(0 0)">
+                      <path id="パス_909002" data-name="パス 909002" d="M4.372.052A5.458,5.458,0,0,0,2.562.4a3.651,3.651,0,0,0-1.32.863A3.657,3.657,0,0,0,.383,2.589,5.482,5.482,0,0,0,.04,4.4C.005,5.2,0,5.451,0,7.478s.013,2.281.051,3.077a5.471,5.471,0,0,0,.35,1.81,3.654,3.654,0,0,0,.863,1.32,3.659,3.659,0,0,0,1.324.858,5.477,5.477,0,0,0,1.812.343c.8.035,1.05.043,3.076.039s2.281-.013,3.077-.051a5.486,5.486,0,0,0,1.81-.35,3.814,3.814,0,0,0,2.178-2.187,5.465,5.465,0,0,0,.343-1.811c.035-.8.043-1.051.039-3.077s-.013-2.28-.051-3.076a5.473,5.473,0,0,0-.35-1.811,3.661,3.661,0,0,0-.863-1.32A3.652,3.652,0,0,0,12.337.384,5.46,5.46,0,0,0,10.526.041C9.73.005,9.476,0,7.449,0S5.168.014,4.372.052m.087,13.491a4.139,4.139,0,0,1-1.386-.254,2.326,2.326,0,0,1-.859-.557,2.319,2.319,0,0,1-.56-.857,4.133,4.133,0,0,1-.259-1.386c-.037-.787-.045-1.023-.049-3.015s0-2.228.038-3.016a4.132,4.132,0,0,1,.254-1.386,2.315,2.315,0,0,1,.557-.859,2.312,2.312,0,0,1,.857-.56A4.13,4.13,0,0,1,4.436,1.4c.787-.037,1.023-.045,3.015-.049s2.229,0,3.016.038a4.122,4.122,0,0,1,1.386.254,2.31,2.31,0,0,1,.859.557,2.311,2.311,0,0,1,.56.857,4.12,4.12,0,0,1,.259,1.385c.037.787.046,1.023.05,3.015s0,2.229-.038,3.016a4.138,4.138,0,0,1-.254,1.387,2.472,2.472,0,0,1-1.414,1.419,4.133,4.133,0,0,1-1.385.259c-.787.037-1.023.045-3.016.049s-2.228,0-3.015-.038M10.543,3.474a.9.9,0,1,0,.894-.9.9.9,0,0,0-.894.9m-6.912,4A3.832,3.832,0,1,0,7.455,3.631,3.832,3.832,0,0,0,3.631,7.471m1.344,0A2.488,2.488,0,1,1,7.468,9.951,2.488,2.488,0,0,1,4.975,7.468" transform="translate(0 -0.001)" fill="#fff"></path>
+                      </g>
+                  </g>
+                  </g>
+              </g>
+          </symbol>
+      </defs>
+  </svg>
+  
+  <script type="speculationrules">
+  {"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/cms/wp-*.php","/cms/wp-admin/*","/cms/wp-content/uploads/*","/cms/wp-content/*","/cms/wp-content/plugins/*","/cms/wp-content/themes/aiwakai/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+  </script>
+  <script id="wp-emoji-settings" type="application/json">
+  {"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://swc-aiwakai.jp/cms/wp-includes/js/wp-emoji-release.min.js?ver=6.9.4"}}
+  </script>
+  <script type="module">
+  /* <![CDATA[ */
+  /*! This file is auto-generated */
+  const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
+  //# sourceURL=https://swc-aiwakai.jp/cms/wp-includes/js/wp-emoji-loader.min.js
+  /* ]]> */
+  </script>
+  
+  <style>
+    /* soft fade when pin-spacer "releases" (marker passed) — avoid display:none so transition can run */
+    #wrapper .pin-spacer {
+      opacity: 1;
+      transition: opacity 0.6s cubic-bezier(0.33, 0.1, 0.2, 1);
+    }
+    #wrapper.hide-pin .pin-spacer {
+      opacity: 0;
+      pointer-events: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #wrapper .pin-spacer {
+        transition: none;
+      }
+    }
+  </style>
+
+  <script>
+    (function () {
+      function updateHidePin() {
+        const wrapper = document.getElementById("wrapper");
+        const marker = document.getElementById("pin-hide-marker");
+        if (!wrapper || !marker) return;
+
+        const passed = marker.getBoundingClientRect().top <= 0;
+        wrapper.classList.toggle("hide-pin", passed);
+      }
+
+      window.addEventListener("scroll", updateHidePin, { passive: true });
+      window.addEventListener("resize", updateHidePin);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", updateHidePin, { once: true });
+      } else {
+        updateHidePin();
+      }
+    })();
+  </script>
+
+  <tldx-lmi-shadow-root data-wxt-shadow-root=""></tldx-lmi-shadow-root><div id="tldx-toast-container"></div></body></html>

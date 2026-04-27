@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>医療法人仁愛会</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* カラー：ポピー（北欧テキスタイル風）の白・橙・ピンク・黄・黒 */
+  :root {
+    --cream: #ffffff;
+    --deep-red: #F27A18;
+    --coral: #F4A7B9;
+    --warm-white: #fff5f6;
+    --forest: #1a1a1a;
+    --navy: #1a1a1a;
+    --sand: #F9E03D;
+    --petal-1: #F27A18;
+    --petal-2: #E97122;
+    --petal-3: #F9B7C1;
+    --petal-4: #1a1a1a;
+    --petal-5: #F9E03D;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ===== PETAL CANVAS (background) ===== */
+  #petal-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--deep-red);
+  }
+
+  .logo {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.3;
+    text-decoration: none;
+  }
+
+  .logo span { display: block; font-size: 0.65rem; font-weight: 300; color: var(--forest); letter-spacing: 0.15em; }
+
+  nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav a {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--navy);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    position: relative;
+    padding-bottom: 2px;
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--deep-red);
+    transition: width 0.3s;
+  }
+
+  nav a:hover::after { width: 100%; }
+
+  .nav-recruit {
+    background: var(--deep-red);
+    color: #fff !important;
+    padding: 0.45rem 1.2rem;
+    border-radius: 2px;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.1em;
+  }
+
+  .nav-recruit::after { display: none !important; }
+
+  /* ===== HERO ===== */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 3rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    padding-top: 6rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    color: var(--deep-red);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--deep-red);
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero-sub {
+    font-size: 0.92rem;
+    line-height: 1.9;
+    color: #444;
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--deep-red);
+    color: #fff;
+    padding: 0.85rem 2.2rem;
+    border: 2px solid var(--deep-red);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.25s;
+  }
+
+  .btn-primary:hover { background: transparent; color: var(--deep-red); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--navy);
+    padding: 0.85rem 2.2rem;
+    border: 2px solid var(--navy);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.25s;
+  }
+
+  .btn-outline:hover { background: var(--navy); color: #fff; }
+
+  /* Hero giant petal decoration */
+  .hero-petal-art {
+    position: absolute;
+    right: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    animation: heroSpin 40s linear infinite;
+  }
+
+  @keyframes heroSpin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  /* Ticker */
+  .ticker-wrap {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    border-top: 1px solid var(--deep-red);
+    border-bottom: 1px solid var(--deep-red);
+    background: var(--deep-red);
+    padding: 0.6rem 0;
+  }
+
+  .ticker {
+    display: flex;
+    gap: 0;
+    animation: tickerMove 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .ticker span {
+    color: #fff;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    padding: 0 2.5rem;
+  }
+
+  @keyframes tickerMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ===== SECTION SHARED ===== */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 3rem;
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    color: var(--deep-red);
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .section-lead {
+    font-size: 0.88rem;
+    line-height: 1.85;
+    color: #555;
+    max-width: 500px;
+    margin-bottom: 3rem;
+  }
+
+  /* ===== HOSPITAL CARDS ===== */
+  #hospitals { background: var(--warm-white); }
+
+  .hosp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .hosp-card {
+    background: var(--cream);
+    padding: 2.4rem 2.1rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid rgba(26, 26, 26, 0.08);
+    box-shadow: 0 16px 30px rgba(0,0,0,0.06);
+    transform: translateZ(0);
+    border-radius: 34px; /* fallback */
+  }
+
+  /* 花形（対応ブラウザのみ） */
+  @supports (clip-path: path("M0 0 L1 1")) {
+    .hosp-card {
+      border-radius: 0;
+      clip-path: path("M 150 6 C 178 18 190 40 188 62 C 210 60 232 74 244 102 C 256 130 250 154 234 172 C 254 188 260 214 248 240 C 236 266 212 276 190 270 C 192 294 176 316 148 328 C 120 340 96 332 82 314 C 66 332 40 338 14 324 C -12 310 -24 286 -18 262 C -40 266 -64 252 -76 224 C -88 196 -82 172 -64 156 C -82 138 -88 112 -74 86 C -60 60 -34 52 -12 58 C -12 34 2 14 30 4 C 58 -6 84 4 98 22 C 112 6 132 -4 150 6 Z");
+    }
+  }
+
+  .hosp-card::after {
+    content: '';
+    position: absolute;
+    inset: -30px;
+    background:
+      radial-gradient(circle at 30% 25%, rgba(244,167,185,0.28), transparent 55%),
+      radial-gradient(circle at 78% 32%, rgba(249,224,61,0.22), transparent 58%),
+      radial-gradient(circle at 45% 78%, rgba(242,122,24,0.18), transparent 60%);
+    opacity: 0.9;
+    transform: rotate(-8deg);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hosp-card::before {
+    content: '';
+    position: absolute;
+    inset: 18px;
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,0.75), rgba(255,255,255,0.28) 52%, transparent 72%),
+      conic-gradient(from 210deg,
+        rgba(242,122,24,0.10),
+        rgba(249,183,193,0.10),
+        rgba(249,224,61,0.10),
+        rgba(233,113,34,0.10),
+        rgba(244,167,185,0.10),
+        rgba(242,122,24,0.10)
+      );
+    opacity: 0.0;
+    transform: scale(0.92);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hosp-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 48px rgba(0,0,0,0.10);
+    background: #fff;
+  }
+
+  .hosp-card:hover::before { opacity: 1; transform: scale(1); }
+
+  .hosp-num {
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--deep-red);
+    opacity: 0.32;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    font-family: 'Noto Serif JP', serif;
+  }
+
+  .hosp-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.55rem;
+  }
+
+  .hosp-dept {
+    font-size: 0.75rem;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 1.35rem;
+    max-width: 18rem;
+  }
+
+  .hosp-link {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--deep-red);
+    letter-spacing: 0.12em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(242, 122, 24, 0.08);
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+  }
+
+  .hosp-link::after { content: '→'; transition: transform 0.2s; }
+  .hosp-card:hover .hosp-link::after { transform: translateX(4px); }
+
+  /* ===== CARE SECTION ===== */
+  #care { background: var(--cream); }
+
+  .care-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5px;
+  }
+
+  .care-card {
+    background: var(--warm-white);
+    padding: 2rem 2rem 2rem 5rem;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .care-card:hover { background: #ffe8ec; }
+
+  .care-num-big {
+    position: absolute;
+    left: 1.5rem;
+    top: 1.8rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--deep-red);
+    letter-spacing: 0.05em;
+    writing-mode: vertical-rl;
+  }
+
+  .care-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+
+  .care-type {
+    font-size: 0.68rem;
+    color: var(--forest);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.8rem;
+    background: rgba(242, 122, 24, 0.1);
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .care-desc {
+    font-size: 0.8rem;
+    line-height: 1.75;
+    color: #666;
+  }
+
+  .care-petal-mark {
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+
+  /* ===== NEWS ===== */
+  #news { background: var(--warm-white); }
+
+  .news-filters {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1.5px solid var(--navy);
+    padding: 0.35rem 1rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--navy);
+    transition: all 0.2s;
+  }
+
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  .news-list { display: flex; flex-direction: column; gap: 0; }
+
+  .news-item {
+    display: flex;
+    gap: 2rem;
+    align-items: baseline;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+    text-decoration: none;
+    color: inherit;
+    transition: padding-left 0.2s;
+  }
+
+  .news-item:hover { padding-left: 0.5rem; }
+
+  .news-date {
+    font-size: 0.75rem;
+    color: #888;
+    white-space: nowrap;
+    min-width: 6rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .news-tag {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    padding: 0.15rem 0.5rem;
+    background: var(--deep-red);
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .news-title {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  /* ===== PHILOSOPHY ===== */
+  #philosophy {
+    background: var(--navy);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #philosophy .section-label { color: var(--sand); }
+  #philosophy .section-title { color: #fff; }
+
+  .phil-quote {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--sand);
+    border-left: 4px solid var(--coral);
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .phil-body {
+    font-size: 0.88rem;
+    line-height: 1.95;
+    color: rgba(255,255,255,0.75);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+  }
+
+  .phil-pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5px;
+    margin-top: 3rem;
+  }
+
+  .pillar {
+    background: rgba(255,255,255,0.05);
+    padding: 1.5rem;
+    border-top: 3px solid var(--coral);
+    transition: background 0.3s;
+  }
+
+  .pillar:hover { background: rgba(255,255,255,0.1); }
+
+  .pillar-num {
+    font-size: 0.65rem;
+    color: var(--coral);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+  }
+
+  .pillar-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .pillar-desc {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+  }
+
+  .phil-petal-bg {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.06;
+    animation: slowSpin 60s linear infinite;
+  }
+
+  @keyframes slowSpin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  /* ===== RECRUIT ===== */
+  #recruit { background: var(--cream); }
+
+  .recruit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5px;
+    margin-bottom: 2rem;
+  }
+
+  .recruit-item {
+    background: var(--warm-white);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: var(--navy);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.25s;
+    border-left: 4px solid transparent;
+  }
+
+  .recruit-item:hover {
+    border-left-color: var(--deep-red);
+    padding-left: 2.5rem;
+    background: #ffe8ec;
+  }
+
+  .recruit-arrow {
+    font-size: 1.1rem;
+    color: var(--deep-red);
+  }
+
+  /* ===== ACCESS ===== */
+  #contact { background: var(--warm-white); }
+
+  .access-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+  }
+
+  .access-card {
+    background: var(--cream);
+    padding: 2rem;
+    border-top: 4px solid var(--deep-red);
+  }
+
+  .access-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    color: var(--navy);
+  }
+
+  .access-role {
+    font-size: 0.65rem;
+    color: var(--deep-red);
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  .access-info {
+    font-size: 0.78rem;
+    line-height: 1.9;
+    color: #555;
+  }
+
+  .access-tel {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--navy);
+    letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--navy);
+    color: #fff;
+    padding: 3rem 3rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .foot-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .foot-logo {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .foot-desc {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.8;
+  }
+
+  .foot-col-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--sand);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .foot-col ul { list-style: none; }
+  .foot-col li { margin-bottom: 0.5rem; }
+  .foot-col a {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .foot-col a:hover { color: #fff; }
+
+  .foot-bottom {
+    max-width: 1100px;
+    margin: 1.5rem auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ===== FLOATING PETALS ===== */
+  .float-petal {
+    position: absolute;
+    animation: floatUp linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes floatUp {
+    0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.6; }
+    100% { transform: translateY(-120vh) rotate(720deg) scale(0.5); opacity: 0; }
+  }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- Floating Petal Background -->
+<div id="petal-bg" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    医療法人仁愛会
+    <span>医療・福祉の総合グループ</span>
+  </a>
+  <ul>
+    <li><a href="#hospitals">医療施設</a></li>
+    <li><a href="#care">介護・障がい</a></li>
+    <li><a href="#news">お知らせ</a></li>
+    <li><a href="#philosophy">法人理念</a></li>
+    <li><a href="#contact">アクセス</a></li>
+    <li><a href="#recruit" class="nav-recruit">求人情報</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-petal-art" aria-hidden="true">
+    <svg width="680" height="680" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="heroFlowerShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000000" flood-opacity="0.12" />
+        </filter>
+        <!-- ふっくらした花びら形（パス） -->
+        <path id="heroFlowerPetal" d="M0,-215
+          C70,-190 115,-105 90,-30
+          C70,35 30,70 0,92
+          C-30,70 -70,35 -90,-30
+          C-115,-105 -70,-190 0,-215 Z" />
+      </defs>
+
+      <g transform="translate(340,340)" filter="url(#heroFlowerShadow)">
+        <g opacity="0.95">
+          <use href="#heroFlowerPetal" transform="rotate(0)"   fill="#F27A18" stroke="#1A1A1A" stroke-opacity="0.18" stroke-width="3"/>
+          <use href="#heroFlowerPetal" transform="rotate(60)"  fill="#F9B7C1" stroke="#1A1A1A" stroke-opacity="0.18" stroke-width="3"/>
+          <use href="#heroFlowerPetal" transform="rotate(120)" fill="#F9E03D" stroke="#1A1A1A" stroke-opacity="0.18" stroke-width="3"/>
+          <use href="#heroFlowerPetal" transform="rotate(180)" fill="#E97122" stroke="#1A1A1A" stroke-opacity="0.18" stroke-width="3"/>
+          <use href="#heroFlowerPetal" transform="rotate(240)" fill="#F4A7B9" stroke="#1A1A1A" stroke-opacity="0.18" stroke-width="3"/>
+          <use href="#heroFlowerPetal" transform="rotate(300)" fill="#F27A18" stroke="#1A1A1A" stroke-opacity="0.18" stroke-width="3"/>
+        </g>
+
+        <!-- 花芯（リング + 種） -->
+        <circle r="78" fill="#ffffff" stroke="#1A1A1A" stroke-opacity="0.14" stroke-width="3"/>
+        <circle r="52" fill="#F9E03D" stroke="#1A1A1A" stroke-opacity="0.18" stroke-width="3"/>
+        <circle r="18" fill="#000000"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">患者さま・ご家族のみなさまへ</p>
+    <h1 class="hero-title">
+      人を想う医療で、<br>
+      <em>鹿児島の未来へ。</em>
+    </h1>
+    <p class="hero-sub">
+      不安やご心配があるとき、いつでも話しやすい雰囲気でお迎えできるよう心がけています。3つの病院と福祉の施設を通じて、地域の皆さまの健康と暮らしを支えています。
+    </p>
+    <div class="hero-btns">
+      <a href="#hospitals" class="btn-primary">施設を探す</a>
+      <a href="#contact" class="btn-outline">アクセス</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker">
+    <span>﨑元病院</span><span>仁愛会病院</span><span>花倉病院</span>
+    <span>笑憩の里</span><span>花倉工房</span><span>ジャンプ</span><span>悠友</span>
+    <span>﨑元病院</span><span>仁愛会病院</span><span>花倉病院</span>
+    <span>笑憩の里</span><span>花倉工房</span><span>ジャンプ</span><span>悠友</span>
+    <span>﨑元病院</span><span>仁愛会病院</span><span>花倉病院</span>
+    <span>笑憩の里</span><span>花倉工房</span><span>ジャンプ</span><span>悠友</span>
+  </div>
+</div>
+
+<!-- HOSPITALS -->
+<section id="hospitals">
+  <div class="section-inner">
+    <p class="section-label reveal">医療施設</p>
+    <h2 class="section-title reveal">医療施設のご案内</h2>
+    <p class="section-lead reveal">どの施設でも、分かりやすい説明と丁寧な対応を大切にしています。内科・神経内科・リハビリテーション科など、幅広い診療で皆さまの健康をお守りします。</p>
+    <div class="hosp-grid reveal">
+      <a href="https://jinaikai.com/sakimoto/" class="hosp-card">
+        <div class="hosp-num">01</div>
+        <div class="hosp-name">﨑元病院</div>
+        <div class="hosp-dept">内科・神経内科・循環器内科<br>リハビリテーション科・老年精神科</div>
+        <div class="hosp-link">詳しく見る</div>
+      </a>
+      <a href="https://jinaikai.com/jinaikai/" class="hosp-card">
+        <div class="hosp-num">02</div>
+        <div class="hosp-name">仁愛会病院</div>
+        <div class="hosp-dept">内科・神経内科<br>リハビリテーション科・放射線科</div>
+        <div class="hosp-link">詳しく見る</div>
+      </a>
+      <a href="https://jinaikai.com/kekura/" class="hosp-card">
+        <div class="hosp-num">03</div>
+        <div class="hosp-name">花倉病院</div>
+        <div class="hosp-dept">老年精神科・精神科・内科</div>
+        <div class="hosp-link">詳しく見る</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CARE -->
+<section id="care">
+  <div class="section-inner">
+    <p class="section-label reveal">福祉</p>
+    <h2 class="section-title reveal">介護・障がいサービス事業</h2>
+    <p class="section-lead reveal">ご本人とご家族が安心できるよう、スタッフ一同が笑顔で寄り添います。認知症ケアから就労支援まで、一人ひとりのペースを尊重したサポートを行っています。</p>
+    <div class="care-grid reveal">
+      <a href="https://jinaikai.com/shoukei/" class="care-card">
+        <div class="care-num-big">01</div>
+        <div class="care-name">笑憩の里</div>
+        <div class="care-type">認知症対応型 共同生活介護</div>
+        <p class="care-desc">家庭的な温かさの中、安心して毎日を過ごせる場所です。認知症対応型共同生活介護事業所。</p>
+        <svg class="care-petal-mark" width="140" height="140" viewBox="0 0 140 140">
+          <g transform="translate(70,70)" fill="#F27A18">
+            <ellipse rx="18" ry="50" transform="rotate(0)"/>
+            <ellipse rx="18" ry="50" transform="rotate(60)"/>
+            <ellipse rx="18" ry="50" transform="rotate(120)"/>
+            <ellipse rx="18" ry="50" transform="rotate(180)"/>
+            <ellipse rx="18" ry="50" transform="rotate(240)"/>
+            <ellipse rx="18" ry="50" transform="rotate(300)"/>
+          </g>
+        </svg>
+      </a>
+      <a href="https://jinaikai.com/support/" class="care-card">
+        <div class="care-num-big">02</div>
+        <div class="care-name">花倉工房</div>
+        <div class="care-type">就労継続支援B型</div>
+        <p class="care-desc">自分のペースで働き、社会とのつながりを大切に過ごせます。就労継続支援B型事業所。</p>
+        <svg class="care-petal-mark" width="140" height="140" viewBox="0 0 140 140">
+          <g transform="translate(70,70)" fill="#F9B7C1">
+            <ellipse rx="18" ry="50" transform="rotate(0)"/>
+            <ellipse rx="18" ry="50" transform="rotate(60)"/>
+            <ellipse rx="18" ry="50" transform="rotate(120)"/>
+            <ellipse rx="18" ry="50" transform="rotate(180)"/>
+            <ellipse rx="18" ry="50" transform="rotate(240)"/>
+            <ellipse rx="18" ry="50" transform="rotate(300)"/>
+          </g>
+        </svg>
+      </a>
+      <a href="https://jinaikai.com/support/#enjo" class="care-card">
+        <div class="care-num-big">03</div>
+        <div class="care-name">ジャンプ</div>
+        <div class="care-type">共同生活援助 グループホーム</div>
+        <p class="care-desc">地域の中で自立した生活を送るための支援を行います。共同生活援助グループホーム。</p>
+        <svg class="care-petal-mark" width="140" height="140" viewBox="0 0 140 140">
+          <g transform="translate(70,70)" fill="#F9E03D">
+            <ellipse rx="18" ry="50" transform="rotate(0)"/>
+            <ellipse rx="18" ry="50" transform="rotate(60)"/>
+            <ellipse rx="18" ry="50" transform="rotate(120)"/>
+            <ellipse rx="18" ry="50" transform="rotate(180)"/>
+            <ellipse rx="18" ry="50" transform="rotate(240)"/>
+            <ellipse rx="18" ry="50" transform="rotate(300)"/>
+          </g>
+        </svg>
+      </a>
+      <a href="https://jinaikai.com/yuyu/" class="care-card">
+        <div class="care-num-big">04</div>
+        <div class="care-name">悠友</div>
+        <div class="care-type">有料老人ホーム・通所介護</div>
+        <p class="care-desc">豊かな時間の中で、その人らしい老後の生活を。有料老人ホームと地域密着型通所介護。</p>
+        <svg class="care-petal-mark" width="140" height="140" viewBox="0 0 140 140">
+          <g transform="translate(70,70)" fill="#E97122">
+            <ellipse rx="18" ry="50" transform="rotate(0)"/>
+            <ellipse rx="18" ry="50" transform="rotate(60)"/>
+            <ellipse rx="18" ry="50" transform="rotate(120)"/>
+            <ellipse rx="18" ry="50" transform="rotate(180)"/>
+            <ellipse rx="18" ry="50" transform="rotate(240)"/>
+            <ellipse rx="18" ry="50" transform="rotate(300)"/>
+          </g>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news">
+  <div class="section-inner">
+    <p class="section-label reveal">お知らせ</p>
+    <h2 class="section-title reveal">新着情報</h2>
+    <div class="news-filters reveal" id="newsFilters">
+      <button class="filter-btn active" data-tag="すべて">すべて</button>
+      <button class="filter-btn" data-tag="﨑元病院">﨑元病院</button>
+      <button class="filter-btn" data-tag="仁愛会病院">仁愛会病院</button>
+      <button class="filter-btn" data-tag="花倉病院">花倉病院</button>
+    </div>
+    <div class="news-list reveal" id="newsList">
+      <a href="https://jinaikai.com/wp/2025/09/19/%e5%a4%96%e6%9d%a5%e8%a8%ba%e7%99%82%e6%97%a5%e5%a4%89%e6%9b%b4%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/" class="news-item" data-tag="﨑元病院">
+        <span class="news-date">2025.09.19</span>
+        <span class="news-tag">﨑元病院</span>
+        <span class="news-title">外来診療日変更のお知らせ</span>
+      </a>
+      <a href="https://jinaikai.com/wp/2025/07/28/%e9%9d%a2%e4%bc%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6-4/" class="news-item" data-tag="﨑元病院">
+        <span class="news-date">2025.07.28</span>
+        <span class="news-tag">﨑元病院</span>
+        <span class="news-title">面会についてのご案内</span>
+      </a>
+      <a href="https://jinaikai.com/wp/2025/12/28/%e5%b9%b4%e6%9c%ab%e5%b9%b4%e5%a7%8b%e8%a8%ba%e7%99%82%e3%81%ae%e3%81%94%e6%a1%88%e5%86%85-7/" class="news-item" data-tag="仁愛会病院">
+        <span class="news-date">2025.12.28</span>
+        <span class="news-tag">仁愛会病院</span>
+        <span class="news-title">年末年始診療のご案内</span>
+      </a>
+      <a href="https://jinaikai.com/wp/2025/12/23/%e5%b9%b4%e6%9c%ab%e5%b9%b4%e5%a7%8b%e8%a8%ba%e7%99%82%e3%81%ae%e3%81%94%e6%a1%88%e5%86%85-6/" class="news-item" data-tag="花倉病院">
+        <span class="news-date">2025.12.23</span>
+        <span class="news-tag">花倉病院</span>
+        <span class="news-title">年末年始診療のご案内</span>
+      </a>
+      <a href="https://jinaikai.com/wp/2024/12/13/%ef%bc%91%e9%9a%8e%e9%a7%90%e8%bb%8a%e5%a0%b4%e5%96%b6%e6%a5%ad%e3%81%8a%e3%82%88%e3%81%b3%e9%96%89%e9%8e%96%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6/" class="news-item" data-tag="﨑元病院">
+        <span class="news-date">2024.12.13</span>
+        <span class="news-tag">﨑元病院</span>
+        <span class="news-title">１階駐車場営業および閉鎖について</span>
+      </a>
+      <a href="https://jinaikai.com/wp/2025/10/01/%e5%a4%96%e6%9d%a5%e8%a8%ba%e7%99%82%e3%81%ae%e3%80%8c%e8%a8%ba%e7%99%82%e6%99%82%e9%96%93%e3%80%8d%e3%80%8c%e8%a8%ba%e5%af%9f%e6%8b%85%e5%bd%93%e5%8c%bb%e3%80%8d%e3%80%8c%e7%a6%81%e7%85%99%e5%a4%96/" class="news-item" data-tag="﨑元病院">
+        <span class="news-date">2025.10.01</span>
+        <span class="news-tag">﨑元病院</span>
+        <span class="news-title">外来診療の診療時間・担当医変更のお知らせ</span>
+      </a>
+    </div>
+    <div style="margin-top:2rem">
+      <a href="https://jinaikai.com/news/" class="btn-outline">お知らせ一覧へ →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <svg class="phil-petal-bg" aria-hidden="true" width="600" height="600" viewBox="0 0 600 600">
+    <g transform="translate(300,300)">
+      <ellipse rx="55" ry="185" transform="rotate(0)"   fill="#fff"/>
+      <ellipse rx="55" ry="185" transform="rotate(45)"  fill="#fff"/>
+      <ellipse rx="55" ry="185" transform="rotate(90)"  fill="#fff"/>
+      <ellipse rx="55" ry="185" transform="rotate(135)" fill="#fff"/>
+      <ellipse rx="55" ry="185" transform="rotate(180)" fill="#fff"/>
+      <ellipse rx="55" ry="185" transform="rotate(225)" fill="#fff"/>
+      <ellipse rx="55" ry="185" transform="rotate(270)" fill="#fff"/>
+      <ellipse rx="55" ry="185" transform="rotate(315)" fill="#fff"/>
+    </g>
+  </svg>
+  <div class="section-inner">
+    <p class="section-label reveal">法人理念</p>
+    <blockquote class="phil-quote reveal">
+      仁愛の心をもって、<br>
+      一人ひとりの命と<br>
+      暮らしに寄り添う。
+    </blockquote>
+    <p class="phil-body reveal">
+      「仁愛」とは、人を思いやる心のこと。その精神を根本に、患者さん・ご利用者さん・そのご家族と誠実に向き合い、医療・介護・福祉が一体となったサービスを提供してまいります。地域の皆さまが安心して暮らし続けられる社会の実現に向けて、私たちは今日も努力を続けています。
+    </p>
+    <a href="https://jinaikai.com/about/" style="display:inline-block; background:var(--sand); color:var(--navy); padding:0.85rem 2.2rem; font-size:0.82rem; font-weight:500; letter-spacing:0.12em; text-decoration:none; transition:opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">法人概要を見る</a>
+    <div class="phil-pillars reveal">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">人を想う医療</div>
+        <div class="pillar-desc">患者さんの気持ちに寄り添い、丁寧な診療を心がけます。</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">地域との連携</div>
+        <div class="pillar-desc">医療・福祉が連携し、切れ目のないサービスを提供します。</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">信頼と安心</div>
+        <div class="pillar-desc">患者さん・ご家族との信頼関係を最も大切にします。</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">04</div>
+        <div class="pillar-title">専門性の向上</div>
+        <div class="pillar-desc">スタッフの継続的な学びを支援し、医療の質を高めます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECRUIT -->
+<section id="recruit">
+  <div class="section-inner">
+    <p class="section-label reveal">採用情報</p>
+    <h2 class="section-title reveal">共に、地域医療を<br>支えていきませんか。</h2>
+    <p class="section-lead reveal">仁愛の心を共有できる仲間を求めています。医療・介護・事務など幅広い職種で新しいスタッフを募集中です。</p>
+    <div class="recruit-grid reveal">
+      <a href="https://jinaikai.com/recruit/" class="recruit-item">
+        医師・看護師 <span class="recruit-arrow">→</span>
+      </a>
+      <a href="https://jinaikai.com/recruit/" class="recruit-item">
+        リハビリテーション専門職 <span class="recruit-arrow">→</span>
+      </a>
+      <a href="https://jinaikai.com/recruit/" class="recruit-item">
+        介護・福祉スタッフ <span class="recruit-arrow">→</span>
+      </a>
+      <a href="https://jinaikai.com/recruit/" class="recruit-item">
+        事務・その他スタッフ <span class="recruit-arrow">→</span>
+      </a>
+    </div>
+    <a href="https://jinaikai.com/recruit/" class="btn-primary">求人情報をすべて見る</a>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label reveal">お問い合わせ・ご来院</p>
+    <h2 class="section-title reveal">各施設の連絡先・アクセス</h2>
+    <div class="access-grid reveal">
+      <div class="access-card">
+        <div class="access-role">受付・ご相談</div>
+        <div class="access-name">﨑元病院</div>
+        <div class="access-info">
+          〒892-0842<br>鹿児島市東千石町4-13<br>
+          FAX：099-224-0747
+        </div>
+        <div class="access-tel">099-224-5650</div>
+      </div>
+      <div class="access-card">
+        <div class="access-role">受付・ご相談</div>
+        <div class="access-name">仁愛会病院</div>
+        <div class="access-info">
+          〒891-0122<br>鹿児島市南栄5丁目10-19<br>
+          FAX：099-210-0203
+        </div>
+        <div class="access-tel">099-210-0201</div>
+      </div>
+      <div class="access-card">
+        <div class="access-role">受付・ご相談</div>
+        <div class="access-name">花倉病院</div>
+        <div class="access-info">
+          〒892-0871<br>鹿児島市吉野町5147<br>
+          FAX：099-243-5113
+        </div>
+        <div class="access-tel">099-243-5111</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div>
+      <div class="foot-logo">医療法人仁愛会</div>
+      <p class="foot-desc">仁愛の心で地域に寄り添い、<br>医療・介護・福祉の連携による<br>総合的なサービスを提供しています。</p>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-title">医療施設</div>
+      <ul>
+        <li><a href="https://jinaikai.com/sakimoto/">﨑元病院</a></li>
+        <li><a href="https://jinaikai.com/jinaikai/">仁愛会病院</a></li>
+        <li><a href="https://jinaikai.com/kekura/">花倉病院</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-title">福祉</div>
+      <ul>
+        <li><a href="https://jinaikai.com/shoukei/">笑憩の里</a></li>
+        <li><a href="https://jinaikai.com/support/">花倉工房</a></li>
+        <li><a href="https://jinaikai.com/support/#enjo">ジャンプ</a></li>
+        <li><a href="https://jinaikai.com/yuyu/">悠友</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-title">法人のご案内</div>
+      <ul>
+        <li><a href="https://jinaikai.com/about/">法人概要</a></li>
+        <li><a href="https://jinaikai.com/recruit/">求人情報</a></li>
+        <li><a href="https://jinaikai.com/privacypolicy/">個人情報保護方針</a></li>
+        <li><a href="https://jinaikai.com/pdf/plan2022.pdf">一般事業主行動計画</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2025 医療法人仁愛会</span>
+    <span><a href="https://jinaikai.com/privacypolicy/" style="color:rgba(255,255,255,0.35);text-decoration:none;">個人情報保護方針</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+
+  // ===== FLOATING PETALS =====
+  const bg = document.getElementById('petal-bg');
+  const colors = ['#F27A18', '#F9B7C1', '#F9E03D', '#E97122', '#1A1A1A', '#F4A7B9'];
+  const flowerTypes = [5, 6];
+  const petalPathD = [
+    'M0,-92',
+    'C32,-80 55,-42 45,-10',
+    'C36,22 14,42 0,52',
+    'C-14,42 -36,22 -45,-10',
+    'C-55,-42 -32,-80 0,-92 Z'
+  ].join(' ');
+
+  function makePetal() {
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const wrap = document.createElementNS(svgNS,'svg');
+    const petalCount = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+    const size = 34 + Math.random() * 90;
+    const petalColor = colors[Math.floor(Math.random() * colors.length)];
+    const x = Math.random()*window.innerWidth;
+    const delay = Math.random()*12;
+    const dur = 12 + Math.random()*18;
+
+    wrap.setAttribute('width', size);
+    wrap.setAttribute('height', size);
+    wrap.setAttribute('viewBox','0 0 200 200');
+    wrap.style.cssText = 'position:absolute;left:'+x+'px;bottom:-200px;opacity:0;';
+    wrap.style.animation = 'floatUp '+dur+'s '+delay+'s linear infinite';
+
+    const g = document.createElementNS(svgNS,'g');
+    g.setAttribute('transform','translate(100,100)');
+    g.style.opacity = '0.72';
+
+    // 花びら（パス）で“花っぽく”
+    for (let i = 0; i < petalCount; i++) {
+      const p = document.createElementNS(svgNS, 'path');
+      p.setAttribute('d', petalPathD);
+      p.setAttribute('fill', petalColor);
+      p.setAttribute('stroke', '#1A1A1A');
+      p.setAttribute('stroke-opacity', '0.14');
+      p.setAttribute('stroke-width', '3');
+      p.setAttribute('transform', 'rotate(' + (i * (360 / petalCount)) + ')');
+      g.appendChild(p);
+    }
+
+    // 花芯（白リング + 黄 + 黒）
+    const ring = document.createElementNS(svgNS, 'circle');
+    ring.setAttribute('r', '34');
+    ring.setAttribute('fill', '#ffffff');
+    ring.setAttribute('stroke', '#1A1A1A');
+    ring.setAttribute('stroke-opacity', '0.12');
+    ring.setAttribute('stroke-width', '3');
+    g.appendChild(ring);
+
+    const core = document.createElementNS(svgNS, 'circle');
+    core.setAttribute('r', '22');
+    core.setAttribute('fill', '#F9E03D');
+    core.setAttribute('stroke', '#1A1A1A');
+    core.setAttribute('stroke-opacity', '0.14');
+    core.setAttribute('stroke-width', '3');
+    g.appendChild(core);
+
+    const seed = document.createElementNS(svgNS, 'circle');
+    seed.setAttribute('r', '8');
+    seed.setAttribute('fill', '#000000');
+    g.appendChild(seed);
+
+    wrap.appendChild(g);
+    bg.appendChild(wrap);
+
+    setTimeout(function(){
+      if(wrap.parentNode) wrap.parentNode.removeChild(wrap);
+    }, (delay + dur + 1)*1000);
+  }
+
+  for(let i=0;i<18;i++) makePetal();
+  setInterval(makePetal, 2200);
+
+  // ===== SCROLL REVEAL =====
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); observer.unobserve(e.target); }
+    });
+  },{ threshold: 0.1 });
+  reveals.forEach(function(r){ observer.observe(r); });
+
+  // ===== NEWS FILTER =====
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const newsItems = document.querySelectorAll('.news-item');
+
+  filterBtns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      filterBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      const tag = btn.dataset.tag;
+      newsItems.forEach(function(item){
+        item.style.display = (tag==='すべて' || item.dataset.tag===tag) ? 'flex' : 'none';
+      });
+    });
+  });
+
+})();
+</script>
+</body>
+</html>

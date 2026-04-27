@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>介護・障がいサービス事業 | 医療法人仁愛会</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep: #0F6E56;
+    --green-mid: #1D9E75;
+    --green-light: #E1F5EE;
+    --green-pale: #F2FBF7;
+    --teal-accent: #5DCAA5;
+    --warm-white: #FAFAF8;
+    --warm-gray: #F5F3EE;
+    --text-dark: #1E2A22;
+    --text-mid: #4A5E52;
+    --text-light: #7A9080;
+    --border: rgba(15,110,86,0.15);
+    --serif: 'Noto Serif JP', serif;
+    --sans: 'Noto Sans JP', sans-serif;
+    --radius: 16px;
+    --radius-sm: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--warm-white);
+    color: var(--text-dark);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-logo-mark {
+    width: 36px;
+    height: 36px;
+    background: var(--green-deep);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .nav-logo-mark svg { width: 20px; height: 20px; }
+
+  .nav-logo-text {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.3;
+  }
+
+  .nav-logo-text span {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    font-family: var(--sans);
+    color: var(--text-light);
+    letter-spacing: 0.06em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-mid);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1.5px;
+    background: var(--green-mid);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green-deep); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-links a.is-current {
+    color: var(--green-deep);
+    font-weight: 600;
+  }
+
+  .nav-links a.is-current::after { transform: scaleX(1); }
+
+  .nav-recruit {
+    background: var(--green-deep);
+    color: #fff !important;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 13px !important;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .nav-recruit:hover { background: var(--green-mid) !important; transform: translateY(-1px); }
+  .nav-recruit::after { display: none !important; }
+
+  .nav-hamburger { display: none; cursor: pointer; }
+  .nav-hamburger span { width: 24px; height: 2px; background: var(--text-dark); border-radius: 2px; }
+
+  main { padding-top: 64px; }
+
+  .page-hero {
+    padding: 48px 40px 40px;
+    background:
+      radial-gradient(ellipse 70% 80% at 85% 20%, rgba(29,158,117,0.08) 0%, transparent 55%),
+      linear-gradient(180deg, var(--green-pale) 0%, var(--warm-white) 100%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .breadcrumb {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .breadcrumb a { color: var(--green-mid); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  .page-hero-inner { max-width: 960px; margin: 0 auto; }
+
+  .page-hero .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--green-mid);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .page-hero .section-label::before {
+    content: '';
+    width: 28px;
+    height: 1.5px;
+    background: var(--green-mid);
+  }
+
+  .page-title {
+    font-family: var(--serif);
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.45;
+    margin-bottom: 16px;
+  }
+
+  .page-lead {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.9;
+    max-width: 680px;
+  }
+
+  section.content-block {
+    padding: 64px 40px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  section.content-block.alt {
+    background: var(--warm-gray);
+    max-width: none;
+    padding-left: max(40px, calc(50vw - 480px));
+    padding-right: max(40px, calc(50vw - 480px));
+  }
+
+  section.content-block.alt .content-inner { max-width: 960px; margin: 0 auto; }
+
+  h2.block-title {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.5vw, 26px);
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+  }
+
+  .block-desc {
+    font-size: 14px;
+    color: var(--text-mid);
+    margin-bottom: 28px;
+    line-height: 1.85;
+  }
+
+  .care-service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 720px) {
+    .care-service-grid { grid-template-columns: 1fr; }
+  }
+
+  .care-service-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.25s, border-color 0.25s;
+  }
+
+  .care-service-card:hover {
+    box-shadow: 0 12px 40px rgba(15,110,86,0.1);
+    border-color: rgba(29,158,117,0.25);
+  }
+
+  .care-service-top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 22px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .care-service-top.accent-green { background: linear-gradient(135deg, var(--green-light) 0%, rgba(29,158,117,0.08) 100%); }
+  .care-service-top.accent-blue { background: linear-gradient(135deg, #E6F1FB 0%, rgba(24,95,165,0.08) 100%); }
+  .care-service-top.accent-brown { background: linear-gradient(135deg, #FAEEDA 0%, rgba(133,79,11,0.08) 100%); }
+  .care-service-top.accent-olive { background: linear-gradient(135deg, #E8F2DD 0%, rgba(59,109,17,0.1) 100%); }
+
+  .care-service-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .care-service-icon svg { width: 26px; height: 26px; }
+
+  .care-service-meta .care-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .care-service-meta .care-name {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.35;
+  }
+
+  .care-service-body {
+    padding: 22px 22px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .care-service-body p {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.9;
+    margin-bottom: 18px;
+    flex: 1;
+  }
+
+  .care-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    width: fit-content;
+    transition: gap 0.2s;
+  }
+
+  .care-link:hover { gap: 10px; }
+
+  .care-link svg { flex-shrink: 0; }
+
+  .link-green { color: var(--green-deep); }
+  .link-blue { color: #185FA5; }
+  .link-brown { color: #854F0B; }
+  .link-olive { color: #3B6D11; }
+
+  .collab-panel {
+    background: var(--green-deep);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 32px 36px;
+  }
+
+  .collab-panel h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .collab-panel p {
+    font-size: 14px;
+    line-height: 2;
+    opacity: 0.92;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green-deep);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.04em;
+  }
+
+  .btn-primary:hover {
+    background: var(--green-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(15,110,86,0.25);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1.5px solid var(--green-deep);
+    color: var(--green-deep);
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    letter-spacing: 0.04em;
+    background: var(--warm-white);
+  }
+
+  .btn-secondary:hover {
+    background: var(--green-pale);
+    transform: translateY(-2px);
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  footer {
+    background: var(--text-dark);
+    color: rgba(255,255,255,0.75);
+    padding: 56px 40px 32px;
+    font-size: 13px;
+  }
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 48px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    margin-bottom: 16px;
+  }
+
+  .footer-logo-mark {
+    width: 40px;
+    height: 40px;
+    background: var(--green-deep);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-logo-text {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .footer-desc {
+    max-width: 280px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.55);
+    font-size: 12px;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .footer-col h4 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+  .footer-col a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: rgba(255,255,255,0.95); }
+
+  .footer-bottom {
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .footer-bottom-links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-bottom-links a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+  }
+
+  .footer-bottom-links a:hover { color: rgba(255,255,255,0.9); }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; flex-direction: column; gap: 5px; }
+    nav { padding: 0 24px; }
+    .page-hero, section.content-block { padding-left: 24px; padding-right: 24px; }
+    section.content-block.alt { padding-left: 24px; padding-right: 24px; }
+    footer { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 2C10 2 4 5.5 4 11C4 14.3 6.7 17 10 17C13.3 17 16 14.3 16 11C16 5.5 10 2 10 2Z" fill="white" opacity="0.9"/>
+        <rect x="9" y="7" width="2" height="7" rx="1" fill="#0F6E56"/>
+        <rect x="6.5" y="9.5" width="7" height="2" rx="1" fill="#0F6E56"/>
+      </svg>
+    </div>
+    <div class="nav-logo-text">
+      医療法人仁愛会
+      <span>JINAIKAI MEDICAL CORPORATION</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html#hospitals">医療施設</a></li>
+    <li><a href="care.html" class="is-current">介護・障がい</a></li>
+    <li><a href="news.html">お知らせ</a></li>
+    <li><a href="about.html">法人概要</a></li>
+    <li><a href="index.html#contact">アクセス</a></li>
+    <li><a href="recruit.html" class="nav-recruit">求人情報</a></li>
+  </ul>
+
+  <div class="nav-hamburger" onclick="this.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main>
+  <header class="page-hero">
+    <div class="breadcrumb">
+      <a href="index.html">トップ</a>
+      <span aria-hidden="true">/</span>
+      <span>介護・障がいサービス事業</span>
+    </div>
+    <div class="page-hero-inner">
+      <div class="section-label">CARE &amp; WELFARE</div>
+      <h1 class="page-title">介護・障がいサービス事業</h1>
+      <p class="page-lead">
+        認知症ケアから就労支援まで、一人ひとりの暮らしに寄り添い、医療法人として培った経験を活かしたサービスを提供しています。
+      </p>
+    </div>
+  </header>
+
+  <section class="content-block" aria-labelledby="sec-intro">
+    <h2 id="sec-intro" class="block-title">事業の概要</h2>
+    <p class="block-desc">
+      鹿児島市内において、高齢者の介護・認知症ケア、障がいのある方への就労支援・共同生活援助など、多様なニーズに応える施設を運営しています。
+      ご利用を検討中の方は、各施設の公式サイトでサービス内容・見学・お問い合わせをご確認ください。
+    </p>
+  </section>
+
+  <section class="content-block alt" aria-labelledby="sec-services">
+    <div class="content-inner">
+      <h2 id="sec-services" class="block-title">運営施設・サービス</h2>
+      <p class="block-desc">事業所ごとの特徴と公式サイトへのリンクです。</p>
+
+      <div class="care-service-grid">
+        <article class="care-service-card">
+          <div class="care-service-top accent-green">
+            <div class="care-service-icon" style="background:var(--green-deep);">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9L12 3L21 9V20C21 20.6 20.6 21 20 21H15V15H9V21H4C3.4 21 3 20.6 3 20V9Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+                <circle cx="12" cy="11" r="2.5" stroke="white" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="care-service-meta">
+              <div class="care-label" style="color:var(--green-deep);">認知症ケア</div>
+              <div class="care-name">笑憩の里</div>
+            </div>
+          </div>
+          <div class="care-service-body">
+            <p>
+              認知症対応型共同生活介護事業所として、家庭的な雰囲気の中で安心した日常生活を支えます。スタッフが寄り添い、ご本人・ご家族の負担軽減にも配慮しています。
+            </p>
+            <a href="https://jinaikai.com/shoukei/" class="care-link link-green" target="_blank" rel="noopener noreferrer">
+              笑憩の里のサイトへ
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M5 4H12V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="care-service-card">
+          <div class="care-service-top accent-blue">
+            <div class="care-service-icon" style="background:#185FA5;">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="7" width="18" height="13" rx="2" stroke="white" stroke-width="1.5"/>
+                <path d="M8 7V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V7" stroke="white" stroke-width="1.5"/>
+                <path d="M12 12V16M10 14H14" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="care-service-meta">
+              <div class="care-label" style="color:#185FA5;">就労継続支援B型</div>
+              <div class="care-name">花倉工房</div>
+            </div>
+          </div>
+          <div class="care-service-body">
+            <p>
+              障がいのある方が、ご自身のペースで作業や活動に取り組み、社会参加の機会を広げられるよう支援します。働くことへの意欲を大切にした支援体制を整えています。
+            </p>
+            <a href="https://jinaikai.com/support/" class="care-link link-blue" target="_blank" rel="noopener noreferrer">
+              花倉工房のサイトへ
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M5 4H12V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="care-service-card">
+          <div class="care-service-top accent-brown">
+            <div class="care-service-icon" style="background:#854F0B;">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="9" cy="7" r="3" stroke="white" stroke-width="1.5"/>
+                <circle cx="17" cy="9" r="2.5" stroke="white" stroke-width="1.5"/>
+                <path d="M2 20C2 17.2 5.1 15 9 15C12.9 15 16 17.2 16 20" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M17 14C19.2 14 21 15.6 21 17.6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="care-service-meta">
+              <div class="care-label" style="color:#854F0B;">共同生活援助</div>
+              <div class="care-name">ジャンプ</div>
+            </div>
+          </div>
+          <div class="care-service-body">
+            <p>
+              グループホーム形式で、地域の中での自立した生活をサポートします。生活リズムの維持や社会とのつながりづくりを、職員が伴走しながら支えます。
+            </p>
+            <a href="https://jinaikai.com/support/#enjo" class="care-link link-brown" target="_blank" rel="noopener noreferrer">
+              ジャンプのご案内へ
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M5 4H12V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="care-service-card">
+          <div class="care-service-top accent-olive">
+            <div class="care-service-icon" style="background:#3B6D11;">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C8.1 2 5 5.1 5 9C5 14 12 22 12 22C12 22 19 14 19 9C19 5.1 15.9 2 12 2Z" stroke="white" stroke-width="1.5"/>
+                <circle cx="12" cy="9" r="3" stroke="white" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="care-service-meta">
+              <div class="care-label" style="color:#3B6D11;">有料老人ホーム・通所介護</div>
+              <div class="care-name">悠友</div>
+            </div>
+          </div>
+          <div class="care-service-body">
+            <p>
+              有料老人ホームと地域密着型通所介護を通じて、ご入居者・ご利用者の方が安心して日々を過ごせるよう、生活支援と見守りを行います。
+            </p>
+            <a href="https://jinaikai.com/yuyu/" class="care-link link-olive" target="_blank" rel="noopener noreferrer">
+              悠友のサイトへ
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M5 4H12V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-block" aria-labelledby="sec-collab">
+    <h2 id="sec-collab" class="block-title">医療との連携</h2>
+    <p class="block-desc">法人内の病院・クリニックと情報を共有し、体調変化や通院のニーズに応じた支援につなげています。</p>
+    <div class="collab-panel">
+      <h3>切れ目のないサポート</h3>
+      <p>
+        医療法人仁愛会では、病院での治療から在宅・施設での生活まで、必要に応じて連携できる体制を整えています。
+        ご利用にあたってのご不明点は、各施設へお気軽にお問い合わせください。
+      </p>
+    </div>
+    <div class="cta-row" style="margin-top:28px;">
+      <a href="index.html#hospitals" class="btn-primary">
+        医療施設のご紹介
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="index.html#contact" class="btn-secondary">各施設へのアクセス</a>
+      <a href="index.html" class="btn-secondary">トップへ戻る</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="index.html" class="footer-logo">
+        <div class="footer-logo-mark">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+            <path d="M10 2C10 2 4 5.5 4 11C4 14.3 6.7 17 10 17C13.3 17 16 14.3 16 11C16 5.5 10 2 10 2Z" fill="white" opacity="0.9"/>
+            <rect x="9" y="7" width="2" height="7" rx="1" fill="#1D9E75"/>
+            <rect x="6.5" y="9.5" width="7" height="2" rx="1" fill="#1D9E75"/>
+          </svg>
+        </div>
+        <div class="footer-logo-text">医療法人仁愛会</div>
+      </a>
+      <p class="footer-desc">仁愛の心で地域に寄り添い、医療・介護・福祉の連携による総合的なサービスを提供しています。</p>
+    </div>
+
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>医療施設</h4>
+        <ul>
+          <li><a href="https://jinaikai.com/sakimoto/">﨑元病院</a></li>
+          <li><a href="https://jinaikai.com/jinaikai/">仁愛会病院</a></li>
+          <li><a href="https://jinaikai.com/kekura/">花倉病院</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>介護・福祉</h4>
+        <ul>
+          <li><a href="https://jinaikai.com/shoukei/">笑憩の里</a></li>
+          <li><a href="https://jinaikai.com/support/">花倉工房</a></li>
+          <li><a href="https://jinaikai.com/support/#enjo">ジャンプ</a></li>
+          <li><a href="https://jinaikai.com/yuyu/">悠友</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>法人情報</h4>
+        <ul>
+          <li><a href="about.html">法人概要</a></li>
+          <li><a href="recruit.html">求人情報</a></li>
+          <li><a href="https://jinaikai.com/privacypolicy/">個人情報保護方針</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2025 医療法人仁愛会 All Rights Reserved.</span>
+    <div class="footer-bottom-links">
+      <a href="https://jinaikai.com/privacypolicy/">個人情報保護方針</a>
+      <a href="https://jinaikai.com/pdf/plan2022.pdf">一般事業主行動計画</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
