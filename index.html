@@ -57,15 +57,15 @@
       object-fit: cover;
       object-position: center;
     }
-    /* 1枚目: 明るいローカル画像を、テーマ付属スライドと同系の落ち着いたトーンに */
-    a._inner:has(> img[src$="welfare_kaigo.jpg"])::after {
+    /* heroスライド写真を少し暗くする（可読性UP） */
+    .top_mv_slider ._slide ._inner::before {
       content: "";
       position: absolute;
       inset: 0;
       z-index: 1;
       border-radius: 12px;
       pointer-events: none;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.25);
     }
     .top_mv_slider ._text_sec,
     .top_mv_slider ._hover_text {
@@ -224,7 +224,7 @@
   <link rel="shortlink" href="index.html">
   <style type="text/css">@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');</style><script src="https://swc-aiwakai.jp/cms/wp-includes/js/wp-emoji-release.min.js?ver=6.9.4" defer=""></script></head>
   
-  <body style="">
+  <body>
   <div id="wrapper" class="top _pc">
     <header id="header" class="">
           <div class="header_mega_bg"></div>
@@ -640,7 +640,7 @@
                               </div>
                           </div><div class="_slide swiper-slide swiper-slide-duplicate" data-swiper-slide-index="2" style="width: 269px; margin-right: 40px;" role="group" aria-label="3 / 6">
                               <a href="care.html" class="_inner">
-                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_hover_02.jpg" alt="">
+                                  <img src="images/top_kaigo.jpg" alt="">
                                   <div class="_text_sec">
                                       <div class="_title_sec">
                                           <p class="_jp">介護<span class="_rotate">・</span>福祉</p>
@@ -664,7 +664,7 @@
                               </div>
                           </div><div class="_slide swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="4" style="width: 269px; margin-right: 40px;" role="group" aria-label="5 / 6">
                               <a href="care.html" class="_inner">
-                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_hover_03.jpg" alt="">
+                                  <img src="images/top_kaigo2.jpg" alt="">
                                   <div class="_text_sec">
                                       <div class="_title_sec">
                                           <p class="_jp">施設<span class="_rotate">・</span>地域</p>
@@ -684,7 +684,7 @@
                               </a>
                           </div><div class="_slide swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="5" style="width: 269px; margin-right: 40px;" role="group" aria-label="6 / 6">
                               <div class="_inner">
-                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_not_hover_03.jpg" alt="">
+                                  <img src="images/top_kaigo3.jpg" alt="">
                               </div>
                           </div>
                           <div class="_slide swiper-slide" data-swiper-slide-index="0" style="width: 269px; margin-right: 40px;" role="group" aria-label="1 / 6">
@@ -715,7 +715,7 @@
                           </div>
                           <div class="_slide swiper-slide" data-swiper-slide-index="2" style="width: 269px; margin-right: 40px;" role="group" aria-label="3 / 6">
                               <a href="care.html" class="_inner">
-                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_hover_02.jpg" alt="">
+                                  <img src="images/top_kaigo.jpg" alt="">
                                   <div class="_text_sec">
                                       <div class="_title_sec">
                                           <p class="_jp">介護<span class="_rotate">・</span>福祉</p>
@@ -741,7 +741,7 @@
                           </div>
                           <div class="_slide swiper-slide swiper-slide-active" data-swiper-slide-index="4" style="width: 269px; margin-right: 40px;" role="group" aria-label="5 / 6">
                               <a href="care.html" class="_inner">
-                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_hover_03.jpg" alt="">
+                                  <img src="images/top_kaigo2.jpg" alt="">
                                   <div class="_text_sec">
                                       <div class="_title_sec">
                                           <p class="_jp">施設<span class="_rotate">・</span>地域</p>
@@ -762,7 +762,7 @@
                           </div>
                           <div class="_slide swiper-slide swiper-slide-next" data-swiper-slide-index="5" style="width: 269px; margin-right: 40px;" role="group" aria-label="6 / 6">
                               <div class="_inner">
-                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_not_hover_03.jpg" alt="">
+                                  <img src="images/top_kaigo3.jpg" alt="">
                               </div>
                           </div>
                       <div class="_slide swiper-slide swiper-slide-duplicate" data-swiper-slide-index="0" style="width: 269px; margin-right: 40px;" role="group" aria-label="1 / 6">
@@ -791,7 +791,7 @@
                               </div>
                           </div><div class="_slide swiper-slide swiper-slide-duplicate" data-swiper-slide-index="2" style="width: 269px; margin-right: 40px;" role="group" aria-label="3 / 6">
                               <a href="care.html" class="_inner">
-                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_hover_02.jpg" alt="">
+                                  <img src="images/top_kaigo.jpg" alt="">
                                   <div class="_text_sec">
                                       <div class="_title_sec">
                                           <p class="_jp">介護<span class="_rotate">・</span>福祉</p>
@@ -815,7 +815,7 @@
                               </div>
                           </div><div class="_slide swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="4" style="width: 269px; margin-right: 40px;" role="group" aria-label="5 / 6">
                               <a href="care.html" class="_inner">
-                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_hover_03.jpg" alt="">
+                                  <img src="images/top_kaigo2.jpg" alt="">
                                   <div class="_text_sec">
                                       <div class="_title_sec">
                                           <p class="_jp">施設<span class="_rotate">・</span>地域</p>
@@ -835,7 +835,7 @@
                               </a>
                           </div><div class="_slide swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="5" role="group" aria-label="6 / 6" style="width: 269px; margin-right: 40px;">
                               <div class="_inner">
-                                  <img src="https://swc-aiwakai.jp/cms/wp-content/themes/aiwakai/images/top_mv_slider_not_hover_03.jpg" alt="">
+                                  <img src="images/top_kaigo3.jpg" alt="">
                               </div>
                           </div></div>
                   <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
