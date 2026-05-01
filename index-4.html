@@ -188,13 +188,15 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 32px;
+    width: 100%;
+    min-width: 0;
   }
 
-  /* 桜クリップSVGコンテナ */
+  /* 桜クリップSVGコンテナ（右カラム幅いっぱいまで使用） */
   .sakura-cluster {
     position: relative;
     width: 100%;
-    max-width: 620px;
+    max-width: none;
     animation: fadeIn 1.2s 0.5s ease both;
   }
   @keyframes fadeIn {
@@ -213,9 +215,9 @@
   .bloom2 { animation: floatB 7s 1s ease-in-out infinite; transform-origin: 435px 160px; }
   .bloom3 { animation: floatC 8s 0.5s ease-in-out infinite; transform-origin: 308px 362px; }
 
-  @keyframes floatA { 0%,100%{transform:translateY(0) rotate(-1.5deg)} 50%{transform:translateY(-8px) rotate(1.5deg)} }
-  @keyframes floatB { 0%,100%{transform:translateY(0) rotate(1deg)}    50%{transform:translateY(-6px) rotate(-1deg)} }
-  @keyframes floatC { 0%,100%{transform:translateY(0) rotate(-1deg)}   50%{transform:translateY(-10px) rotate(1.5deg)} }
+  @keyframes floatA { 0%,100%{transform:translateY(0) rotate(-1.5deg) scale(1.32)} 50%{transform:translateY(-8px) rotate(1.5deg) scale(1.32)} }
+  @keyframes floatB { 0%,100%{transform:translateY(0) rotate(1deg) scale(1.32)}    50%{transform:translateY(-6px) rotate(-1deg) scale(1.32)} }
+  @keyframes floatC { 0%,100%{transform:translateY(0) rotate(-1deg) scale(1.32)}   50%{transform:translateY(-10px) rotate(1.5deg) scale(1.32)} }
 
   /* キャッチコピー */
   .catch {
@@ -877,7 +879,7 @@
             <g clip-path="url(#sakura1)">
               <image href="images/welfare_child.jpg" x="75" y="65" width="220" height="220" preserveAspectRatio="xMidYMid slice"/>
             </g>
-            <text x="185" y="168" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="13" fill="rgba(255,255,255,0.95)" filter="url(#textShadow)">介護スタッフと入居者</text>
+            <text x="185" y="168" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="13" fill="rgba(255,255,255,0.95)" filter="url(#textShadow)"></text>
             <use href="#sakura-shape-1" fill="none" stroke="#E8829A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
             <use href="#sakura-shape-1" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round"/>
           </g>
@@ -887,7 +889,7 @@
             <g clip-path="url(#sakura2)">
               <image href="images/welfare_child2.jpg" x="335" y="60" width="200" height="200" preserveAspectRatio="xMidYMid slice"/>
             </g>
-            <text x="435" y="155" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="13" fill="rgba(255,255,255,0.95)" filter="url(#textShadow)">家族との温かなひととき</text>
+            <text x="435" y="155" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="13" fill="rgba(255,255,255,0.95)" filter="url(#textShadow)"></text>
             <use href="#sakura-shape-2" fill="none" stroke="#E8829A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
             <use href="#sakura-shape-2" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round"/>
           </g>
@@ -897,7 +899,7 @@
             <g clip-path="url(#sakura3)">
               <image href="images/welfare_child3.jpg" x="213" y="267" width="190" height="190" preserveAspectRatio="xMidYMid slice"/>
             </g>
-            <text x="308" y="360" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="13" fill="rgba(255,255,255,0.95)" filter="url(#textShadow)">屋外でのリハビリ風景</text>
+            <text x="308" y="360" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="13" fill="rgba(255,255,255,0.95)" filter="url(#textShadow)"></text>
             <use href="#sakura-shape-3" fill="none" stroke="#E8829A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
             <use href="#sakura-shape-3" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round"/>
           </g>
