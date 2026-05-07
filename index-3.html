@@ -26,6 +26,11 @@
     overflow-x: hidden;
   }
 
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
   /* ===== HERO ===== */
   .hero {
     position: relative;
@@ -94,6 +99,12 @@
     gap: 8px;
   }
 
+  .logo-mark img {
+    display: block;
+    width: min(353px, 62vw);
+    height: auto;
+  }
+
   /* ロゴの手書き風マーク（SVGで再現） */
   .logo-svg {
     width: 72px;
@@ -123,6 +134,123 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--sakura-deep); }
+
+  .nav-toggle {
+    display: none;
+    appearance: none;
+    border: 0;
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(8px);
+    border-radius: 14px;
+    padding: 10px 12px;
+    box-shadow: 0 4px 18px rgba(58, 42, 46, 0.12);
+    cursor: pointer;
+    color: var(--text-dark);
+  }
+  .nav-toggle:focus-visible {
+    outline: 3px solid var(--sakura-deep);
+    outline-offset: 3px;
+  }
+
+  .nav-toggle-icon {
+    width: 22px;
+    height: 16px;
+    position: relative;
+    display: block;
+  }
+  .nav-toggle-icon span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(58, 42, 46, 0.86);
+  }
+  .nav-toggle-icon span:nth-child(1) { top: 0; }
+  .nav-toggle-icon span:nth-child(2) { top: 7px; }
+  .nav-toggle-icon span:nth-child(3) { bottom: 0; }
+
+  .mobile-nav {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding: 18px 16px 22px;
+    background: rgba(255, 245, 248, 0.92);
+    backdrop-filter: blur(10px);
+    transform: translateY(-6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+  .mobile-nav.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .mobile-nav-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .mobile-nav-title {
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    color: rgba(58, 42, 46, 0.85);
+    font-weight: 600;
+  }
+  .mobile-nav-close {
+    appearance: none;
+    border: 0;
+    background: rgba(255,255,255,0.76);
+    border-radius: 14px;
+    padding: 10px 12px;
+    box-shadow: 0 4px 18px rgba(58, 42, 46, 0.12);
+    cursor: pointer;
+    color: var(--text-dark);
+  }
+  .mobile-nav-close:focus-visible {
+    outline: 3px solid var(--sakura-deep);
+    outline-offset: 3px;
+  }
+
+  .mobile-nav-links {
+    margin-top: 16px;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+  .mobile-nav-links a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 14px 14px 16px;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(244,167,185,0.25);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    box-shadow: 0 8px 22px rgba(232,130,154,0.08);
+  }
+  .mobile-nav-links a::after {
+    content: '›';
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(58, 42, 46, 0.55);
+  }
+
+  body.is-nav-open {
+    overflow: hidden;
+    touch-action: none;
+  }
 
   /* ===== MAIN CONTENT ===== */
   .hero-body {
@@ -257,6 +385,47 @@
     }
     .navbar { padding: 20px 24px; }
     .nav-links { display: none; }
+    .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  }
+
+  @media (max-width: 540px) {
+    body { -webkit-text-size-adjust: 100%; }
+    .navbar { padding: 16px 16px 10px; }
+    .hero { min-height: auto; }
+    .hero-body { padding: 14px 16px 40px; gap: 18px; }
+
+    .nav-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .nav-card {
+      padding: 14px 14px;
+      border-radius: 16px;
+      gap: 12px;
+      flex-direction: row;
+      justify-content: flex-start;
+      box-shadow: 0 10px 26px rgba(232,130,154,0.12);
+    }
+    .card-icon { width: 40px; height: 40px; flex: 0 0 auto; }
+    .card-label { font-size: 15px; letter-spacing: 0.04em; }
+
+    .hero-right { gap: 18px; }
+    .sakura-cluster { margin-top: 4px; }
+
+    .catch { padding-left: 0; }
+    .catch-line1,
+    .catch-line2 {
+      font-size: clamp(20px, 6.2vw, 28px);
+      line-height: 1.45;
+      letter-spacing: 0.03em;
+    }
+    .catch-line2 { padding-left: 0; }
+
+    .bloom1, .bloom2, .bloom3 { transform-origin: center; }
+    @keyframes floatA { 0%,100%{transform:translateY(0) rotate(-1.5deg) scale(1.12)} 50%{transform:translateY(-8px) rotate(1.5deg) scale(1.12)} }
+    @keyframes floatB { 0%,100%{transform:translateY(0) rotate(1deg) scale(1.12)}    50%{transform:translateY(-6px) rotate(-1deg) scale(1.12)} }
+    @keyframes floatC { 0%,100%{transform:translateY(0) rotate(-1deg) scale(1.12)}   50%{transform:translateY(-10px) rotate(1.5deg) scale(1.12)} }
   }
 
   /* ===== お知らせ ===== */
@@ -912,7 +1081,28 @@
       <li><a href="#">採用情報</a></li>
       <li><a href="#">お問い合わせ</a></li>
     </ul>
+
+    <button class="nav-toggle" type="button" aria-label="メニューを開く" aria-controls="mobile-nav" aria-expanded="false">
+      <span class="nav-toggle-icon" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
   </nav>
+
+  <div id="mobile-nav" class="mobile-nav" aria-hidden="true">
+    <div class="mobile-nav-top">
+      <div class="mobile-nav-title">MENU</div>
+      <button class="mobile-nav-close" type="button" aria-label="メニューを閉じる">閉じる</button>
+    </div>
+    <ul class="mobile-nav-links" aria-label="モバイルナビゲーション">
+      <li><a href="#">法人について</a></li>
+      <li><a href="#">医療施設</a></li>
+      <li><a href="#">介護・障がい</a></li>
+      <li><a href="#">採用情報</a></li>
+      <li><a href="#">お問い合わせ</a></li>
+      <li><a href="news.html">お知らせ</a></li>
+    </ul>
+  </div>
 
   <!-- メインコンテンツ -->
   <div class="hero-body">
@@ -1222,6 +1412,32 @@
     <small>Copyright 医療法人仁愛会 / JINAIKAI All Rights Reserved.</small>
   </div>
 </footer>
+
+<script>
+  (() => {
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.getElementById('mobile-nav');
+    const closeBtn = document.querySelector('.mobile-nav-close');
+    if (!toggle || !nav || !closeBtn) return;
+
+    const setOpen = (open) => {
+      document.body.classList.toggle('is-nav-open', open);
+      nav.classList.toggle('is-open', open);
+      nav.setAttribute('aria-hidden', open ? 'false' : 'true');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+
+    toggle.addEventListener('click', () => setOpen(true));
+    closeBtn.addEventListener('click', () => setOpen(false));
+    nav.addEventListener('click', (e) => {
+      if (e.target === nav) setOpen(false);
+    });
+    nav.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  })();
+</script>
 
 </body>
 </html>
