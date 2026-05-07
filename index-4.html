@@ -4,1090 +4,1276 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>医療法人仁愛会</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  /* カラー：ポピー（北欧テキスタイル風）の白・橙・ピンク・黄・黒 */
   :root {
-    --sakura: #F4A7B9;
-    --sakura-light: #FADADD;
-    --sakura-pale: #FDF0F2;
-    --sakura-bg: #FBE4EA;
-    --sakura-deep: #E8829A;
-    --text-dark: #3a2a2e;
-    --text-mid: #7a5560;
-    --white: #ffffff;
+    --cream: #ffffff;
+    --deep-red: #F27A18;
+    --coral: #F4A7B9;
+    --warm-white: #fff5f6;
+    --forest: #1a1a1a;
+    --navy: #1a1a1a;
+    --sand: #F9E03D;
+    --petal-1: #F27A18;
+    --petal-2: #E97122;
+    --petal-3: #F9B7C1;
+    --petal-4: #1a1a1a;
+    --petal-5: #F9E03D;
   }
 
+  html { scroll-behavior: smooth; }
+
   body {
-    font-family: 'Noto Serif JP', serif;
-    background: var(--sakura-pale);
-    min-height: 100vh;
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
     overflow-x: hidden;
   }
 
-  /* ===== HERO ===== */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #FDE8ED 0%, #FAD4DC 40%, #F7C5D0 70%, #F4B8C8 100%);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  /* 桜の花びら背景アニメーション */
-  .petal {
-    position: absolute;
-    width: 12px;
-    height: 14px;
-    background: radial-gradient(ellipse at 40% 30%, rgba(255,255,255,0.9) 0%, rgba(244,167,185,0.7) 60%, rgba(232,130,154,0.5) 100%);
-    border-radius: 50% 0 50% 0;
-    opacity: 0;
-    animation: falling linear infinite;
-    pointer-events: none;
-  }
-  @keyframes falling {
-    0%   { transform: translateY(-40px) rotate(0deg) translateX(0); opacity: 0; }
-    10%  { opacity: 0.8; }
-    90%  { opacity: 0.5; }
-    100% { transform: translateY(110vh) rotate(720deg) translateX(60px); opacity: 0; }
-  }
-  .petal:nth-child(1)  { left: 5%;  width: 10px; height: 12px; animation-duration: 8s;  animation-delay: 0s;   }
-  .petal:nth-child(2)  { left: 12%; width: 14px; height: 16px; animation-duration: 10s; animation-delay: 1.2s; }
-  .petal:nth-child(3)  { left: 20%; width: 8px;  height: 10px; animation-duration: 7s;  animation-delay: 2.5s; }
-  .petal:nth-child(4)  { left: 30%; width: 12px; height: 14px; animation-duration: 9s;  animation-delay: 0.8s; }
-  .petal:nth-child(5)  { left: 42%; width: 16px; height: 18px; animation-duration: 11s; animation-delay: 3.1s; }
-  .petal:nth-child(6)  { left: 55%; width: 10px; height: 12px; animation-duration: 8.5s;animation-delay: 1.7s; }
-  .petal:nth-child(7)  { left: 65%; width: 13px; height: 15px; animation-duration: 9.5s;animation-delay: 0.3s; }
-  .petal:nth-child(8)  { left: 75%; width: 9px;  height: 11px; animation-duration: 7.5s;animation-delay: 4.0s; }
-  .petal:nth-child(9)  { left: 85%; width: 15px; height: 17px; animation-duration: 10.5s;animation-delay:2.0s; }
-  .petal:nth-child(10) { left: 93%; width: 11px; height: 13px; animation-duration: 8s;  animation-delay: 1.0s; }
-  .petal:nth-child(11) { left: 8%;  width: 13px; height: 15px; animation-duration: 12s; animation-delay: 5.5s; }
-  .petal:nth-child(12) { left: 48%; width: 9px;  height: 11px; animation-duration: 6.5s;animation-delay: 3.7s; }
-
-  /* ===== NAVBAR ===== */
-  .navbar {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 24px 48px 16px;
-  }
-
-  .logo-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    animation: fadeDown 0.8s ease both;
-  }
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .logo-mark {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  /* ロゴの手書き風マーク（SVGで再現） */
-  .logo-svg {
-    width: 72px;
-    height: 60px;
-  }
-
-  .logo-text {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text-dark);
-    letter-spacing: 0.08em;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-    animation: fadeDown 0.8s 0.2s ease both;
-  }
-  .nav-links a {
-    text-decoration: none;
-    font-size: 14px;
-    color: var(--text-mid);
-    letter-spacing: 0.05em;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--sakura-deep); }
-
-  /* ===== MAIN CONTENT ===== */
-  .hero-body {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 340px 1fr;
-    align-items: center;
-    padding: 20px 48px 60px;
-    gap: 40px;
-    position: relative;
-    z-index: 2;
-  }
-
-  /* === LEFT: ナビカード === */
-  .nav-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    animation: fadeLeft 0.9s 0.3s ease both;
-  }
-  @keyframes fadeLeft {
-    from { opacity: 0; transform: translateX(-24px); }
-    to   { opacity: 1; transform: translateX(0); }
-  }
-
-  .nav-card {
-    background: rgba(255,255,255,0.92);
-    border-radius: 16px;
-    padding: 20px 28px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    border: 1.5px solid rgba(244,167,185,0.3);
-    box-shadow: 0 4px 20px rgba(232,130,154,0.12);
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
-    text-decoration: none;
-  }
-  .nav-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(232,130,154,0.22);
-    border-color: var(--sakura);
-  }
-
-  .card-icon {
-    width: 52px;
-    height: 52px;
-  }
-
-  .card-label {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--text-dark);
-    letter-spacing: 0.05em;
-    font-family: 'Noto Serif JP', serif;
-  }
-
-  /* === RIGHT: 桜クリップ写真 + キャッチコピー === */
-  .hero-right {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 32px;
-    width: 100%;
-    min-width: 0;
-  }
-
-  /* 桜クリップSVGコンテナ（右カラム幅いっぱいまで使用） */
-  .sakura-cluster {
-    position: relative;
-    width: 100%;
-    max-width: none;
-    animation: fadeIn 1.2s 0.5s ease both;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.96); }
-    to   { opacity: 1; transform: scale(1); }
-  }
-
-  .sakura-cluster svg {
-    width: 100%;
-    height: auto;
-    overflow: visible;
-  }
-
-  /* 桜ブロブのふわふわアニメーション */
-  .bloom1 { animation: floatA 6s ease-in-out infinite; transform-origin: 185px 175px; }
-  .bloom2 { animation: floatB 7s 1s ease-in-out infinite; transform-origin: 435px 160px; }
-  .bloom3 { animation: floatC 8s 0.5s ease-in-out infinite; transform-origin: 308px 362px; }
-
-  @keyframes floatA { 0%,100%{transform:translateY(0) rotate(-1.5deg) scale(1.32)} 50%{transform:translateY(-8px) rotate(1.5deg) scale(1.32)} }
-  @keyframes floatB { 0%,100%{transform:translateY(0) rotate(1deg) scale(1.32)}    50%{transform:translateY(-6px) rotate(-1deg) scale(1.32)} }
-  @keyframes floatC { 0%,100%{transform:translateY(0) rotate(-1deg) scale(1.32)}   50%{transform:translateY(-10px) rotate(1.5deg) scale(1.32)} }
-
-  /* キャッチコピー */
-  .catch {
-    animation: fadeUp 1s 0.9s ease both;
-    padding-left: 4px;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .catch-line1 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(22px, 2.8vw, 36px);
-    font-weight: 600;
-    color: var(--text-dark);
-    letter-spacing: 0.06em;
-    line-height: 1.5;
-    display: block;
-  }
-  .catch-line2 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(22px, 2.8vw, 36px);
-    font-weight: 700;
-    color: var(--text-dark);
-    letter-spacing: 0.06em;
-    line-height: 1.5;
-    display: block;
-    padding-left: clamp(24px, 3vw, 48px);
-  }
-
-  /* レスポンシブ */
-  @media (max-width: 900px) {
-    .hero-body {
-      grid-template-columns: 1fr;
-      padding: 20px 24px 48px;
-    }
-    .navbar { padding: 20px 24px; }
-    .nav-links { display: none; }
-  }
-
-  /* ===== お知らせ ===== */
-  .news-section {
-    position: relative;
-    padding: 72px 48px 88px;
-    background: linear-gradient(180deg, #FDF2F5 0%, #FBE8EE 50%, #FDF0F4 100%);
-    overflow: hidden;
-  }
-  .news-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      radial-gradient(ellipse 14px 9px at 8% 18%, rgba(244, 167, 185, 0.35), transparent 72%),
-      radial-gradient(ellipse 11px 8px at 22% 62%, rgba(250, 218, 221, 0.5), transparent 70%),
-      radial-gradient(ellipse 16px 10px at 78% 28%, rgba(244, 167, 185, 0.28), transparent 75%),
-      radial-gradient(ellipse 10px 7px at 91% 55%, rgba(232, 130, 154, 0.22), transparent 68%),
-      radial-gradient(ellipse 12px 8px at 45% 8%, rgba(251, 228, 234, 0.9), transparent 65%),
-      radial-gradient(ellipse 9px 6px at 63% 78%, rgba(244, 167, 185, 0.3), transparent 70%),
-      radial-gradient(ellipse 13px 9px at 35% 88%, rgba(250, 218, 221, 0.45), transparent 72%);
+  /* ===== PETAL CANVAS (background) ===== */
+  #petal-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     pointer-events: none;
     z-index: 0;
+    overflow: hidden;
   }
 
-  .news-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 1120px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 48px 64px;
-    align-items: start;
-  }
-
-  .news-title {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(28px, 3.2vw, 36px);
-    font-weight: 500;
-    color: var(--text-dark);
-    letter-spacing: 0.06em;
-    line-height: 1.2;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--text-dark);
-    display: inline-block;
-    min-width: 0;
-  }
-
-  .news-list-wrap {
-    min-width: 0;
-  }
-
-  .news-list {
-    list-style: none;
-    border-top: 1px dotted rgba(90, 70, 78, 0.45);
-  }
-
-  .news-row {
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px 24px;
-    padding: 22px 0;
-    border-bottom: 1px dotted rgba(90, 70, 78, 0.45);
+    padding: 1.2rem 3rem;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--deep-red);
   }
 
-  .news-date {
-    flex: 0 0 auto;
-    font-size: 15px;
+  .logo {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.3;
+    text-decoration: none;
+  }
+
+  .logo span { display: block; font-size: 0.65rem; font-weight: 300; color: var(--forest); letter-spacing: 0.15em; }
+
+  nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav a {
+    font-size: 0.78rem;
     font-weight: 500;
-    color: var(--text-dark);
-    letter-spacing: 0.04em;
+    color: var(--navy);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    position: relative;
+    padding-bottom: 2px;
   }
 
-  .news-text {
-    flex: 1 1 auto;
-    min-width: 0;
-    font-size: 15px;
-    color: var(--text-dark);
-    line-height: 1.55;
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--deep-red);
+    transition: width 0.3s;
+  }
+
+  nav a:hover::after { width: 100%; }
+
+  .nav-recruit {
+    background: var(--deep-red);
+    color: #fff !important;
+    padding: 0.45rem 1.2rem;
+    border-radius: 2px;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.1em;
+  }
+
+  .nav-recruit::after { display: none !important; }
+
+  /* ===== HERO ===== */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 3rem;
     overflow: hidden;
-    text-overflow: ellipsis;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    padding-top: 6rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    color: var(--deep-red);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--deep-red);
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero-sub {
+    font-size: 0.92rem;
+    line-height: 1.9;
+    color: #444;
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--deep-red);
+    color: #fff;
+    padding: 0.85rem 2.2rem;
+    border: 2px solid var(--deep-red);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.25s;
+  }
+
+  .btn-primary:hover { background: transparent; color: var(--deep-red); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--navy);
+    padding: 0.85rem 2.2rem;
+    border: 2px solid var(--navy);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.25s;
+  }
+
+  .btn-outline:hover { background: var(--navy); color: #fff; }
+
+  /* Hero giant petal decoration */
+  .hero-petal-art {
+    position: absolute;
+    right: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    animation: heroSpin 40s linear infinite;
+  }
+
+  @keyframes heroSpin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  /* Ticker */
+  .ticker-wrap {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    border-top: 1px solid var(--deep-red);
+    border-bottom: 1px solid var(--deep-red);
+    background: var(--deep-red);
+    padding: 0.6rem 0;
+  }
+
+  .ticker {
+    display: flex;
+    gap: 0;
+    animation: tickerMove 20s linear infinite;
     white-space: nowrap;
   }
 
-  .news-btn {
-    flex: 0 0 auto;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 10px 10px 20px;
-    background: var(--white);
-    border-radius: 999px;
-    text-decoration: none;
-    color: var(--text-dark);
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    box-shadow: 0 1px 4px rgba(58, 42, 46, 0.06);
-    transition: box-shadow 0.2s, transform 0.2s;
-  }
-  .news-btn:hover {
-    box-shadow: 0 4px 14px rgba(232, 130, 154, 0.2);
-    transform: translateY(-1px);
+  .ticker span {
+    color: #fff;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    padding: 0 2.5rem;
   }
 
-  .news-btn-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #2c2426;
-    flex-shrink: 0;
-  }
-  .news-btn-icon svg {
-    display: block;
-    width: 14px;
-    height: 14px;
+  @keyframes tickerMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 
-  .news-footer {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 28px;
-  }
-
-  .news-btn-wide {
-    padding-left: 24px;
-    padding-right: 12px;
-  }
-
-  @media (max-width: 900px) {
-    .news-section { padding: 56px 24px 64px; }
-    .news-inner {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    .news-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 10px 12px;
-      align-items: center;
-    }
-    .news-date { grid-column: 1; grid-row: 1; }
-    .news-btn { grid-column: 2; grid-row: 1; justify-self: end; }
-    .news-text {
-      grid-column: 1 / -1;
-      grid-row: 2;
-      white-space: normal;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-  }
-
-  /* ===== 医療施設一覧 ===== */
-  .facilities-section {
-    position: relative;
-    padding: 56px 24px 88px;
-    background: #F7F2EA;
-    overflow: hidden;
-  }
-  .facilities-section::before,
-  .facilities-section::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(48px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .facilities-section::before {
-    width: min(90vw, 480px);
-    height: min(70vw, 360px);
-    top: -120px;
-    left: -140px;
-    background: radial-gradient(ellipse at center, rgba(255, 170, 190, 0.55) 0%, rgba(255, 210, 220, 0.2) 45%, transparent 72%);
-  }
-  .facilities-section::after {
-    width: min(85vw, 420px);
-    height: min(65vw, 320px);
-    bottom: -100px;
-    right: -120px;
-    background: radial-gradient(ellipse at center, rgba(255, 195, 160, 0.5) 0%, rgba(255, 220, 200, 0.18) 50%, transparent 70%);
-  }
-
-  .facilities-wrap {
+  /* ===== SECTION SHARED ===== */
+  section {
     position: relative;
     z-index: 1;
-    max-width: 1040px;
+  }
+
+  .section-inner {
+    max-width: 1100px;
     margin: 0 auto;
+    padding: 5rem 3rem;
   }
 
-  .facilities-panel {
-    position: relative;
-    border-radius: 28px;
-    background: linear-gradient(165deg, #FDFBF7 0%, #F3EDE4 55%, #FAF6EF 100%);
-    padding: 52px 40px 60px;
-    box-shadow: 0 10px 48px rgba(58, 42, 46, 0.07);
-    overflow: hidden;
-  }
-  .facilities-panel::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 280px 200px at 12% 88%, rgba(255, 185, 175, 0.22), transparent 65%),
-      radial-gradient(ellipse 240px 180px at 88% 12%, rgba(255, 175, 195, 0.2), transparent 62%),
-      radial-gradient(ellipse 200px 160px at 50% 50%, rgba(255, 210, 185, 0.12), transparent 70%);
-    pointer-events: none;
-  }
-  .facilities-panel-dots {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    pointer-events: none;
-    opacity: 0.4;
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.95) 1.5px, transparent 1.5px);
-    background-size: 11px 11px;
-  }
-  .facilities-panel-dots--tr { top: 16px; right: 16px; }
-  .facilities-panel-dots--bl { bottom: 16px; left: 16px; }
-
-  .facilities-title {
-    position: relative;
-    z-index: 1;
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(24px, 2.8vw, 32px);
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    color: var(--deep-red);
     font-weight: 500;
-    color: var(--text-dark);
-    letter-spacing: 0.1em;
-    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
   }
 
-  .facility-grid {
-    position: relative;
-    z-index: 1;
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .section-lead {
+    font-size: 0.88rem;
+    line-height: 1.85;
+    color: #555;
+    max-width: 500px;
+    margin-bottom: 3rem;
+  }
+
+  /* ===== HOSPITAL CARDS ===== */
+  #hospitals { background: var(--warm-white); }
+
+  .hosp-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 36px 28px;
-    justify-items: center;
-    margin-top: 44px;
-    max-width: 880px;
-    margin-left: auto;
-    margin-right: auto;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
   }
 
-  .facility-card {
-    display: flex;
-    flex-direction: column;
-    width: min(100%, 260px);
-    aspect-ratio: 1;
-    border-radius: 50%;
+  .hosp-card {
+    background: var(--cream);
+    padding: 2.4rem 2.1rem;
+    position: relative;
     overflow: hidden;
+    transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
     text-decoration: none;
     color: inherit;
-    box-shadow: 0 6px 28px rgba(58, 42, 46, 0.1);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-  .facility-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 14px 40px rgba(58, 42, 46, 0.14);
-  }
-  .facility-card:focus-visible {
-    outline: 3px solid var(--sakura-deep);
-    outline-offset: 4px;
-  }
-
-  .facility-card-photo {
-    flex: 1 1 50%;
-    min-height: 0;
-    background: #e8e4dc;
-  }
-  .facility-card-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
     display: block;
-  }
-
-  .facility-card-caption {
-    flex: 1 1 50%;
-    min-height: 0;
-    background: #4A86C1;
+    min-height: 280px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 6px;
-    padding: 10px 12px;
-  }
-  .facility-card-name {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(13px, 1.5vw, 15px);
-    font-weight: 600;
-    color: var(--white);
-    letter-spacing: 0.06em;
+    align-items: center;
     text-align: center;
-    line-height: 1.35;
+    border: 1px solid rgba(26, 26, 26, 0.08);
+    box-shadow: 0 16px 30px rgba(0,0,0,0.06);
+    transform: translateZ(0);
+    border-radius: 34px; /* fallback */
   }
-  .facility-card-chevron {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 18px;
+
+  /* 花形（対応ブラウザのみ） */
+  @supports (clip-path: path("M0 0 L1 1")) {
+    .hosp-card {
+      border-radius: 0;
+      clip-path: path("M 150 6 C 178 18 190 40 188 62 C 210 60 232 74 244 102 C 256 130 250 154 234 172 C 254 188 260 214 248 240 C 236 266 212 276 190 270 C 192 294 176 316 148 328 C 120 340 96 332 82 314 C 66 332 40 338 14 324 C -12 310 -24 286 -18 262 C -40 266 -64 252 -76 224 C -88 196 -82 172 -64 156 C -82 138 -88 112 -74 86 C -60 60 -34 52 -12 58 C -12 34 2 14 30 4 C 58 -6 84 4 98 22 C 112 6 132 -4 150 6 Z");
+    }
+  }
+
+  .hosp-card::after {
+    content: '';
+    position: absolute;
+    inset: -30px;
+    background:
+      radial-gradient(circle at 30% 25%, rgba(244,167,185,0.28), transparent 55%),
+      radial-gradient(circle at 78% 32%, rgba(249,224,61,0.22), transparent 58%),
+      radial-gradient(circle at 45% 78%, rgba(242,122,24,0.18), transparent 60%);
+    opacity: 0.9;
+    transform: rotate(-8deg);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hosp-card::before {
+    content: '';
+    position: absolute;
+    inset: 18px;
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,0.75), rgba(255,255,255,0.28) 52%, transparent 72%),
+      conic-gradient(from 210deg,
+        rgba(242,122,24,0.10),
+        rgba(249,183,193,0.10),
+        rgba(249,224,61,0.10),
+        rgba(233,113,34,0.10),
+        rgba(244,167,185,0.10),
+        rgba(242,122,24,0.10)
+      );
+    opacity: 0.0;
+    transform: scale(0.92);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hosp-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 48px rgba(0,0,0,0.10);
+    background: #fff;
+  }
+
+  .hosp-card:hover::before { opacity: 1; transform: scale(1); }
+
+  .hosp-num {
+    font-size: 3rem;
     font-weight: 300;
-    color: var(--white);
+    color: var(--deep-red);
+    opacity: 0.32;
     line-height: 1;
-  }
-
-  @media (max-width: 720px) {
-    .facilities-section { padding: 48px 20px 64px; }
-    .facilities-panel { padding: 40px 24px 48px; }
-    .facility-grid {
-      grid-template-columns: 1fr;
-      gap: 28px;
-      margin-top: 36px;
-    }
-    .facility-card {
-      width: min(100%, 280px);
-    }
-  }
-
-  /* ===== 介護障がい施設一覧 ===== */
-  .care-facilities-section {
-    position: relative;
-    padding: 0 24px 88px;
-    background: #FDF0F5;
-    overflow: hidden;
-  }
-
-  .care-facilities-wrap {
-    position: relative;
-    z-index: 1;
-    max-width: 1040px;
-    margin: 0 auto;
-  }
-
-  .care-facilities-panel {
-    position: relative;
-    border-radius: 28px;
-    background: #ffffff;
-    padding: 52px 40px 60px;
-    box-shadow: 0 10px 40px rgba(90, 60, 80, 0.08);
-    overflow: hidden;
-  }
-
-  /* 淡い水色の波形（斜め方向のライン） */
-  .care-facilities-panel::before {
-    content: '';
-    position: absolute;
-    inset: -20%;
-    z-index: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cpath fill='none' stroke='%239BC4EB' stroke-width='1.1' opacity='0.35' d='M-20 50 Q35 35 90 50 T220 50'/%3E%3Cpath fill='none' stroke='%239BC4EB' stroke-width='1.1' opacity='0.3' d='M-30 110 Q38 132 106 110 T238 110'/%3E%3Cpath fill='none' stroke='%23A8CDE8' stroke-width='1' opacity='0.28' d='M-40 170 Q42 148 118 168 T266 164'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
-    transform: rotate(-18deg);
-    pointer-events: none;
-  }
-
-  /* 右上 4×4 水色ドット */
-  .care-panel-dots {
-    position: absolute;
-    z-index: 1;
-    width: 52px;
-    height: 52px;
-    pointer-events: none;
-    background-image: radial-gradient(circle, rgba(120, 175, 230, 0.55) 2.25px, transparent 2.5px);
-    background-size: 13px 13px;
-    background-position: 0 0;
-  }
-  .care-panel-dots--tr {
-    top: 22px;
-    right: 22px;
-  }
-
-  .care-facilities-panel .facilities-title,
-  .care-facilities-panel .facility-grid {
-    position: relative;
-    z-index: 1;
-  }
-
-  @media (max-width: 720px) {
-    .care-facilities-section { padding: 0 20px 64px; }
-    .care-facilities-panel { padding: 40px 24px 48px; }
-  }
-
-  /* ===== 場所・アクセス ===== */
-  .access-section {
-    position: relative;
-    padding: 72px 24px 96px;
-    background: linear-gradient(180deg, #FBEFF3 0%, #FDF2F7 55%, #FBEFF5 100%);
-    overflow: hidden;
-  }
-  .access-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      radial-gradient(ellipse 16px 10px at 12% 24%, rgba(244, 167, 185, 0.4), transparent 72%),
-      radial-gradient(ellipse 12px 8px at 78% 16%, rgba(250, 218, 221, 0.55), transparent 70%),
-      radial-gradient(ellipse 14px 9px at 88% 72%, rgba(244, 167, 185, 0.32), transparent 68%),
-      radial-gradient(ellipse 11px 7px at 28% 86%, rgba(232, 130, 154, 0.22), transparent 65%),
-      radial-gradient(ellipse 13px 9px at 52% 8%, rgba(255, 220, 230, 0.5), transparent 62%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .access-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 1080px;
-    margin: 0 auto;
-  }
-
-  .access-title {
+    margin-bottom: 0.75rem;
     font-family: 'Noto Serif JP', serif;
-    font-size: clamp(26px, 3vw, 34px);
+  }
+
+  .hosp-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.55rem;
+  }
+
+  .hosp-dept {
+    font-size: 0.75rem;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 1.35rem;
+    max-width: 18rem;
+  }
+
+  .hosp-link {
+    font-size: 0.75rem;
     font-weight: 500;
-    color: var(--text-dark);
+    color: var(--deep-red);
+    letter-spacing: 0.12em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(242, 122, 24, 0.08);
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+  }
+
+  .hosp-link::after { content: '→'; transition: transform 0.2s; }
+  .hosp-card:hover .hosp-link::after { transform: translateX(4px); }
+
+  /* ===== CARE SECTION ===== */
+  #care { background: var(--cream); }
+
+  .care-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5px;
+  }
+
+  .care-card {
+    background: var(--warm-white);
+    padding: 2rem 2rem 2rem 5rem;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .care-card:hover { background: #ffe8ec; }
+
+  .care-num-big {
+    position: absolute;
+    left: 1.5rem;
+    top: 1.8rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--deep-red);
+    letter-spacing: 0.05em;
+    writing-mode: vertical-rl;
+  }
+
+  .care-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+
+  .care-type {
+    font-size: 0.68rem;
+    color: var(--forest);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.8rem;
+    background: rgba(242, 122, 24, 0.1);
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .care-desc {
+    font-size: 0.8rem;
+    line-height: 1.75;
+    color: #666;
+  }
+
+  .care-petal-mark {
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+
+  /* ===== NEWS ===== */
+  #news { background: var(--warm-white); }
+
+  .news-filters {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1.5px solid var(--navy);
+    padding: 0.35rem 1rem;
+    font-size: 0.72rem;
     letter-spacing: 0.1em;
-    text-align: center;
-    margin-bottom: 44px;
+    cursor: pointer;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--navy);
+    transition: all 0.2s;
   }
 
-  .access-body {
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  .news-list { display: flex; flex-direction: column; gap: 0; }
+
+  .news-item {
+    display: flex;
+    gap: 2rem;
+    align-items: baseline;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+    text-decoration: none;
+    color: inherit;
+    transition: padding-left 0.2s;
+  }
+
+  .news-item:hover { padding-left: 0.5rem; }
+
+  .news-date {
+    font-size: 0.75rem;
+    color: #888;
+    white-space: nowrap;
+    min-width: 6rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .news-tag {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    padding: 0.15rem 0.5rem;
+    background: var(--deep-red);
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .news-title {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  /* ===== PHILOSOPHY ===== */
+  #philosophy {
+    background: var(--navy);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #philosophy .section-label { color: var(--sand); }
+  #philosophy .section-title { color: #fff; }
+
+  .phil-quote {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--sand);
+    border-left: 4px solid var(--coral);
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .phil-body {
+    font-size: 0.88rem;
+    line-height: 1.95;
+    color: rgba(255,255,255,0.75);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+  }
+
+  .phil-pillars {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 400px);
-    gap: 40px 48px;
-    align-items: start;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5px;
+    margin-top: 3rem;
   }
 
-  .access-list {
-    min-width: 0;
-    border-top: 1px solid rgba(58, 42, 46, 0.35);
+  .pillar {
+    background: rgba(255,255,255,0.05);
+    padding: 1.5rem;
+    border-top: 3px solid var(--coral);
+    transition: background 0.3s;
   }
 
-  .access-row {
+  .pillar:hover { background: rgba(255,255,255,0.1); }
+
+  .pillar-num {
+    font-size: 0.65rem;
+    color: var(--coral);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+  }
+
+  .pillar-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .pillar-desc {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+  }
+
+  .phil-petal-bg {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.06;
+    animation: slowSpin 60s linear infinite;
+  }
+
+  @keyframes slowSpin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  /* ===== RECRUIT ===== */
+  #recruit { background: var(--cream); }
+
+  .recruit-grid {
     display: grid;
-    grid-template-columns: minmax(100px, 132px) minmax(0, 1fr);
-    gap: 20px 28px;
-    align-items: start;
-    padding: 20px 0 22px;
-    border-bottom: 1px solid rgba(58, 42, 46, 0.35);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5px;
+    margin-bottom: 2rem;
+  }
+
+  .recruit-item {
+    background: var(--warm-white);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: var(--navy);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.25s;
+    border-left: 4px solid transparent;
+  }
+
+  .recruit-item:hover {
+    border-left-color: var(--deep-red);
+    padding-left: 2.5rem;
+    background: #ffe8ec;
+  }
+
+  .recruit-arrow {
+    font-size: 1.1rem;
+    color: var(--deep-red);
+  }
+
+  /* ===== ACCESS ===== */
+  #contact { background: var(--warm-white); }
+
+  .access-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+  }
+
+  .access-card {
+    background: var(--cream);
+    padding: 2rem;
+    border-top: 4px solid var(--deep-red);
   }
 
   .access-name {
     font-family: 'Noto Serif JP', serif;
-    font-size: 15px;
+    font-size: 1.1rem;
     font-weight: 600;
-    color: var(--text-dark);
-    letter-spacing: 0.06em;
-    line-height: 1.5;
-    padding-top: 2px;
+    margin-bottom: 0.2rem;
+    color: var(--navy);
   }
 
-  .access-detail {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--text-dark);
-    line-height: 1.65;
-    letter-spacing: 0.02em;
-  }
-  .access-detail p + p {
-    margin-top: 6px;
+  .access-role {
+    font-size: 0.65rem;
+    color: var(--deep-red);
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
   }
 
-  .access-map {
+  .access-info {
+    font-size: 0.78rem;
+    line-height: 1.9;
+    color: #555;
+  }
+
+  .access-tel {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--navy);
+    letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--navy);
+    color: #fff;
+    padding: 3rem 3rem 2rem;
     position: relative;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    max-height: min(92vw, 400px);
-    margin-left: auto;
-    margin-right: 0;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 6px 28px rgba(58, 42, 46, 0.1);
-    background: #e8eaf0;
+    z-index: 1;
   }
-  .access-map iframe {
+
+  .foot-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .foot-logo {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .foot-desc {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.8;
+  }
+
+  .foot-col-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--sand);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .foot-col ul { list-style: none; }
+  .foot-col li { margin-bottom: 0.5rem; }
+  .foot-col a {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .foot-col a:hover { color: #fff; }
+
+  .foot-bottom {
+    max-width: 1100px;
+    margin: 1.5rem auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ===== FLOATING PETALS ===== */
+  .float-petal {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
+    animation: floatUp linear infinite;
+    pointer-events: none;
   }
 
-  @media (max-width: 900px) {
-    .access-section { padding: 56px 24px 72px; }
-    .access-body {
-      grid-template-columns: 1fr;
-      gap: 36px;
-    }
-    .access-map {
-      max-height: none;
-      max-width: 420px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .access-row {
-      grid-template-columns: minmax(88px, 120px) 1fr;
-      gap: 16px 20px;
-    }
+  @keyframes floatUp {
+    0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.6; }
+    100% { transform: translateY(-120vh) rotate(720deg) scale(0.5); opacity: 0; }
   }
 
-  @media (max-width: 540px) {
-    .access-section { padding: 48px 20px 64px; }
-    .access-title { margin-bottom: 32px; }
-    .access-row {
-      grid-template-columns: 1fr;
-      gap: 8px;
-    }
-    .access-name { padding-top: 0; }
+  /* ===== SCROLL REVEAL ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
   }
+
+  .reveal.in { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
-<section class="hero">
+<!-- Floating Petal Background -->
+<div id="petal-bg" aria-hidden="true"></div>
 
-  <!-- 花びらアニメーション -->
-  <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-  <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-  <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-  <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    医療法人仁愛会
+    <span>医療・福祉の総合グループ</span>
+  </a>
+  <ul>
+    <li><a href="#hospitals">医療施設</a></li>
+    <li><a href="#care">介護・障がい</a></li>
+    <li><a href="#news">お知らせ</a></li>
+    <li><a href="#philosophy">法人理念</a></li>
+    <li><a href="#contact">アクセス</a></li>
+    <li><a href="#recruit" class="nav-recruit">求人情報</a></li>
+  </ul>
+</nav>
 
-  <!-- ナビバー -->
-  <nav class="navbar">
-    <div class="logo-wrap">
-      <div class="logo-mark">
-        <!-- ロゴマーク（手書き風HHをSVGで再現） -->
-        <img src="images/SiteID.svg" alt="医療法人仁愛会" width="353" height="65">
-      </div>
-      <!-- <span class="logo-text">医療法人仁愛会</span> -->
-    </div>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-petal-art" aria-hidden="true">
+    <svg width="680" height="680" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="heroFlowerShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000000" flood-opacity="0.12" />
+        </filter>
+        <!-- ふっくらした花びら形（パス） -->
+        <path id="heroFlowerPetal" d="M0,-215
+          C70,-190 115,-105 90,-30
+          C70,35 30,70 0,92
+          C-30,70 -70,35 -90,-30
+          C-115,-105 -70,-190 0,-215 Z" />
+      </defs>
 
-    <ul class="nav-links">
-      <li><a href="#">法人について</a></li>
-      <li><a href="#">医療施設</a></li>
-      <li><a href="#">介護・障がい</a></li>
-      <li><a href="#">採用情報</a></li>
-      <li><a href="#">お問い合わせ</a></li>
-    </ul>
-  </nav>
+      <g transform="translate(340,340)" filter="url(#heroFlowerShadow)">
+        <g opacity="0.95">
+          <use href="#heroFlowerPetal" transform="rotate(0)"   fill="#F27A18" stroke="#1A1A1A" stroke-opacity="0.18" stroke-width="3"/>
+          <use href="#heroFlowerPetal" transform="rotate(60)"  fill="#F9B7C1" stroke="#1A1A1A" stroke-opacity="0.18" stroke-width="3"/>
+          <use href="#heroFlowerPetal" transform="rotate(120)" fill="#F9E03D" stroke="#1A1A1A" stroke-opacity="0.18" stroke-width="3"/>
+          <use href="#heroFlowerPetal" transform="rotate(180)" fill="#E97122" stroke="#1A1A1A" stroke-opacity="0.18" stroke-width="3"/>
+          <use href="#heroFlowerPetal" transform="rotate(240)" fill="#F4A7B9" stroke="#1A1A1A" stroke-opacity="0.18" stroke-width="3"/>
+          <use href="#heroFlowerPetal" transform="rotate(300)" fill="#F27A18" stroke="#1A1A1A" stroke-opacity="0.18" stroke-width="3"/>
+        </g>
 
-  <!-- メインコンテンツ -->
-  <div class="hero-body">
-
-    <!-- 左：ナビカード -->
-    <div class="nav-cards">
-
-      <a class="nav-card" href="#">
-        <!-- 医療施設アイコン -->
-        <svg class="card-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="8" y="16" width="36" height="30" rx="3" fill="none" stroke="#E8829A" stroke-width="2.2"/>
-          <rect x="20" y="4" width="12" height="14" rx="2" fill="none" stroke="#E8829A" stroke-width="2"/>
-          <line x1="26" y1="24" x2="26" y2="36" stroke="#E8829A" stroke-width="2.2" stroke-linecap="round"/>
-          <line x1="20" y1="30" x2="32" y2="30" stroke="#E8829A" stroke-width="2.2" stroke-linecap="round"/>
-          <rect x="14" y="38" width="8" height="8" rx="1" fill="#FAD4DC"/>
-          <rect x="30" y="38" width="8" height="8" rx="1" fill="#FAD4DC"/>
-        </svg>
-        <span class="card-label">医療施設一覧</span>
-      </a>
-
-      <a class="nav-card" href="#">
-        <!-- 介護アイコン（車いす風） -->
-        <svg class="card-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="28" cy="8" r="5" fill="none" stroke="#E8829A" stroke-width="2.2"/>
-          <path d="M28 14 L24 26 L16 26" stroke="#E8829A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <path d="M24 26 L22 38" stroke="#E8829A" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-          <path d="M22 38 L30 38" stroke="#E8829A" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-          <path d="M30 26 L32 36" stroke="#E8829A" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <circle cx="32" cy="42" r="5" fill="none" stroke="#E8829A" stroke-width="2"/>
-          <circle cx="18" cy="42" r="5" fill="none" stroke="#E8829A" stroke-width="2"/>
-        </svg>
-        <span class="card-label">介護障がい施設一覧</span>
-      </a>
-
-      <a class="nav-card" href="#">
-        <!-- 求人アイコン -->
-        <svg class="card-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="10" width="32" height="36" rx="4" fill="none" stroke="#E8829A" stroke-width="2.2"/>
-          <rect x="18" y="4" width="16" height="10" rx="2" fill="none" stroke="#E8829A" stroke-width="2"/>
-          <line x1="18" y1="24" x2="34" y2="24" stroke="#E8829A" stroke-width="2" stroke-linecap="round"/>
-          <line x1="18" y1="31" x2="34" y2="31" stroke="#E8829A" stroke-width="2" stroke-linecap="round"/>
-          <line x1="18" y1="38" x2="26" y2="38" stroke="#E8829A" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="26" cy="20" r="5" fill="#FAD4DC" stroke="#E8829A" stroke-width="1.5"/>
-          <path d="M22 19 C22 17 24 16 26 16 C28 16 30 17 30 19" stroke="#E8829A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        </svg>
-        <span class="card-label">求人募集</span>
-      </a>
-
-    </div>
-
-    <!-- 右：写真クラスター + キャッチコピー -->
-    <div class="hero-right">
-
-      <div class="sakura-cluster">
-        <!-- 桜型clipPath＋同一パスで外枠。写真は g の clip-path で花びら形に切り抜き -->
-        <svg viewBox="0 0 620 465" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <filter id="textShadow" x="-40%" y="-40%" width="180%" height="180%">
-              <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#2a1018" flood-opacity="0.55"/>
-            </filter>
-            <!-- 桜の花形: δを上げて花びらのくびれをはっきり（星になりすぎない範囲） -->
-            <path id="sakura-shape-1" d="M185,79L193.624,76.432L201.658,80.53L208.138,88.646L213.062,97.9L216.802,106.801L220.139,114.138L224.04,119.245L229.369,122.124L236.604,123.396L245.66,124.1L255.842,125.396L265.973,128.25L274.609,133.215L275.913,141.91L279.196,149.76L281.534,157.979L276.834,166.966L270,175L262.519,181.782L255.884,187.499L251.242,192.75L249.142,198.346L249.415,205.037L251.251,213.25L253.414,222.904L254.568,233.374L253.604,243.604L248.201,250.32L240.177,253.801L234.59,260.892L225.043,260.873L215.081,257.648L205.861,252.854L197.863,247.947L191.065,244.328L185,243L178.935,244.328L172.137,247.947L164.139,252.854L154.919,257.648L144.957,260.873L135.41,260.892L129.823,253.801L121.799,250.32L116.396,243.604L115.432,233.374L116.586,222.904L118.749,213.25L120.585,205.037L120.858,198.346L118.758,192.75L114.116,187.499L107.481,181.782L100,175L93.166,166.966L88.466,157.979L90.804,149.76L94.087,141.91L95.391,133.215L104.027,128.25L114.158,125.396L124.34,124.1L133.396,123.396L140.631,122.124L145.96,119.245L149.861,114.138L153.198,106.801L156.938,97.9L161.862,88.646L168.342,80.53L176.376,76.432L185,79Z"/>
-            <path id="sakura-shape-2" d="M435,70.72L443.02,68.332L450.492,72.143L456.519,79.691L461.098,88.297L464.576,96.575L467.679,103.398L471.307,108.148L476.263,110.825L482.992,112.008L491.414,112.663L500.883,113.868L510.305,116.523L518.336,121.14L519.549,129.227L522.602,136.527L524.776,144.17L520.405,152.528L514.05,160L507.093,166.307L500.922,171.624L496.606,176.507L494.652,181.712L494.906,187.935L496.613,195.573L498.625,204.551L499.698,214.288L498.802,223.802L493.777,230.047L486.315,233.285L481.119,239.88L472.24,239.862L462.976,236.863L454.401,232.404L446.962,227.841L440.641,224.475L435,223.24L429.359,224.475L423.038,227.841L415.599,232.404L407.024,236.863L397.76,239.862L388.881,239.88L383.685,233.285L376.223,230.047L371.198,223.802L370.302,214.288L371.375,204.551L373.387,195.573L375.094,187.935L375.348,181.712L373.394,176.507L369.078,171.624L362.907,166.307L355.95,160L349.595,152.528L345.224,144.17L347.398,136.527L350.451,129.227L351.664,121.14L359.695,116.523L369.117,113.868L378.586,112.663L387.008,112.008L393.737,110.825L398.693,108.148L402.321,103.398L405.424,96.575L408.902,88.297L413.481,79.691L419.508,72.143L426.98,68.332L435,70.72Z"/>
-            <path id="sakura-shape-3" d="M308,277.52L315.589,275.26L322.659,278.866L328.362,286.009L332.695,294.152L335.985,301.985L338.922,308.441L342.355,312.935L347.044,315.469L353.412,316.588L361.381,317.208L370.341,318.349L379.257,320.86L386.856,325.229L388.003,332.881L390.892,339.789L392.95,347.021L388.814,354.93L382.8,362L376.217,367.968L370.378,372.999L366.293,377.62L364.445,382.544L364.685,388.433L366.301,395.66L368.205,404.156L369.22,413.369L368.372,422.372L363.617,428.281L356.556,431.345L351.639,437.585L343.238,437.569L334.472,434.73L326.358,430.511L319.319,426.194L313.338,423.009L308,421.84L302.662,423.009L296.681,426.194L289.642,430.511L281.528,434.73L272.762,437.569L264.361,437.585L259.444,431.345L252.383,428.281L247.628,422.372L246.78,413.369L247.795,404.156L249.699,395.66L251.315,388.433L251.555,382.544L249.707,377.62L245.622,372.999L239.783,367.968L233.2,362L227.186,354.93L223.05,347.021L225.108,339.789L227.997,332.881L229.144,325.229L236.743,320.86L245.659,318.349L254.619,317.208L262.588,316.588L268.956,315.469L273.645,312.935L277.078,308.441L280.015,301.985L283.305,294.152L287.638,286.009L293.341,278.866L300.411,275.26L308,277.52Z"/>
-            <clipPath id="sakura1" clipPathUnits="userSpaceOnUse"><use href="#sakura-shape-1"/></clipPath>
-            <clipPath id="sakura2" clipPathUnits="userSpaceOnUse"><use href="#sakura-shape-2"/></clipPath>
-            <clipPath id="sakura3" clipPathUnits="userSpaceOnUse"><use href="#sakura-shape-3"/></clipPath>
-          </defs>
-
-          <!-- ===== 桜1（左上）: 介護スタッフ写真 ===== -->
-          <g class="bloom1">
-            <g clip-path="url(#sakura1)">
-              <image href="images/welfare_child.jpg" x="75" y="65" width="220" height="220" preserveAspectRatio="xMidYMid slice"/>
-            </g>
-            <text x="185" y="168" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="13" fill="rgba(255,255,255,0.95)" filter="url(#textShadow)"></text>
-            <use href="#sakura-shape-1" fill="none" stroke="#E8829A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-            <use href="#sakura-shape-1" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round"/>
-          </g>
-
-          <!-- ===== 桜2（右上）: 家族写真 ===== -->
-          <g class="bloom2">
-            <g clip-path="url(#sakura2)">
-              <image href="images/welfare_child2.jpg" x="335" y="60" width="200" height="200" preserveAspectRatio="xMidYMid slice"/>
-            </g>
-            <text x="435" y="155" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="13" fill="rgba(255,255,255,0.95)" filter="url(#textShadow)"></text>
-            <use href="#sakura-shape-2" fill="none" stroke="#E8829A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-            <use href="#sakura-shape-2" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round"/>
-          </g>
-
-          <!-- ===== 桜3（中央下）: リハビリ写真 ===== -->
-          <g class="bloom3">
-            <g clip-path="url(#sakura3)">
-              <image href="images/welfare_child3.jpg" x="213" y="267" width="190" height="190" preserveAspectRatio="xMidYMid slice"/>
-            </g>
-            <text x="308" y="360" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="13" fill="rgba(255,255,255,0.95)" filter="url(#textShadow)"></text>
-            <use href="#sakura-shape-3" fill="none" stroke="#E8829A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-            <use href="#sakura-shape-3" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round"/>
-          </g>
-
-          <!-- 散らばる花びら（装飾） -->
-          <ellipse cx="80"  cy="120" rx="7" ry="5" fill="rgba(255,200,215,0.7)" transform="rotate(-30 80 120)"/>
-          <ellipse cx="540" cy="90"  rx="6" ry="4" fill="rgba(255,200,215,0.65)" transform="rotate(20 540 90)"/>
-          <ellipse cx="60"  cy="320" rx="5" ry="4" fill="rgba(255,210,220,0.6)"  transform="rotate(45 60 320)"/>
-          <ellipse cx="580" cy="280" rx="8" ry="5" fill="rgba(255,195,210,0.6)"  transform="rotate(-15 580 280)"/>
-          <ellipse cx="290" cy="80"  rx="6" ry="4" fill="rgba(255,205,218,0.55)" transform="rotate(10 290 80)"/>
-        </svg>
-      </div>
-
-      <div class="catch">
-        <span class="catch-line1">もう一度、日常へ。</span>
-        <span class="catch-line2">その一歩を私たちが支えます。</span>
-      </div>
-
-    </div>
+        <!-- 花芯（リング + 種） -->
+        <circle r="78" fill="#ffffff" stroke="#1A1A1A" stroke-opacity="0.14" stroke-width="3"/>
+        <circle r="52" fill="#F9E03D" stroke="#1A1A1A" stroke-opacity="0.18" stroke-width="3"/>
+        <circle r="18" fill="#000000"/>
+      </g>
+    </svg>
   </div>
 
+  <div class="hero-content">
+    <p class="hero-eyebrow">患者さま・ご家族のみなさまへ</p>
+    <h1 class="hero-title">
+      人を想う医療で、<br>
+      <em>鹿児島の未来へ。</em>
+    </h1>
+    <p class="hero-sub">
+      不安やご心配があるとき、いつでも話しやすい雰囲気でお迎えできるよう心がけています。3つの病院と福祉の施設を通じて、地域の皆さまの健康と暮らしを支えています。
+    </p>
+    <div class="hero-btns">
+      <a href="#hospitals" class="btn-primary">施設を探す</a>
+      <a href="#contact" class="btn-outline">アクセス</a>
+    </div>
+  </div>
 </section>
 
-<section class="news-section" aria-labelledby="news-heading">
-  <div class="news-inner">
-    <div class="news-head">
-      <h2 id="news-heading" class="news-title">お知らせ</h2>
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker">
+    <span>﨑元病院</span><span>仁愛会病院</span><span>花倉病院</span>
+    <span>笑憩の里</span><span>花倉工房</span><span>ジャンプ</span><span>悠友</span>
+    <span>﨑元病院</span><span>仁愛会病院</span><span>花倉病院</span>
+    <span>笑憩の里</span><span>花倉工房</span><span>ジャンプ</span><span>悠友</span>
+    <span>﨑元病院</span><span>仁愛会病院</span><span>花倉病院</span>
+    <span>笑憩の里</span><span>花倉工房</span><span>ジャンプ</span><span>悠友</span>
+  </div>
+</div>
+
+<!-- HOSPITALS -->
+<section id="hospitals">
+  <div class="section-inner">
+    <p class="section-label reveal">医療施設</p>
+    <h2 class="section-title reveal">医療施設のご案内</h2>
+    <p class="section-lead reveal">どの施設でも、分かりやすい説明と丁寧な対応を大切にしています。内科・神経内科・リハビリテーション科など、幅広い診療で皆さまの健康をお守りします。</p>
+    <div class="hosp-grid reveal">
+      <a href="https://jinaikai.com/sakimoto/" class="hosp-card">
+        <div class="hosp-num">01</div>
+        <div class="hosp-name">﨑元病院</div>
+        <div class="hosp-dept">内科・神経内科・循環器内科<br>リハビリテーション科・老年精神科</div>
+        <div class="hosp-link">詳しく見る</div>
+      </a>
+      <a href="https://jinaikai.com/jinaikai/" class="hosp-card">
+        <div class="hosp-num">02</div>
+        <div class="hosp-name">仁愛会病院</div>
+        <div class="hosp-dept">内科・神経内科<br>リハビリテーション科・放射線科</div>
+        <div class="hosp-link">詳しく見る</div>
+      </a>
+      <a href="https://jinaikai.com/kekura/" class="hosp-card">
+        <div class="hosp-num">03</div>
+        <div class="hosp-name">花倉病院</div>
+        <div class="hosp-dept">老年精神科・精神科・内科</div>
+        <div class="hosp-link">詳しく見る</div>
+      </a>
     </div>
-    <div class="news-list-wrap">
-      <ul class="news-list">
-        <li class="news-row">
-          <time class="news-date" datetime="2026-04-20">R8.4.20</time>
-          <p class="news-text">テキストテキストテキストテキストテキストテキストテキストテキストテキスト…</p>
-          <a class="news-btn" href="#">
-            <span>詳しく見る</span>
-            <span class="news-btn-icon" aria-hidden="true">
-              <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 2.5L8.5 6l-4 3.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-          </a>
-        </li>
-        <li class="news-row">
-          <time class="news-date" datetime="2026-04-15">R8.4.15</time>
-          <p class="news-text">テキストテキストテキストテキストテキストテキストテキストテキストテキスト…</p>
-          <a class="news-btn" href="#">
-            <span>詳しく見る</span>
-            <span class="news-btn-icon" aria-hidden="true">
-              <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 2.5L8.5 6l-4 3.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-          </a>
-        </li>
-        <li class="news-row">
-          <time class="news-date" datetime="2026-04-01">R8.4.1</time>
-          <p class="news-text">テキストテキストテキストテキストテキストテキストテキストテキストテキスト…</p>
-          <a class="news-btn" href="#">
-            <span>詳しく見る</span>
-            <span class="news-btn-icon" aria-hidden="true">
-              <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 2.5L8.5 6l-4 3.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-          </a>
-        </li>
+  </div>
+</section>
+
+<!-- CARE -->
+<section id="care">
+  <div class="section-inner">
+    <p class="section-label reveal">福祉</p>
+    <h2 class="section-title reveal">介護・障がいサービス事業</h2>
+    <p class="section-lead reveal">ご本人とご家族が安心できるよう、スタッフ一同が笑顔で寄り添います。認知症ケアから就労支援まで、一人ひとりのペースを尊重したサポートを行っています。</p>
+    <div class="care-grid reveal">
+      <a href="https://jinaikai.com/shoukei/" class="care-card">
+        <div class="care-num-big">01</div>
+        <div class="care-name">笑憩の里</div>
+        <div class="care-type">認知症対応型 共同生活介護</div>
+        <p class="care-desc">家庭的な温かさの中、安心して毎日を過ごせる場所です。認知症対応型共同生活介護事業所。</p>
+        <svg class="care-petal-mark" width="140" height="140" viewBox="0 0 140 140">
+          <g transform="translate(70,70)" fill="#F27A18">
+            <ellipse rx="18" ry="50" transform="rotate(0)"/>
+            <ellipse rx="18" ry="50" transform="rotate(60)"/>
+            <ellipse rx="18" ry="50" transform="rotate(120)"/>
+            <ellipse rx="18" ry="50" transform="rotate(180)"/>
+            <ellipse rx="18" ry="50" transform="rotate(240)"/>
+            <ellipse rx="18" ry="50" transform="rotate(300)"/>
+          </g>
+        </svg>
+      </a>
+      <a href="https://jinaikai.com/support/" class="care-card">
+        <div class="care-num-big">02</div>
+        <div class="care-name">花倉工房</div>
+        <div class="care-type">就労継続支援B型</div>
+        <p class="care-desc">自分のペースで働き、社会とのつながりを大切に過ごせます。就労継続支援B型事業所。</p>
+        <svg class="care-petal-mark" width="140" height="140" viewBox="0 0 140 140">
+          <g transform="translate(70,70)" fill="#F9B7C1">
+            <ellipse rx="18" ry="50" transform="rotate(0)"/>
+            <ellipse rx="18" ry="50" transform="rotate(60)"/>
+            <ellipse rx="18" ry="50" transform="rotate(120)"/>
+            <ellipse rx="18" ry="50" transform="rotate(180)"/>
+            <ellipse rx="18" ry="50" transform="rotate(240)"/>
+            <ellipse rx="18" ry="50" transform="rotate(300)"/>
+          </g>
+        </svg>
+      </a>
+      <a href="https://jinaikai.com/support/#enjo" class="care-card">
+        <div class="care-num-big">03</div>
+        <div class="care-name">ジャンプ</div>
+        <div class="care-type">共同生活援助 グループホーム</div>
+        <p class="care-desc">地域の中で自立した生活を送るための支援を行います。共同生活援助グループホーム。</p>
+        <svg class="care-petal-mark" width="140" height="140" viewBox="0 0 140 140">
+          <g transform="translate(70,70)" fill="#F9E03D">
+            <ellipse rx="18" ry="50" transform="rotate(0)"/>
+            <ellipse rx="18" ry="50" transform="rotate(60)"/>
+            <ellipse rx="18" ry="50" transform="rotate(120)"/>
+            <ellipse rx="18" ry="50" transform="rotate(180)"/>
+            <ellipse rx="18" ry="50" transform="rotate(240)"/>
+            <ellipse rx="18" ry="50" transform="rotate(300)"/>
+          </g>
+        </svg>
+      </a>
+      <a href="https://jinaikai.com/yuyu/" class="care-card">
+        <div class="care-num-big">04</div>
+        <div class="care-name">悠友</div>
+        <div class="care-type">有料老人ホーム・通所介護</div>
+        <p class="care-desc">豊かな時間の中で、その人らしい老後の生活を。有料老人ホームと地域密着型通所介護。</p>
+        <svg class="care-petal-mark" width="140" height="140" viewBox="0 0 140 140">
+          <g transform="translate(70,70)" fill="#E97122">
+            <ellipse rx="18" ry="50" transform="rotate(0)"/>
+            <ellipse rx="18" ry="50" transform="rotate(60)"/>
+            <ellipse rx="18" ry="50" transform="rotate(120)"/>
+            <ellipse rx="18" ry="50" transform="rotate(180)"/>
+            <ellipse rx="18" ry="50" transform="rotate(240)"/>
+            <ellipse rx="18" ry="50" transform="rotate(300)"/>
+          </g>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news">
+  <div class="section-inner">
+    <p class="section-label reveal">お知らせ</p>
+    <h2 class="section-title reveal">新着情報</h2>
+    <div class="news-filters reveal" id="newsFilters">
+      <button class="filter-btn active" data-tag="すべて">すべて</button>
+      <button class="filter-btn" data-tag="﨑元病院">﨑元病院</button>
+      <button class="filter-btn" data-tag="仁愛会病院">仁愛会病院</button>
+      <button class="filter-btn" data-tag="花倉病院">花倉病院</button>
+    </div>
+    <div class="news-list reveal" id="newsList">
+      <a href="https://jinaikai.com/wp/2025/09/19/%e5%a4%96%e6%9d%a5%e8%a8%ba%e7%99%82%e6%97%a5%e5%a4%89%e6%9b%b4%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/" class="news-item" data-tag="﨑元病院">
+        <span class="news-date">2025.09.19</span>
+        <span class="news-tag">﨑元病院</span>
+        <span class="news-title">外来診療日変更のお知らせ</span>
+      </a>
+      <a href="https://jinaikai.com/wp/2025/07/28/%e9%9d%a2%e4%bc%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6-4/" class="news-item" data-tag="﨑元病院">
+        <span class="news-date">2025.07.28</span>
+        <span class="news-tag">﨑元病院</span>
+        <span class="news-title">面会についてのご案内</span>
+      </a>
+      <a href="https://jinaikai.com/wp/2025/12/28/%e5%b9%b4%e6%9c%ab%e5%b9%b4%e5%a7%8b%e8%a8%ba%e7%99%82%e3%81%ae%e3%81%94%e6%a1%88%e5%86%85-7/" class="news-item" data-tag="仁愛会病院">
+        <span class="news-date">2025.12.28</span>
+        <span class="news-tag">仁愛会病院</span>
+        <span class="news-title">年末年始診療のご案内</span>
+      </a>
+      <a href="https://jinaikai.com/wp/2025/12/23/%e5%b9%b4%e6%9c%ab%e5%b9%b4%e5%a7%8b%e8%a8%ba%e7%99%82%e3%81%ae%e3%81%94%e6%a1%88%e5%86%85-6/" class="news-item" data-tag="花倉病院">
+        <span class="news-date">2025.12.23</span>
+        <span class="news-tag">花倉病院</span>
+        <span class="news-title">年末年始診療のご案内</span>
+      </a>
+      <a href="https://jinaikai.com/wp/2024/12/13/%ef%bc%91%e9%9a%8e%e9%a7%90%e8%bb%8a%e5%a0%b4%e5%96%b6%e6%a5%ad%e3%81%8a%e3%82%88%e3%81%b3%e9%96%89%e9%8e%96%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6/" class="news-item" data-tag="﨑元病院">
+        <span class="news-date">2024.12.13</span>
+        <span class="news-tag">﨑元病院</span>
+        <span class="news-title">１階駐車場営業および閉鎖について</span>
+      </a>
+      <a href="https://jinaikai.com/wp/2025/10/01/%e5%a4%96%e6%9d%a5%e8%a8%ba%e7%99%82%e3%81%ae%e3%80%8c%e8%a8%ba%e7%99%82%e6%99%82%e9%96%93%e3%80%8d%e3%80%8c%e8%a8%ba%e5%af%9f%e6%8b%85%e5%bd%93%e5%8c%bb%e3%80%8d%e3%80%8c%e7%a6%81%e7%85%99%e5%a4%96/" class="news-item" data-tag="﨑元病院">
+        <span class="news-date">2025.10.01</span>
+        <span class="news-tag">﨑元病院</span>
+        <span class="news-title">外来診療の診療時間・担当医変更のお知らせ</span>
+      </a>
+    </div>
+    <div style="margin-top:2rem">
+      <a href="https://jinaikai.com/news/" class="btn-outline">お知らせ一覧へ →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <svg class="phil-petal-bg" aria-hidden="true" width="600" height="600" viewBox="0 0 600 600">
+    <g transform="translate(300,300)">
+      <ellipse rx="55" ry="185" transform="rotate(0)"   fill="#fff"/>
+      <ellipse rx="55" ry="185" transform="rotate(45)"  fill="#fff"/>
+      <ellipse rx="55" ry="185" transform="rotate(90)"  fill="#fff"/>
+      <ellipse rx="55" ry="185" transform="rotate(135)" fill="#fff"/>
+      <ellipse rx="55" ry="185" transform="rotate(180)" fill="#fff"/>
+      <ellipse rx="55" ry="185" transform="rotate(225)" fill="#fff"/>
+      <ellipse rx="55" ry="185" transform="rotate(270)" fill="#fff"/>
+      <ellipse rx="55" ry="185" transform="rotate(315)" fill="#fff"/>
+    </g>
+  </svg>
+  <div class="section-inner">
+    <p class="section-label reveal">法人理念</p>
+    <blockquote class="phil-quote reveal">
+      仁愛の心をもって、<br>
+      一人ひとりの命と<br>
+      暮らしに寄り添う。
+    </blockquote>
+    <p class="phil-body reveal">
+      「仁愛」とは、人を思いやる心のこと。その精神を根本に、患者さん・ご利用者さん・そのご家族と誠実に向き合い、医療・介護・福祉が一体となったサービスを提供してまいります。地域の皆さまが安心して暮らし続けられる社会の実現に向けて、私たちは今日も努力を続けています。
+    </p>
+    <a href="https://jinaikai.com/about/" style="display:inline-block; background:var(--sand); color:var(--navy); padding:0.85rem 2.2rem; font-size:0.82rem; font-weight:500; letter-spacing:0.12em; text-decoration:none; transition:opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">法人概要を見る</a>
+    <div class="phil-pillars reveal">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">人を想う医療</div>
+        <div class="pillar-desc">患者さんの気持ちに寄り添い、丁寧な診療を心がけます。</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">地域との連携</div>
+        <div class="pillar-desc">医療・福祉が連携し、切れ目のないサービスを提供します。</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">信頼と安心</div>
+        <div class="pillar-desc">患者さん・ご家族との信頼関係を最も大切にします。</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">04</div>
+        <div class="pillar-title">専門性の向上</div>
+        <div class="pillar-desc">スタッフの継続的な学びを支援し、医療の質を高めます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECRUIT -->
+<section id="recruit">
+  <div class="section-inner">
+    <p class="section-label reveal">採用情報</p>
+    <h2 class="section-title reveal">共に、地域医療を<br>支えていきませんか。</h2>
+    <p class="section-lead reveal">仁愛の心を共有できる仲間を求めています。医療・介護・事務など幅広い職種で新しいスタッフを募集中です。</p>
+    <div class="recruit-grid reveal">
+      <a href="https://jinaikai.com/recruit/" class="recruit-item">
+        医師・看護師 <span class="recruit-arrow">→</span>
+      </a>
+      <a href="https://jinaikai.com/recruit/" class="recruit-item">
+        リハビリテーション専門職 <span class="recruit-arrow">→</span>
+      </a>
+      <a href="https://jinaikai.com/recruit/" class="recruit-item">
+        介護・福祉スタッフ <span class="recruit-arrow">→</span>
+      </a>
+      <a href="https://jinaikai.com/recruit/" class="recruit-item">
+        事務・その他スタッフ <span class="recruit-arrow">→</span>
+      </a>
+    </div>
+    <a href="https://jinaikai.com/recruit/" class="btn-primary">求人情報をすべて見る</a>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label reveal">お問い合わせ・ご来院</p>
+    <h2 class="section-title reveal">各施設の連絡先・アクセス</h2>
+    <div class="access-grid reveal">
+      <div class="access-card">
+        <div class="access-role">受付・ご相談</div>
+        <div class="access-name">﨑元病院</div>
+        <div class="access-info">
+          〒892-0842<br>鹿児島市東千石町4-13<br>
+          FAX：099-224-0747
+        </div>
+        <div class="access-tel">099-224-5650</div>
+      </div>
+      <div class="access-card">
+        <div class="access-role">受付・ご相談</div>
+        <div class="access-name">仁愛会病院</div>
+        <div class="access-info">
+          〒891-0122<br>鹿児島市南栄5丁目10-19<br>
+          FAX：099-210-0203
+        </div>
+        <div class="access-tel">099-210-0201</div>
+      </div>
+      <div class="access-card">
+        <div class="access-role">受付・ご相談</div>
+        <div class="access-name">花倉病院</div>
+        <div class="access-info">
+          〒892-0871<br>鹿児島市吉野町5147<br>
+          FAX：099-243-5113
+        </div>
+        <div class="access-tel">099-243-5111</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div>
+      <div class="foot-logo">医療法人仁愛会</div>
+      <p class="foot-desc">仁愛の心で地域に寄り添い、<br>医療・介護・福祉の連携による<br>総合的なサービスを提供しています。</p>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-title">医療施設</div>
+      <ul>
+        <li><a href="https://jinaikai.com/sakimoto/">﨑元病院</a></li>
+        <li><a href="https://jinaikai.com/jinaikai/">仁愛会病院</a></li>
+        <li><a href="https://jinaikai.com/kekura/">花倉病院</a></li>
       </ul>
-      <div class="news-footer">
-        <a class="news-btn news-btn-wide" href="#">
-          <span>お知らせ一覧</span>
-          <span class="news-btn-icon" aria-hidden="true">
-            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 2.5L8.5 6l-4 3.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </a>
-      </div>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-title">福祉</div>
+      <ul>
+        <li><a href="https://jinaikai.com/shoukei/">笑憩の里</a></li>
+        <li><a href="https://jinaikai.com/support/">花倉工房</a></li>
+        <li><a href="https://jinaikai.com/support/#enjo">ジャンプ</a></li>
+        <li><a href="https://jinaikai.com/yuyu/">悠友</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-title">法人のご案内</div>
+      <ul>
+        <li><a href="https://jinaikai.com/about/">法人概要</a></li>
+        <li><a href="https://jinaikai.com/recruit/">求人情報</a></li>
+        <li><a href="https://jinaikai.com/privacypolicy/">個人情報保護方針</a></li>
+        <li><a href="https://jinaikai.com/pdf/plan2022.pdf">一般事業主行動計画</a></li>
+      </ul>
     </div>
   </div>
-</section>
-
-<section class="facilities-section" aria-labelledby="facilities-heading">
-  <div class="facilities-wrap">
-    <div class="facilities-panel">
-      <span class="facilities-panel-dots facilities-panel-dots--tr" aria-hidden="true"></span>
-      <span class="facilities-panel-dots facilities-panel-dots--bl" aria-hidden="true"></span>
-      <h2 id="facilities-heading" class="facilities-title">医療施設一覧</h2>
-      <div class="facility-grid">
-        <a class="facility-card" href="#">
-          <div class="facility-card-photo">
-            <img src="images/menu-sakimoto.jpg" alt="﨑元病院の外観" width="400" height="400" loading="lazy" decoding="async">
-          </div>
-          <div class="facility-card-caption">
-            <span class="facility-card-name">﨑元病院</span>
-            <span class="facility-card-chevron" aria-hidden="true">&gt;</span>
-          </div>
-        </a>
-        <a class="facility-card" href="#">
-          <div class="facility-card-photo">
-            <img src="images/menu-jinaikai.jpg" alt="仁愛会病院の外観" width="400" height="400" loading="lazy" decoding="async">
-          </div>
-          <div class="facility-card-caption">
-            <span class="facility-card-name">仁愛会病院</span>
-            <span class="facility-card-chevron" aria-hidden="true">&gt;</span>
-          </div>
-        </a>
-        <a class="facility-card" href="#">
-          <div class="facility-card-photo">
-            <img src="images/menu-kekura.jpg" alt="花倉病院の外観" width="400" height="400" loading="lazy" decoding="async">
-          </div>
-          <div class="facility-card-caption">
-            <span class="facility-card-name">花倉病院</span>
-            <span class="facility-card-chevron" aria-hidden="true">&gt;</span>
-          </div>
-        </a>
-      </div>
-    </div>
+  <div class="foot-bottom">
+    <span>© 2025 医療法人仁愛会</span>
+    <span><a href="https://jinaikai.com/privacypolicy/" style="color:rgba(255,255,255,0.35);text-decoration:none;">個人情報保護方針</a></span>
   </div>
-</section>
+</footer>
 
-<section class="care-facilities-section" aria-labelledby="care-facilities-heading">
-  <div class="care-facilities-wrap">
-    <div class="care-facilities-panel">
-      <span class="care-panel-dots care-panel-dots--tr" aria-hidden="true"></span>
-      <h2 id="care-facilities-heading" class="facilities-title">介護障がい施設一覧</h2>
-      <div class="facility-grid">
-        <a class="facility-card" href="#">
-          <div class="facility-card-photo">
-            <img src="images/welfare_kaigo2.jpg" alt="花倉工房" width="400" height="400" loading="lazy" decoding="async">
-          </div>
-          <div class="facility-card-caption">
-            <span class="facility-card-name">花倉工房</span>
-            <span class="facility-card-chevron" aria-hidden="true">&gt;</span>
-          </div>
-        </a>
-        <a class="facility-card" href="#">
-          <div class="facility-card-photo">
-            <img src="images/welfare_kaigo.jpg" alt="ジャンプの外観" width="400" height="400" loading="lazy" decoding="async">
-          </div>
-          <div class="facility-card-caption">
-            <span class="facility-card-name">ジャンプ</span>
-            <span class="facility-card-chevron" aria-hidden="true">&gt;</span>
-          </div>
-        </a>
-        <a class="facility-card" href="#">
-          <div class="facility-card-photo">
-            <img src="images/top_kaigo3.jpg" alt="悠友の外観" width="400" height="400" loading="lazy" decoding="async">
-          </div>
-          <div class="facility-card-caption">
-            <span class="facility-card-name">悠友</span>
-            <span class="facility-card-chevron" aria-hidden="true">&gt;</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
+<script>
+(function(){
 
-<section class="access-section" aria-labelledby="access-heading">
-  <div class="access-inner">
-    <h2 id="access-heading" class="access-title">場所・アクセス</h2>
-    <div class="access-body">
-      <div class="access-list">
-        <div class="access-row">
-          <div class="access-name">﨑元病院</div>
-          <div class="access-detail">
-            <p>〒892-0842 鹿児島市東千石町4-13</p>
-            <p>TEL:099-224-5650 / FAX:099-224-0747</p>
-          </div>
-        </div>
-        <div class="access-row">
-          <div class="access-name">仁愛会病院</div>
-          <div class="access-detail">
-            <p>〒891-0122 鹿児島市南栄5丁目10-19</p>
-            <p>TEL:099-210-0201 / FAX:099-210-0203</p>
-          </div>
-        </div>
-        <div class="access-row">
-          <div class="access-name">花倉病院</div>
-          <div class="access-detail">
-            <p>〒892-0871 鹿児島市吉野町5147</p>
-            <p>TEL:099-243-5111 / FAX:099-243-5113</p>
-          </div>
-        </div>
-      </div>
-      <div class="access-map">
-        <iframe
-          title="鹿児島市周辺の地図"
-          src="https://www.google.com/maps?q=%E9%B9%BF%E5%85%90%E5%B3%B6%E5%B8%82&amp;hl=ja&amp;z=12&amp;output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
-</section>
+  // ===== FLOATING PETALS =====
+  const bg = document.getElementById('petal-bg');
+  const colors = ['#F27A18', '#F9B7C1', '#F9E03D', '#E97122', '#1A1A1A', '#F4A7B9'];
+  const flowerTypes = [5, 6];
+  const petalPathD = [
+    'M0,-92',
+    'C32,-80 55,-42 45,-10',
+    'C36,22 14,42 0,52',
+    'C-14,42 -36,22 -45,-10',
+    'C-55,-42 -32,-80 0,-92 Z'
+  ].join(' ');
 
+  function makePetal() {
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const wrap = document.createElementNS(svgNS,'svg');
+    const petalCount = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+    const size = 34 + Math.random() * 90;
+    const petalColor = colors[Math.floor(Math.random() * colors.length)];
+    const x = Math.random()*window.innerWidth;
+    const delay = Math.random()*12;
+    const dur = 12 + Math.random()*18;
+
+    wrap.setAttribute('width', size);
+    wrap.setAttribute('height', size);
+    wrap.setAttribute('viewBox','0 0 200 200');
+    wrap.style.cssText = 'position:absolute;left:'+x+'px;bottom:-200px;opacity:0;';
+    wrap.style.animation = 'floatUp '+dur+'s '+delay+'s linear infinite';
+
+    const g = document.createElementNS(svgNS,'g');
+    g.setAttribute('transform','translate(100,100)');
+    g.style.opacity = '0.72';
+
+    // 花びら（パス）で“花っぽく”
+    for (let i = 0; i < petalCount; i++) {
+      const p = document.createElementNS(svgNS, 'path');
+      p.setAttribute('d', petalPathD);
+      p.setAttribute('fill', petalColor);
+      p.setAttribute('stroke', '#1A1A1A');
+      p.setAttribute('stroke-opacity', '0.14');
+      p.setAttribute('stroke-width', '3');
+      p.setAttribute('transform', 'rotate(' + (i * (360 / petalCount)) + ')');
+      g.appendChild(p);
+    }
+
+    // 花芯（白リング + 黄 + 黒）
+    const ring = document.createElementNS(svgNS, 'circle');
+    ring.setAttribute('r', '34');
+    ring.setAttribute('fill', '#ffffff');
+    ring.setAttribute('stroke', '#1A1A1A');
+    ring.setAttribute('stroke-opacity', '0.12');
+    ring.setAttribute('stroke-width', '3');
+    g.appendChild(ring);
+
+    const core = document.createElementNS(svgNS, 'circle');
+    core.setAttribute('r', '22');
+    core.setAttribute('fill', '#F9E03D');
+    core.setAttribute('stroke', '#1A1A1A');
+    core.setAttribute('stroke-opacity', '0.14');
+    core.setAttribute('stroke-width', '3');
+    g.appendChild(core);
+
+    const seed = document.createElementNS(svgNS, 'circle');
+    seed.setAttribute('r', '8');
+    seed.setAttribute('fill', '#000000');
+    g.appendChild(seed);
+
+    wrap.appendChild(g);
+    bg.appendChild(wrap);
+
+    setTimeout(function(){
+      if(wrap.parentNode) wrap.parentNode.removeChild(wrap);
+    }, (delay + dur + 1)*1000);
+  }
+
+  for(let i=0;i<18;i++) makePetal();
+  setInterval(makePetal, 2200);
+
+  // ===== SCROLL REVEAL =====
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); observer.unobserve(e.target); }
+    });
+  },{ threshold: 0.1 });
+  reveals.forEach(function(r){ observer.observe(r); });
+
+  // ===== NEWS FILTER =====
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const newsItems = document.querySelectorAll('.news-item');
+
+  filterBtns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      filterBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      const tag = btn.dataset.tag;
+      newsItems.forEach(function(item){
+        item.style.display = (tag==='すべて' || item.dataset.tag===tag) ? 'flex' : 'none';
+      });
+    });
+  });
+
+})();
+</script>
 </body>
 </html>
