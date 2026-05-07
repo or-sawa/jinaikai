@@ -225,6 +225,31 @@
   <style type="text/css">@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');</style><script src="https://swc-aiwakai.jp/cms/wp-includes/js/wp-emoji-release.min.js?ver=6.9.4" defer=""></script></head>
   
   <body>
+  <script>
+    (function () {
+      function allowNavigation(href) {
+        if (href == null) return false;
+        var t = String(href).trim();
+        if (t === "" ) return false;
+        if (t === "#" || t.charAt(0) === "#") return true;
+        var low = t.toLowerCase();
+        if (low.indexOf("tel:") === 0 || low.indexOf("mailto:") === 0 || low.indexOf("sms:") === 0)
+          return true;
+        return false;
+      }
+      function stopExternalNav(e) {
+        var a = e.target && e.target.closest && e.target.closest("a[href]");
+        if (!a) return;
+        if (allowNavigation(a.getAttribute("href"))) return;
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      document.addEventListener("click", stopExternalNav, true);
+      document.addEventListener("auxclick", function (e) {
+        if (e.button === 1) stopExternalNav(e);
+      }, true);
+    })();
+  </script>
   <div id="wrapper" class="top _pc">
     <header id="header" class="">
           <div class="header_mega_bg"></div>
