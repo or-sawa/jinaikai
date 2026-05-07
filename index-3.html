@@ -775,6 +775,114 @@
     }
     .access-name { padding-top: 0; }
   }
+
+  /* ===== FOOTER ===== */
+  .site-footer {
+    position: relative;
+    padding: 40px 24px 28px;
+    background: linear-gradient(180deg, #ffffff 0%, #FDF0F5 100%);
+    border-top: 1px solid rgba(58, 42, 46, 0.12);
+  }
+
+  .footer-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(240px, 340px) 1fr;
+    gap: 22px 48px;
+    align-items: start;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .footer-logo img {
+    width: min(320px, 100%);
+    height: auto;
+    display: block;
+  }
+
+  .footer-desc {
+    font-size: 13px;
+    color: rgba(58, 42, 46, 0.78);
+    letter-spacing: 0.03em;
+    line-height: 1.7;
+  }
+
+  .footer-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 24px;
+    align-content: start;
+  }
+
+  .footer-nav a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    padding: 8px 10px;
+    border-radius: 10px;
+    transition: background 0.2s ease, transform 0.2s ease;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .footer-nav a:hover {
+    background: rgba(244, 167, 185, 0.18);
+    transform: translateY(-1px);
+  }
+
+  .footer-nav a:focus-visible {
+    outline: 3px solid var(--sakura-deep);
+    outline-offset: 3px;
+  }
+
+  .footer-bottom {
+    max-width: 1080px;
+    margin: 18px auto 0;
+    padding-top: 18px;
+    border-top: 1px solid rgba(58, 42, 46, 0.1);
+    display: flex;
+    justify-content: space-between;
+    gap: 10px 16px;
+    flex-wrap: wrap;
+    color: rgba(58, 42, 46, 0.68);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 900px) {
+    .site-footer { padding: 36px 24px 26px; }
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    .footer-nav {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px 10px;
+    }
+    .footer-nav a {
+      width: auto;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .site-footer { padding: 32px 20px 24px; }
+    .footer-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .footer-desc { font-size: 12.5px; }
+  }
 </style>
 </head>
 <body>
@@ -1088,6 +1196,32 @@
     </div>
   </div>
 </section>
+
+<footer class="site-footer" aria-label="フッター">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="footer-logo" href="index.html" aria-label="医療法人仁愛会 トップへ">
+        <img src="images/SiteID.svg" alt="医療法人仁愛会" width="353" height="65" loading="lazy" decoding="async">
+      </a>
+      <p class="footer-desc">
+        医療法人仁愛会は、地域に根差した医療・介護・福祉の連携で、皆さまの「もう一度、日常へ」を支えます。
+      </p>
+    </div>
+
+    <nav class="footer-nav" aria-label="フッターナビゲーション">
+      <a href="#">法人について</a>
+      <a href="#">医療施設</a>
+      <a href="#">介護・障がい</a>
+      <a href="#">採用情報</a>
+      <a href="#">お問い合わせ</a>
+      <a href="news.html">お知らせ</a>
+    </nav>
+  </div>
+
+  <div class="footer-bottom" role="contentinfo">
+    <small>Copyright 医療法人仁愛会 / JINAIKAI All Rights Reserved.</small>
+  </div>
+</footer>
 
 </body>
 </html>
