@@ -34,7 +34,7 @@
   /* ===== HERO ===== */
   .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: auto;
     background: linear-gradient(135deg, #FDE8ED 0%, #FAD4DC 40%, #F7C5D0 70%, #F4B8C8 100%);
     display: flex;
     flex-direction: column;
@@ -257,8 +257,8 @@
     flex: 1;
     display: grid;
     grid-template-columns: 340px 1fr;
-    align-items: center;
-    padding: 20px 48px 60px;
+    align-items: start;
+    padding: 16px 48px 28px;
     gap: 40px;
     position: relative;
     z-index: 2;
@@ -318,6 +318,7 @@
     gap: 32px;
     width: 100%;
     min-width: 0;
+    margin-top: -22px;
   }
 
   /* 桜クリップSVGコンテナ（右カラム幅いっぱいまで使用） */
@@ -381,18 +382,19 @@
   @media (max-width: 900px) {
     .hero-body {
       grid-template-columns: 1fr;
-      padding: 20px 24px 48px;
+      padding: 14px 24px 26px;
     }
     .navbar { padding: 20px 24px; }
     .nav-links { display: none; }
     .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+    .hero-right { margin-top: -16px; }
   }
 
   @media (max-width: 540px) {
     body { -webkit-text-size-adjust: 100%; }
     .navbar { padding: 16px 16px 10px; }
     .hero { min-height: auto; }
-    .hero-body { padding: 14px 16px 40px; gap: 18px; }
+    .hero-body { padding: 12px 16px 20px; gap: 18px; }
 
     .nav-cards {
       display: grid;
